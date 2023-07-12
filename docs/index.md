@@ -1,7 +1,7 @@
 ---
 hero:
   title: yl-design
-  desc: 配置化基础表单页面
+  desc: 基于 React 基础 UI 组件库
   actions:
     - text: 组件
       link: /components

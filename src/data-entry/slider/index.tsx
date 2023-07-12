@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
 import { Tooltip } from '../../index';
-import './index.less';
 
 export default ({
   value,

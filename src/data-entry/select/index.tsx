@@ -1,5 +1,4 @@
 import { Select, SelectMultiple, Option } from './components';
-import 'index.less';
 
 const SelectWrapper = (props: any) => {
   /**

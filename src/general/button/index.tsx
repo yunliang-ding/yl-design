@@ -1,5 +1,4 @@
 import { Icon } from '../../index';
-import './index.less';
 
 export default ({ disabled, ghost, onClick, icon, loading, type, style, children }: any) => {
   let className = 'yld-btn';
@@ -24,7 +23,7 @@ export default ({ disabled, ghost, onClick, icon, loading, type, style, children
         typeof onClick === 'function' && onClick(e);
       }}
     >
-      {loading && <Icon type="suiconloading" />}
+      {loading && <Icon type="yldiconloading" />}
       {icon && <Icon type={icon} />}
       {children || ' '}
     </button>

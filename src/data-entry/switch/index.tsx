@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { Icon } from '../../index';
-import './index.less';
 
 export default ({
   checked = true,
@@ -30,7 +29,7 @@ export default ({
         typeof onChange === 'function' && onChange(!_checked, e);
       }}
     >
-      {loading && <Icon type="suiconloading" size={10} />}
+      {loading && <Icon type="yldiconloading" size={10} />}
       <span className="yld-switch-inner">{innerText}</span>
       <div className="yld-click-animating-node" />
     </button>

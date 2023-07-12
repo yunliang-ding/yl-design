@@ -1,6 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
 import { Icon } from '../../index';
-import './index.less';
 
 export default ({ style, closable, data, activeKey, onClick, onRemove, tigger = 'click' }: any) => {
   useEffect(() => {
@@ -55,7 +54,7 @@ export default ({ style, closable, data, activeKey, onClick, onRemove, tigger = 
                 {tab.label}
                 {closable && (
                   <Icon
-                    type="suiconguanbi"
+                    type="yldiconguanbi"
                     size={13}
                     onClick={(e) => {
                       e.stopPropagation(); // 阻止往上冒泡

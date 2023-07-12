@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
 import { Icon, Input } from '../../index';
-import './index.less';
 
 export default ({
   value,
@@ -79,7 +78,7 @@ export default ({
   return (
     <div className={className} style={style}>
       <Input
-        suffix={<Icon type="suicontime" />}
+        suffix={<Icon type="yldicontime" />}
         addonBefore={addonBefore}
         disabled={disabled}
         addonAfter={addonAfter}

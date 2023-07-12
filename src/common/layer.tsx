@@ -12,7 +12,6 @@
  */
 import { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
-import './layer.less';
 
 interface LayerProps {}
 

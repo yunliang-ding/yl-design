@@ -1,5 +1,4 @@
 interface BadgeProps {}
-import './index.less';
 
 export default ({ color, count, dot = false, title, children }: BadgeProps | any) => {
   let style: any = {};

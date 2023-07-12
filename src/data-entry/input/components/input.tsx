@@ -60,7 +60,7 @@ export default ({
         <>
           <Suffix>
             <Icon
-              type={password ? 'suiconpassword-invisible' : 'suiconpassword-visible'}
+              type={password ? 'yldiconpassword-invisible' : 'yldiconpassword-visible'}
               onClick={() => {
                 setpassword(!password);
               }}
@@ -72,7 +72,7 @@ export default ({
           {!disabled && allowClear && _value !== '' && (
             <Suffix style={{ marginRight: suffix ? 24 : 8 }}>
               <Icon
-                type="suiconcuo"
+                type="yldiconcuo"
                 onClick={() => {
                   setvalue('');
                   typeof onAllowClear === 'function' && onAllowClear();

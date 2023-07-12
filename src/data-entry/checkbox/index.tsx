@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import './index.less';
 
 export default ({
   checked = false,

@@ -1,5 +1,4 @@
 import { MenuVerical, MenuHorizontal, Item, SubMenu } from './components';
-import './index.less';
 
 const Menu = (props: any) => {
   const loop = (item) => {

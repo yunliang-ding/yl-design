@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { Input, Select, Icon } from '../../index';
-import './index.less';
 
 export default ({
   current = 1,
@@ -54,7 +53,7 @@ export default ({
             }
           }}
         >
-          {[-1, -2].indexOf(item) > -1 ? <Icon type="suiconmoreread" /> : item}
+          {[-1, -2].indexOf(item) > -1 ? <Icon type="yldiconmoreread" /> : item}
         </div>,
       );
     });
@@ -84,7 +83,7 @@ export default ({
             }
           }}
         >
-          <Icon type="suiconicon-jiantouzuo" />
+          <Icon type="yldiconicon-jiantouzuo" />
         </div>
         {page}
         <div
@@ -95,7 +94,7 @@ export default ({
             }
           }}
         >
-          <Icon type="suiconjiantou2" />
+          <Icon type="yldiconjiantou2" />
         </div>
         {pageSizeOptions && (
           <div className="yld-pagination-jump">

@@ -1,14 +1,13 @@
 import ReactDOM from 'react-dom';
 import { Icon } from '../../index';
-import './index.less';
 
 const $: any = document.querySelector.bind(document);
 const $$: any = document.querySelectorAll.bind(document);
 const typeMapping = {
-  1: 'suiconmessage_SendSuccessfully',
-  2: 'suiconcuo',
-  3: 'suiconinfo_warning',
-  4: 'suiconwarning',
+  1: 'yldiconmessage_SendSuccessfully',
+  2: 'yldiconcuo',
+  3: 'yldiconinfo_warning',
+  4: 'yldiconwarning',
 };
 const colorMapping = {
   1: '#1ac7aa',
@@ -67,7 +66,7 @@ export default class Message {
         <div className="yld-message-content-message">{content}</div>
         <div className="yld-message-content-close">
           <Icon
-            type="suiconguanbi"
+            type="yldiconguanbi"
             onClick={(e) => {
               this.close(e);
             }}

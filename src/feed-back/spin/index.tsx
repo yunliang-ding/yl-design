@@ -1,7 +1,7 @@
 import { useRef, useEffect } from 'react';
 import { Icon } from '../../index';
 
-export default ({ loading, icon = 'suiconloading1', style, message, children }: any) => {
+export default ({ loading, icon = 'yldiconloading1', style, message, children }: any) => {
   const spinMaskRef: any = useRef();
   const spinBodyRef: any = useRef();
   useEffect(() => {

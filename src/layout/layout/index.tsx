@@ -1,5 +1,4 @@
 import { Header, Sider, Content, Footer } from './components';
-import './index.less';
 
 const Layout = (props: any) => {
   let hasSider = props.children.some((item) => item.type.nickName === 'Sider');

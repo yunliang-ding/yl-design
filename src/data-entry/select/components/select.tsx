@@ -110,10 +110,10 @@ export default ({
               selected.label
             )}
           </div>
-          <Icon type="suiconxialadown" />
+          <Icon type="yldiconxialadown" />
           {!disabled && allowClear && selected.value !== undefined && (
             <Icon
-              type="suiconcuo"
+              type="yldiconcuo"
               onClick={(e) => {
                 e.stopPropagation(); // 阻止冒泡
                 typeof onChange === 'function' && onChange(null, null);

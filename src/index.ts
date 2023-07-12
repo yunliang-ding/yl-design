@@ -13,15 +13,16 @@ export { default as Table } from './data-display/table';
 /** data-entry */
 export { default as Input } from './data-entry/input';
 export { default as InputNumber } from './data-entry/input-number';
-export { default as Checkbox } from './data-entry/input';
-export { default as CheckboxGroup } from './data-entry/input';
-export { default as Radio } from './data-entry/input';
-export { default as RadioGroup } from './data-entry/input';
-export { default as Switch } from './data-entry/input';
-export { default as AutoComplete } from './data-entry/input';
-export { default as DatePicker } from './data-entry/input';
-export { default as TimePicker } from './data-entry/input';
-export { default as Cascader } from './data-entry/input';
+export { default as Checkbox } from './data-entry/checkbox';
+export { default as CheckboxGroup } from './data-entry/checkbox/components/group';
+export { default as Radio } from './data-entry/radio';
+export { default as RadioGroup } from './data-entry/radio/components/group';
+export { default as Select } from './data-entry/select';
+export { default as Switch } from './data-entry/switch';
+export { default as AutoComplete } from './data-entry/auto-complete';
+export { default as DatePicker } from './data-entry/date-picker';
+export { default as TimePicker } from './data-entry/time-picker';
+export { default as Cascader } from './data-entry/cascader';
 export { default as Slider } from './data-entry/slider';
 /** navigation */
 export { default as Pagination } from './navigation/pagination';

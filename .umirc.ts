@@ -17,6 +17,9 @@ export default defineConfig({
   ],
   styles: [
     `
+    .__dumi-default-previewer-desc > a{
+      font-size: 12px !important;
+    }
     .__dumi-default-menu-list
       > li
       > a {

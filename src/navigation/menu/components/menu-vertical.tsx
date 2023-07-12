@@ -38,7 +38,7 @@ const MenuVerical = ({
             {item.icon && <Icon type={item.icon} />}
             <span>{item.label}</span>
           </span>
-          {item.children && <Icon type="suiconxialadown" />}
+          {item.children && <Icon type="yldiconxialadown" />}
         </div>
         {item.children && (
           <div className={!_openKey.includes(item.key) ? 'yld-nav-subMenu-hidden' : ''}>

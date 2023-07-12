@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { Icon, Empty } from '../../index';
-import './index.less';
 
 export default ({
   options,
@@ -115,10 +114,10 @@ export default ({
         <div className="yld-cascader-selection-selected-value" title={label}>
           {selected.length === 0 ? <span style={{ color: '#aaa' }}>{placeholder}</span> : label}
         </div>
-        <Icon type="suiconxialadown" />
+        <Icon type="yldiconxialadown" />
         {!disabled && allowClear && selected.length > 0 && (
           <Icon
-            type="suiconcuo"
+            type="yldiconcuo"
             onClick={(e) => {
               e.stopPropagation(); // 阻止冒泡
               setvalue([]); // 还原
@@ -164,7 +163,7 @@ export default ({
                           }}
                         >
                           {option.label}
-                          {option.children && <Icon type="suiconjiantou2" size={14} />}
+                          {option.children && <Icon type="yldiconjiantou2" size={14} />}
                         </div>
                       );
                     })}

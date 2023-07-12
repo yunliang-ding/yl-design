@@ -1,6 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
 import { Layer } from '../../index';
-import './index.less';
 
 export default ({ overlay, children, style }: any) => {
   const [open, setopen] = useState(false); // 默认不显示

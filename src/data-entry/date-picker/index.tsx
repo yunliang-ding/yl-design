@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Select, Button, Input, Icon } from '../../index';
 import dateUtil from './components/util';
-import './index.less';
 
 export default ({
   value,
@@ -79,7 +78,7 @@ export default ({
       <div className="yld-date-picker" style={style}>
         <div className="yld-date-picker-input">
           <Input
-            suffix={<Icon type="suiconweimingmingwenjianjia_rili" />}
+            suffix={<Icon type="yldiconweimingmingwenjianjia_rili" />}
             addonBefore={addonBefore}
             disabled={disabled}
             addonAfter={addonAfter}
@@ -111,7 +110,7 @@ export default ({
                     );
                   }}
                 >
-                  <Icon type="suiconicon-jiantouzuo" />
+                  <Icon type="yldiconicon-jiantouzuo" />
                 </div>
                 <div
                   title="上个月"
@@ -127,7 +126,7 @@ export default ({
                     );
                   }}
                 >
-                  <Icon type="suiconxiangzuoshouqi" />
+                  <Icon type="yldiconxiangzuoshouqi" />
                 </div>
                 <div className="picker-tools-date">
                   <Select
@@ -161,7 +160,7 @@ export default ({
                     );
                   }}
                 >
-                  <Icon type="suiconzuocedakai" />
+                  <Icon type="yldiconzuocedakai" />
                 </div>
                 <div
                   title="下一年"
@@ -173,7 +172,7 @@ export default ({
                     );
                   }}
                 >
-                  <Icon type="suiconjiantou2" />
+                  <Icon type="yldiconjiantou2" />
                 </div>
               </div>
               <div className="yld-date-picker-body-header">{renderHeader()}</div>

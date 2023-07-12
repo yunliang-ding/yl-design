@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
 import { Button, Icon } from '../../index';
-import 'index.less';
 
 export default ({
   title,
@@ -46,7 +45,7 @@ export default ({
         <div className={className.join(' ')} style={style} ref={drawerRef}>
           <div className="yld-drawer-header">
             <div>{title}</div>
-            {closable && <Icon type="suiconguanbi" onClick={close} />}
+            {closable && <Icon type="yldiconguanbi" onClick={close} />}
           </div>
           <div
             className="yld-drawer-body"

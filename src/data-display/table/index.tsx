@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
 import { Icon, Pagination, Checkbox, Empty, Spin } from '../../index';
-import './index.less';
 
 export default ({
   columns,
@@ -213,7 +212,7 @@ export default ({
                 {column.sort && (
                   <>
                     <Icon
-                      type="suiconxiala1"
+                      type="yldiconxiala1"
                       size={12}
                       style={{ left: 4, top: -6 }}
                       onClick={() => {
@@ -221,7 +220,7 @@ export default ({
                       }}
                     />
                     <Icon
-                      type="suiconxialadown"
+                      type="yldiconxialadown"
                       size={12}
                       style={{ top: 6, right: 8 }}
                       onClick={() => {

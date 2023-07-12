@@ -87,7 +87,7 @@ export default ({
                         {item.label}
                         <Icon
                           size={14}
-                          type="suiconguanbi"
+                          type="yldiconguanbi"
                           onClick={(e) => {
                             e.stopPropagation(); // 阻止冒泡
                             let value = _value.filter((item) => item !== item.value); // 删除
@@ -101,11 +101,11 @@ export default ({
               </div>
             )}
           </div>
-          <Icon type="suiconxialadown" />
+          <Icon type="yldiconxialadown" />
           {!disabled && allowClear && _value.length > 0 && (
             <Icon
               size={14}
-              type="suiconcuo"
+              type="yldiconcuo"
               onClick={(e) => {
                 e.stopPropagation(); // 阻止冒泡
                 typeof onChange === 'function' && onChange([], null);
@@ -147,7 +147,7 @@ export default ({
                   }}
                 >
                   {option.label}
-                  <Icon size={14} type="suiconduihao" />
+                  <Icon size={14} type="yldiconduihao" />
                 </div>
               );
             })

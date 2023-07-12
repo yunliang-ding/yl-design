@@ -36,7 +36,7 @@ const Sider = ({
               typeof onCollapse === 'function' && onCollapse(!_collapsed);
             }}
           >
-            <Icon type="suiconicon-jiantouzuo" size={20} />
+            <Icon type="yldiconicon-jiantouzuo" size={20} />
           </div>
         </>
       ) : (

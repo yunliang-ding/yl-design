@@ -1,5 +1,4 @@
 import { AddonBefore, AddonAfter, TextArea, Input } from './components';
-import './index.less';
 
 const InputWrapper = (props: any) => {
   return (

@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { Icon } from '../../index';
-import './index.less';
 
 interface CarouselProps {}
 let swipeX = false;
@@ -97,7 +96,7 @@ export default ({
                 updateCurrentPage(_currentPage - 1);
               }}
             >
-              <Icon type="suiconicon-jiantouzuo" />
+              <Icon type="yldiconicon-jiantouzuo" />
             </div>
             <div
               className="yld-carousel-next"
@@ -105,7 +104,7 @@ export default ({
                 updateCurrentPage(_currentPage + 1);
               }}
             >
-              <Icon type="suiconjiantou2" />
+              <Icon type="yldiconjiantou2" />
             </div>
           </>
         )}

@@ -1,0 +1,62 @@
+.__dumidemo-standard-admin-layout{
+  height:800px;
+  width:100%;
+  margin:20px 0;
+  background-color: #eee;
+}
+.__dumidemo-standard-admin-layout .yld-layout-header{
+  display:flex;
+  align-items: center;
+  color:#333;
+  background-color: #f8f8f8;
+}
+.__dumidemo-standard-admin-layout .yld-layout-header .user{
+  width:48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height:48px;
+  border-radius: 50%;
+  background-color: #fff;
+  font-size:12px;
+  cursor: pointer;
+}
+.__dumidemo-standard-admin-layout .yld-layout-content{
+  background-color: #f2f2f2;
+  overflow: auto;
+  padding:20px;
+}
+.__dumidemo-standard-admin-layout .yld-layout-content .main{
+  width:100%;
+  height:100%;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+}
+.__dumidemo-standard-admin-layout  .yld-layout-footer{
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  color:#333;
+  background-color: #f8f8f8;
+}
+.__dumidemo-standard-admin-layout .yld-layout-sider .logo, .__dumidemo-standard-admin-layout .yld-layout-sider-dark .logo{
+  height:64px;
+  width:100%;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f8f8f8;
+}
+.__dumidemo-standard-admin-layout .yld-layout-sider-dark .logo{
+  background-color: #002140;
+  color:#fff;
+}
+.__dumidemo-standard-admin-layout-dark .yld-layout-header{
+  background-color: #001629;
+}
+.__dumidemo-standard-admin-layout-dark .yld-layout-header .user{
+  background-color: #002140;
+  color:#fff;
+}

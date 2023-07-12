@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from 'react';
-import './index.less';
 
 export default ({
   children,

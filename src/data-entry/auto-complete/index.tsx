@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { Icon, Empty } from '../../index';
-import './index.less';
 
 export default ({
   dataSource,
@@ -50,7 +49,7 @@ export default ({
         </div>
         {allowClear && _value !== '' && (
           <Icon
-            type="suiconcuo"
+            type="yldiconcuo"
             onClick={(e) => {
               e.stopPropagation(); // 阻止冒泡
               setvalue('');

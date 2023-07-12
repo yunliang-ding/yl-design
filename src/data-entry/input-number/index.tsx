@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { Icon } from '../../index';
-import './index.less';
 
 export default ({
   value = '',
@@ -72,10 +71,10 @@ export default ({
       {!disabled && (
         <div className="yld-input-number-suffix">
           <div className="suffix-top" onClick={add}>
-            <Icon type="suiconxiala1" size={12} />
+            <Icon type="yldiconxiala1" size={12} />
           </div>
           <div className="suffix-bottom" onClick={minus}>
-            <Icon type="suiconxialadown" size={12} />
+            <Icon type="yldiconxialadown" size={12} />
           </div>
         </div>
       )}

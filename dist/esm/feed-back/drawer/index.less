@@ -1,0 +1,107 @@
+.yld-drawer,
+.yld-drawer-left {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  z-index: 930226;
+  min-width: 400px;
+  height: 100%;
+  background: #fff;
+  box-shadow: 0 10px 20px 0px rgba(0, 0, 0, 0.05);
+  animation: drawer-move-right 0.3s ease-in;
+  .yld-drawer-header {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 50px;
+    padding: 0 16px;
+    color: @text-color;
+    font-size: 15px;
+    background-color: inherit;
+    border-bottom: 1px solid #f4f4f4;
+    .suiconguanbi {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      color: @text-color;
+      font-size: 18px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: 0.3s;
+      &:active {
+        background-color: @primary-box-shadow;
+        transition: 0.3s;
+      }
+    }
+  }
+  .yld-drawer-body {
+    position: relative;
+    z-index: 2;
+    height: calc(~'100% - 102px');
+    padding: 10px;
+    color: @text-color;
+    background-color: inherit;
+  }
+  .yld-drawer-footer {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    height: 50px;
+    background-color: inherit;
+    border-top: 1px solid #f4f4f4;
+    .yld-btn {
+      margin: 0 10px;
+    }
+  }
+}
+.yld-drawer-mask,
+.yld-drawer-mask-none {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 930220;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(5, 5, 5, 0.432);
+}
+.yld-drawer-mask {
+  animation: modal-show-mask 0.3s ease-in;
+}
+.yld-drawer-mask-none {
+  background: transparent;
+}
+.yld-drawer-left {
+  right: auto;
+  left: 0;
+  animation: drawer-move-left 0.3s linear;
+}
+@keyframes drawer-move-left {
+  0% {
+    transform: translate(-100%, 0);
+  }
+  100% {
+    transform: translate(0%, 0);
+  }
+}
+@keyframes drawer-move-right {
+  0% {
+    transform: translate(100%, 0);
+  }
+  100% {
+    transform: translate(0%, 0);
+  }
+}
+@keyframes modal-show-mask {
+  0% {
+    background: transparent;
+  }
+  100% {
+    background: rgba(5, 5, 5, 0.432);
+  }
+}

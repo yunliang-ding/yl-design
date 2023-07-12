@@ -1,0 +1,114 @@
+.yld-btn {
+  position: relative;
+  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  height: 32px;
+  padding: 0 15px;
+  color: rgba(0, 0, 0, 0.65);
+  font-weight: 400;
+  font-size: @font-size-base;
+  white-space: nowrap;
+  text-align: center;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid transparent;
+  border-color: @border-color-base;
+  border-radius: @border-radius-base;
+  outline: none;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.015);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  user-select: none;
+  touch-action: manipulation;
+  &:hover,
+  &:focus {
+    color: @primary-color;
+    background-color: #fff;
+    border-color: @primary-color;
+  }
+  .yld-icon {
+    margin-right: 4px;
+  }
+  .suiconloading {
+    display: inline-block;
+    color: #fff;
+    font-size: 14px;
+    animation: spin 1.2s linear infinite;
+  }
+  @keyframes spin {
+    0% {
+      -webkit-transform: rotate(0deg);
+    }
+    25% {
+      -webkit-transform: rotate(90deg);
+    }
+    50% {
+      -webkit-transform: rotate(180deg);
+    }
+    75% {
+      -webkit-transform: rotate(270deg);
+    }
+    100% {
+      -webkit-transform: rotate(360deg);
+    }
+  }
+}
+.yld-btn-primary {
+  color: #fff;
+  background-color: @primary-color;
+  border-color: @primary-color;
+  &:hover,
+  &:focus {
+    color: #fff;
+    background-color: @primary-color;
+    border-color: @primary-color;
+    opacity: 0.9;
+  }
+}
+.yld-btn-dashed {
+  color: rgba(0, 0, 0, 0.65);
+  background-color: #fff;
+  border-color: @border-color-base;
+  border-style: dashed;
+  &:hover,
+  &:focus {
+    color: @primary-color;
+    background-color: #fff;
+    border-color: @primary-color;
+  }
+}
+.yld-btn-danger {
+  color: #fff;
+  background-color: #ff4d4f;
+  border-color: #ff4d4f;
+  &:hover,
+  &:focus {
+    color: #fff;
+    background-color: #ff7875;
+    border-color: #ff7875;
+  }
+}
+.yld-btn-disabled {
+  color: rgba(0, 0, 0, 0.25);
+  background-color: #f5f5f5;
+  border-color: #d9d9d9;
+  cursor: not-allowed;
+  &:hover,
+  &:focus {
+    color: rgba(0, 0, 0, 0.25);
+    text-shadow: none;
+    background-color: #f5f5f5;
+    border-color: #d9d9d9;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+}
+.yld-btn-loading {
+  opacity: 0.5;
+  pointer-events: none;
+  &:hover,
+  &:focus {
+    opacity: 0.5;
+  }
+}

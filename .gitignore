@@ -5,16 +5,13 @@
 /npm-debug.log*
 /yarn-error.log
 /yarn.lock
-/package-lock.json
 
 # production
-/es
-/docs-dist
 /dist
+/docs-dist
 
 # misc
 .DS_Store
-/coverage
 
 # umi
 .umi
@@ -25,3 +22,4 @@
 # ide
 /.vscode
 /.idea
+.gitpod.yml

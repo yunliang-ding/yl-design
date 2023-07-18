@@ -1,4 +1,10 @@
-export default ({ direction = 'rows', center = false, gap = 10, children }) => {
+export default ({
+  style = {},
+  direction = 'rows',
+  center = false,
+  gap = 10,
+  children,
+}) => {
   const className = ['yld-space'];
   if (direction === 'column') {
     className.push('yld-space-column');
@@ -7,7 +13,7 @@ export default ({ direction = 'rows', center = false, gap = 10, children }) => {
     className.push('yld-space-center');
   }
   return (
-    <div className={className.join(' ')} style={{ gap }}>
+    <div className={className.join(' ')} style={{ ...style, gap }}>
       {children}
     </div>
   );

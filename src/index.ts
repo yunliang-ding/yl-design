@@ -1,4 +1,6 @@
 import './index.less';
+/** common */
+export { default as Layer } from './common/layer';
 /** general */
 export { default as Icon } from './general/icon';
 export { default as Button } from './general/button';
@@ -38,5 +40,5 @@ export { default as Message } from './feed-back/message';
 export { default as Drawer } from './feed-back/drawer';
 export { default as Modal } from './feed-back/modal';
 export { default as Spin } from './feed-back/spin';
-/** common */
-export { default as Layer } from './common/layer';
+/** other */
+export { default as CopyToClipboard } from './other/copy-to-clipboard';

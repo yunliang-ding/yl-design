@@ -126,26 +126,34 @@ export default () => {
               openKey={['1']}
               selectKey={['1-2']}
             >
-              <SubMenu key="1" icon="yldiconicon_yingyongguanli" title="Navigation One">
-                <Menu.Item key="1-1" icon="yldiconmessage">
+              <SubMenu
+                key="1"
+                icon="icon_yingyongguanli"
+                title="Navigation One"
+              >
+                <Menu.Item key="1-1" icon="message">
                   Option 1
                 </Menu.Item>
                 <Menu.Item key="1-2">Option 2</Menu.Item>
               </SubMenu>
-              <SubMenu key="2" icon="yldiconhezi" title="Navigation Two">
+              <SubMenu key="2" icon="hezi" title="Navigation Two">
                 <Menu.Item key="2-1">Option 1</Menu.Item>
                 <SubMenu key="2-2" title="Option 2">
-                  <Menu.Item key="2-2-1" icon="yldiconempty">
+                  <Menu.Item key="2-2-1" icon="empty">
                     Option 1
                   </Menu.Item>
                   <Menu.Item key="2-2-2">Option 2</Menu.Item>
                 </SubMenu>
               </SubMenu>
-              <SubMenu key="3" icon="yldiconjiaohu" title="Navigation Three">
+              <SubMenu key="3" icon="jiaohu" title="Navigation Three">
                 <Menu.Item key="3-1">Option 1</Menu.Item>
               </SubMenu>
-              <SubMenu key="4" icon="yldiconicon_yingyongguanli" title="Navigation Four">
-                <Menu.Item key="4-1" icon="yldiconcloud-form">
+              <SubMenu
+                key="4"
+                icon="icon_yingyongguanli"
+                title="Navigation Four"
+              >
+                <Menu.Item key="4-1" icon="cloud-form">
                   Option 1
                 </Menu.Item>
               </SubMenu>
@@ -162,20 +170,24 @@ export default () => {
                 }}
                 selectKey={['1-2']}
               >
-                <Menu.Item key="1" icon="yldiconicon_yingyongguanli">
+                <Menu.Item key="1" icon="icon_yingyongguanli">
                   Menu-Nav 1
                 </Menu.Item>
-                <Menu.Item key="2" disabled icon="yldiconempty">
+                <Menu.Item key="2" disabled icon="empty">
                   Menu-Nav 2
                 </Menu.Item>
-                <Menu.Item key="3" icon="yldiconhezi">
+                <Menu.Item key="3" icon="hezi">
                   Menu-Nav 3
                 </Menu.Item>
-                <SubMenu key="4" icon="yldiconjiaohu" title="Menu-Nav 4">
-                  <Menu.Item key="4-1" icon="yldiconcloud-form">
+                <SubMenu key="4" icon="jiaohu" title="Menu-Nav 4">
+                  <Menu.Item key="4-1" icon="cloud-form">
                     Option 1
                   </Menu.Item>
-                  <Menu.Item key="4-2" icon="yldiconweimingmingwenjianjia_rili" disabled>
+                  <Menu.Item
+                    key="4-2"
+                    icon="weimingmingwenjianjia_rili"
+                    disabled
+                  >
                     Option 2
                   </Menu.Item>
                 </SubMenu>
@@ -194,7 +206,7 @@ export default () => {
                 }
               >
                 <div className="user">
-                  <Icon type="yldiconuser" size={20} />
+                  <Icon type="user" size={20} />
                 </div>
               </Dropdown>
             </Header>

@@ -63,7 +63,11 @@ export default ({
     position.x1 = event.changedTouches[0].pageX;
     position.y1 = event.changedTouches[0].pageY;
     // 左右滑动
-    if (swipeX && Math.abs(position.x1 - position.x) - Math.abs(position.y1 - position.y) > 0) {
+    if (
+      swipeX &&
+      Math.abs(position.x1 - position.x) - Math.abs(position.y1 - position.y) >
+        0
+    ) {
       // 阻止事件冒泡
       event.stopPropagation();
       if (position.x - position.x1 > 10) {
@@ -96,7 +100,7 @@ export default ({
                 updateCurrentPage(_currentPage - 1);
               }}
             >
-              <Icon type="yldiconicon-jiantouzuo" />
+              <Icon type="icon-jiantouzuo" />
             </div>
             <div
               className="yld-carousel-next"
@@ -104,7 +108,7 @@ export default ({
                 updateCurrentPage(_currentPage + 1);
               }}
             >
-              <Icon type="yldiconjiantou2" />
+              <Icon type="jiantou2" />
             </div>
           </>
         )}
@@ -124,7 +128,8 @@ export default ({
                     : index + 1 === _currentPage
                     ? 0
                     : 100 * (index + 1 - _currentPage) + '%',
-                opacity: effect === 'fade' ? (index + 1 === _currentPage ? 1 : 0) : 1,
+                opacity:
+                  effect === 'fade' ? (index + 1 === _currentPage ? 1 : 0) : 1,
               }}
             >
               {page}

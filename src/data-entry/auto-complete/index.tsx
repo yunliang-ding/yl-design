@@ -49,7 +49,7 @@ export default ({
         </div>
         {allowClear && _value !== '' && (
           <Icon
-            type="yldiconcuo"
+            type="cuo"
             onClick={(e) => {
               e.stopPropagation(); // 阻止冒泡
               setvalue('');
@@ -76,7 +76,8 @@ export default ({
                     onClick={() => {
                       setopen(false);
                       setsuffix(option);
-                      typeof onSelect === 'function' && onSelect(_value + option);
+                      typeof onSelect === 'function' &&
+                        onSelect(_value + option);
                     }}
                   >
                     {_value + option}

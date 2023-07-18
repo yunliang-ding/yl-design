@@ -18,13 +18,13 @@ export default () => {
       <br />
       <Spin loading={loading} message="提示文案">
         <div style={{ width: 400, height: 200, border: '1px solid #eee' }}>
-          <Empty label="加载区域" icon="yldiconsearchicon" />
+          <Empty label="加载区域" icon="searchicon" />
         </div>
       </Spin>
       <br />
-      <Spin loading={loading} icon="yldiconloading">
+      <Spin loading={loading} icon="loading">
         <div style={{ width: 400, height: 200, border: '1px solid #eee' }}>
-          <Empty label="显示时间" icon="yldicontime" />
+          <Empty label="显示时间" icon="time" />
         </div>
       </Spin>
       <br />

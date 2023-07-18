@@ -45,12 +45,13 @@ export default ({
         <div className={className.join(' ')} style={style} ref={drawerRef}>
           <div className="yld-drawer-header">
             <div>{title}</div>
-            {closable && <Icon type="yldiconguanbi" onClick={close} />}
+            {closable && <Icon type="guanbi" onClick={close} />}
           </div>
           <div
             className="yld-drawer-body"
             style={{
-              height: footer === false ? 'calc(100% - 50px)' : 'calc(100% - 100px)',
+              height:
+                footer === false ? 'calc(100% - 50px)' : 'calc(100% - 100px)',
             }}
           >
             {children}
@@ -76,7 +77,9 @@ export default ({
       {_visible === true && (
         <div
           style={{ top }}
-          className={mask !== false ? 'yld-drawer-mask' : 'yld-drawer-mask-none'}
+          className={
+            mask !== false ? 'yld-drawer-mask' : 'yld-drawer-mask-none'
+          }
           onClick={close}
         />
       )}

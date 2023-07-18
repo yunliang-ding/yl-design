@@ -30,12 +30,13 @@ export default ({
         <div className="yld-modal" style={style}>
           <div className="yld-modal-header">
             <div>{title}</div>
-            {closable && <Icon type="yldiconguanbi" onClick={close} />}
+            {closable && <Icon type="guanbi" onClick={close} />}
           </div>
           <div
             className="yld-modal-body"
             style={{
-              height: footer === false ? 'calc(100% - 50px)' : 'calc(100% - 100px)',
+              height:
+                footer === false ? 'calc(100% - 50px)' : 'calc(100% - 100px)',
             }}
           >
             {children}

@@ -33,8 +33,8 @@ export default () => {
       <Switch checkedChildren="1" unCheckedChildren="0" checked={false} />
       &nbsp; &nbsp; &nbsp;
       <Switch
-        checkedChildren={<Icon type="yldiconduihao" />}
-        unCheckedChildren={<Icon type="yldiconguanbi" />}
+        checkedChildren={<Icon type="duihao" />}
+        unCheckedChildren={<Icon type="guanbi" />}
       />
     </>
   );
@@ -74,7 +74,12 @@ export default () => {
     <>
       <Switch loading checkedChildren="开" unCheckedChildren="关" />
       &nbsp;&nbsp;&nbsp;
-      <Switch loading checked={false} checkedChildren="开" unCheckedChildren="关" />
+      <Switch
+        loading
+        checked={false}
+        checkedChildren="开"
+        unCheckedChildren="关"
+      />
     </>
   );
 };

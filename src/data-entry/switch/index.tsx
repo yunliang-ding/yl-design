@@ -29,7 +29,7 @@ export default ({
         typeof onChange === 'function' && onChange(!_checked, e);
       }}
     >
-      {loading && <Icon type="yldiconloading" size={10} />}
+      {loading && <Icon type="loading" size={10} />}
       <span className="yld-switch-inner">{innerText}</span>
       <div className="yld-click-animating-node" />
     </button>

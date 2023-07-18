@@ -39,7 +39,7 @@ export default ({
           <div className={labelClassName.join(' ')} style={{ paddingLeft }}>
             {item.children && (
               <Icon
-                type="yldiconxialadown"
+                type="xialadown"
                 onClick={(e) => {
                   if (item.disabled || disabled) return;
                   e.stopPropagation(); // 阻止冒泡
@@ -75,7 +75,9 @@ export default ({
                       typeof onCheck === 'function' && onCheck(_checkedKeys);
                     }}
                   >
-                    <span className="yld-tree-node-label-left-text">{item.label}</span>
+                    <span className="yld-tree-node-label-left-text">
+                      {item.label}
+                    </span>
                   </Checkbox>
                 </>
               ) : (
@@ -97,7 +99,11 @@ export default ({
             </span>
           </div>
           {item.children && (
-            <div className={!_expandedKeys.includes(item.key) ? 'yld-tree-node-hidden' : ''}>
+            <div
+              className={
+                !_expandedKeys.includes(item.key) ? 'yld-tree-node-hidden' : ''
+              }
+            >
               {renderTree(item.children, paddingLeft + 34)}
             </div>
           )}

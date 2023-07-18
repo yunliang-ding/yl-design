@@ -1,6 +1,15 @@
 import { Icon } from '../../index';
 
-export default ({ disabled, ghost, onClick, icon, loading, type, style, children }: any) => {
+export default ({
+  disabled,
+  ghost,
+  onClick,
+  icon,
+  loading,
+  type,
+  style,
+  children,
+}: any) => {
   let className = 'yld-btn';
   if (type) {
     className += ' yld-btn-' + type;
@@ -23,7 +32,7 @@ export default ({ disabled, ghost, onClick, icon, loading, type, style, children
         typeof onClick === 'function' && onClick(e);
       }}
     >
-      {loading && <Icon type="yldiconloading" />}
+      {loading && <Icon type="loading" />}
       {icon && <Icon type={icon} />}
       {children || ' '}
     </button>

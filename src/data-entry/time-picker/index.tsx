@@ -53,7 +53,9 @@ export default ({
   /**
    * 内部状态
    */
-  let className = _open ? 'yld-time-picker yld-time-picker-open' : 'yld-time-picker';
+  let className = _open
+    ? 'yld-time-picker yld-time-picker-open'
+    : 'yld-time-picker';
   disabled && (className += ' yld-time-picker-disabled');
   const dropDownClassName = dropdownClassName
     ? dropdownClassName + ' yld-time-picker-dropdown'
@@ -66,7 +68,9 @@ export default ({
   const dropdownColSecondRef: any = useRef();
   useEffect(() => {
     if (dropdownColHourRef && dropdownColHourRef.current) {
-      dropdownColHourRef.current.scrollTop = !isNaN(Number(_value[0])) ? 30 * Number(_value[0]) : 0;
+      dropdownColHourRef.current.scrollTop = !isNaN(Number(_value[0]))
+        ? 30 * Number(_value[0])
+        : 0;
       dropdownColMinuteRef.current.scrollTop = !isNaN(Number(_value[1]))
         ? 30 * Number(_value[1])
         : 0;
@@ -78,7 +82,7 @@ export default ({
   return (
     <div className={className} style={style}>
       <Input
-        suffix={<Icon type="yldicontime" />}
+        suffix={<Icon type="time" />}
         addonBefore={addonBefore}
         disabled={disabled}
         addonAfter={addonAfter}
@@ -138,7 +142,9 @@ export default ({
                       let className = selelcted
                         ? 'yld-time-picker-dropdown-menu yld-time-picker-dropdown-menu-selected'
                         : 'yld-time-picker-dropdown-menu';
-                      option.disabled && (className += ' yld-time-picker-dropdown-menu-disabled');
+                      option.disabled &&
+                        (className +=
+                          ' yld-time-picker-dropdown-menu-disabled');
                       return (
                         <div
                           key={option.key}

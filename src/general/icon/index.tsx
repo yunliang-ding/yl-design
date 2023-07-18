@@ -1,13 +1,14 @@
-export default ({ type, size = 16, style, onClick, color }: any) => {
-  let _style = style || {};
-  _style.fontSize = size;
-  _style.color = color;
+export default ({ type, size = 16, style = {}, onClick, color }: any) => {
   return (
     <i
-      className={'yld-icon ' + type}
-      style={_style}
+      className={`yld-icon yld-icon-${type}`}
+      style={{
+        ...style,
+        color,
+        fontSize: size,
+      }}
       onClick={(e: any) => {
-        typeof onClick === 'function' && onClick(e);
+        onClick?.(e);
       }}
     />
   );

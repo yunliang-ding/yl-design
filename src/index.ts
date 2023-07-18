@@ -10,6 +10,7 @@ export { default as Badge } from './data-display/badge';
 export { default as Tabs } from './data-display/tabs';
 export { default as Tree } from './data-display/tree';
 export { default as Table } from './data-display/table';
+export { default as Timeline } from './data-display/timeline';
 /** data-entry */
 export { default as Input } from './data-entry/input';
 export { default as InputNumber } from './data-entry/input-number';

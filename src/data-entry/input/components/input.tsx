@@ -23,8 +23,10 @@ export default ({
   const [_value, setvalue] = useState(value);
   prefix && (style.paddingLeft = 30);
   suffix && (style.paddingRight = 30);
-  addonBefore && ((style.borderTopLeftRadius = 0), (style.borderBottomLeftRadius = 0));
-  addonAfter && ((style.borderTopRightRadius = 0), (style.borderBottomRightRadius = 0));
+  addonBefore &&
+    ((style.borderTopLeftRadius = 0), (style.borderBottomLeftRadius = 0));
+  addonAfter &&
+    ((style.borderTopRightRadius = 0), (style.borderBottomRightRadius = 0));
   const [password, setpassword] = useState(type === 'password');
   useEffect(() => {
     setvalue(value);
@@ -60,7 +62,7 @@ export default ({
         <>
           <Suffix>
             <Icon
-              type={password ? 'yldiconpassword-invisible' : 'yldiconpassword-visible'}
+              type={password ? 'password-invisible' : 'password-visible'}
               onClick={() => {
                 setpassword(!password);
               }}
@@ -72,7 +74,7 @@ export default ({
           {!disabled && allowClear && _value !== '' && (
             <Suffix style={{ marginRight: suffix ? 24 : 8 }}>
               <Icon
-                type="yldiconcuo"
+                type="cuo"
                 onClick={() => {
                   setvalue('');
                   typeof onAllowClear === 'function' && onAllowClear();

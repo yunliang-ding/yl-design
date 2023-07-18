@@ -50,7 +50,8 @@ export default ({
   const adjustHeight = () => {
     if (selectValueWapper && selectValueWapper.current) {
       const { height } = selectValueWapper.current.getBoundingClientRect();
-      const { left, width } = selectSelectionWapper.current.getBoundingClientRect();
+      const { left, width } =
+        selectSelectionWapper.current.getBoundingClientRect();
       const top = getElementTop(selectValueWapper.current);
       selectSelectionWapper.current.style.height = height + 'px';
       setdropdownStyle({
@@ -74,7 +75,10 @@ export default ({
             setopen(!_open);
           }}
         >
-          <div ref={selectValueWapper} className="yld-select-selection-selected-value">
+          <div
+            ref={selectValueWapper}
+            className="yld-select-selection-selected-value"
+          >
             {_value.length === 0 ? (
               <span style={{ color: '#aaa' }}>{placeholder}</span>
             ) : (
@@ -83,16 +87,22 @@ export default ({
                   .filter((item) => _value.indexOf(item.value) > -1)
                   .map((item) => {
                     return (
-                      <span className="yld-select-selection-choice" key={item.key}>
+                      <span
+                        className="yld-select-selection-choice"
+                        key={item.key}
+                      >
                         {item.label}
                         <Icon
                           size={14}
-                          type="yldiconguanbi"
+                          type="guanbi"
                           onClick={(e) => {
                             e.stopPropagation(); // 阻止冒泡
-                            let value = _value.filter((item) => item !== item.value); // 删除
+                            let value = _value.filter(
+                              (item) => item !== item.value,
+                            ); // 删除
                             setvalue([..._value]);
-                            typeof onChange === 'function' && onChange(value, null);
+                            typeof onChange === 'function' &&
+                              onChange(value, null);
                           }}
                         />
                       </span>
@@ -101,11 +111,11 @@ export default ({
               </div>
             )}
           </div>
-          <Icon type="yldiconxialadown" />
+          <Icon type="xialadown" />
           {!disabled && allowClear && _value.length > 0 && (
             <Icon
               size={14}
-              type="yldiconcuo"
+              type="cuo"
               onClick={(e) => {
                 e.stopPropagation(); // 阻止冒泡
                 typeof onChange === 'function' && onChange([], null);
@@ -128,7 +138,8 @@ export default ({
                 _value.indexOf(option.value) > -1
                   ? 'yld-select-dropdown-menu yld-select-dropdown-menu-selected'
                   : 'yld-select-dropdown-menu';
-              option.disabled && (className += ' yld-select-dropdown-menu-disabled');
+              option.disabled &&
+                (className += ' yld-select-dropdown-menu-disabled');
               return (
                 <div
                   key={option.key}
@@ -143,11 +154,12 @@ export default ({
                       _value.splice(index, 1);
                     }
                     setvalue([..._value]);
-                    typeof onChange === 'function' && onChange([..._value], option);
+                    typeof onChange === 'function' &&
+                      onChange([..._value], option);
                   }}
                 >
                   {option.label}
-                  <Icon size={14} type="yldiconduihao" />
+                  <Icon size={14} type="duihao" />
                 </div>
               );
             })

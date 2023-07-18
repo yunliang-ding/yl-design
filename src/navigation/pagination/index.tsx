@@ -31,9 +31,24 @@ export default ({
   if (totalPage > 8) {
     // 默认大于8 转为更多模式
     if (_current > 5 && _current + 5 < totalPage) {
-      arr.push(-1, _current - 2, _current - 1, _current, _current + 1, _current + 2, -2);
+      arr.push(
+        -1,
+        _current - 2,
+        _current - 1,
+        _current,
+        _current + 1,
+        _current + 2,
+        -2,
+      );
     } else if (_current + 5 >= totalPage) {
-      arr.push(-1, totalPage - 5, totalPage - 4, totalPage - 3, totalPage - 2, totalPage - 1);
+      arr.push(
+        -1,
+        totalPage - 5,
+        totalPage - 4,
+        totalPage - 3,
+        totalPage - 2,
+        totalPage - 1,
+      );
     } else {
       arr.push(2, 3, 4, 5, 6, -2);
     }
@@ -42,7 +57,11 @@ export default ({
       page.push(
         <div
           key={Math.random()}
-          className={_current === item ? 'yld-pagination-item-active' : 'yld-pagination-item'}
+          className={
+            _current === item
+              ? 'yld-pagination-item-active'
+              : 'yld-pagination-item'
+          }
           onClick={() => {
             if (item === -1) {
               pageChange(_current - 5);
@@ -53,7 +72,7 @@ export default ({
             }
           }}
         >
-          {[-1, -2].indexOf(item) > -1 ? <Icon type="yldiconmoreread" /> : item}
+          {[-1, -2].indexOf(item) > -1 ? <Icon type="moreread" /> : item}
         </div>,
       );
     });
@@ -62,7 +81,11 @@ export default ({
       page.push(
         <div
           key={Math.random()}
-          className={_current === i ? 'yld-pagination-item-active' : 'yld-pagination-item'}
+          className={
+            _current === i
+              ? 'yld-pagination-item-active'
+              : 'yld-pagination-item'
+          }
           onClick={() => {
             pageChange(i);
           }}
@@ -76,25 +99,31 @@ export default ({
     <>
       <div className="yld-pagination">
         <div
-          className={_current == 1 ? 'yld-pagination-pre-disabled' : 'yld-pagination-pre'}
+          className={
+            _current == 1 ? 'yld-pagination-pre-disabled' : 'yld-pagination-pre'
+          }
           onClick={() => {
             if (_current != 1) {
               pageChange(_current - 1);
             }
           }}
         >
-          <Icon type="yldiconicon-jiantouzuo" />
+          <Icon type="icon-jiantouzuo" />
         </div>
         {page}
         <div
-          className={_current == totalPage ? 'yld-pagination-next-disabled' : 'yld-pagination-next'}
+          className={
+            _current == totalPage
+              ? 'yld-pagination-next-disabled'
+              : 'yld-pagination-next'
+          }
           onClick={() => {
             if (_current !== totalPage) {
               pageChange(_current + 1);
             }
           }}
         >
-          <Icon type="yldiconjiantou2" />
+          <Icon type="jiantou2" />
         </div>
         {pageSizeOptions && (
           <div className="yld-pagination-jump">
@@ -104,7 +133,8 @@ export default ({
               onChange={(pageSize) => {
                 setcurrent(1);
                 setpageSize(pageSize);
-                typeof onPageSizeChange === 'function' && onPageSizeChange(pageSize);
+                typeof onPageSizeChange === 'function' &&
+                  onPageSizeChange(pageSize);
               }}
               options={pageSizeOptions.map((value) => {
                 return {

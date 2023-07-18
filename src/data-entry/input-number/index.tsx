@@ -37,7 +37,8 @@ export default ({
   };
   const updateValue = (value) => {
     setvalue(step < 1 ? Number(value).toFixed(1) : Number(value));
-    typeof onChange === 'function' && onChange(step < 1 ? Number(value).toFixed(1) : Number(value));
+    typeof onChange === 'function' &&
+      onChange(step < 1 ? Number(value).toFixed(1) : Number(value));
   };
   return (
     <div className="yld-input-number-wrapper" style={style}>
@@ -71,10 +72,10 @@ export default ({
       {!disabled && (
         <div className="yld-input-number-suffix">
           <div className="suffix-top" onClick={add}>
-            <Icon type="yldiconxiala1" size={12} />
+            <Icon type="xiala1" size={12} />
           </div>
           <div className="suffix-bottom" onClick={minus}>
-            <Icon type="yldiconxialadown" size={12} />
+            <Icon type="xialadown" size={12} />
           </div>
         </div>
       )}

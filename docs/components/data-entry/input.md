@@ -16,9 +16,18 @@ export default () => {
     <>
       <Input disabled={disabled} placeholder="普通输入框" />
       <br />
-      <Input disabled={disabled} placeholder="指定宽度" style={{ width: 300 }} />
+      <Input
+        disabled={disabled}
+        placeholder="指定宽度"
+        style={{ width: 300 }}
+      />
       <br />
-      <Input disabled={disabled} placeholder="指定长度11位" style={{ width: 300 }} maxLength={11} />
+      <Input
+        disabled={disabled}
+        placeholder="指定长度11位"
+        style={{ width: 300 }}
+        maxLength={11}
+      />
       <br />
       <Switch
         checkedChildren="启用"
@@ -44,9 +53,15 @@ export default () => {
       <br />
       <Input placeholder="密码" addonAfter="密码" />
       <br />
-      <Input placeholder="超过文本的字符看不到" addonBefore={'超过文本的字符看不到'} />
+      <Input
+        placeholder="超过文本的字符看不到"
+        addonBefore={'超过文本的字符看不到'}
+      />
       <br />
-      <Input placeholder="超过文本的字符看不到" addonAfter={'超过文本的字符看不到'} />
+      <Input
+        placeholder="超过文本的字符看不到"
+        addonAfter={'超过文本的字符看不到'}
+      />
     </>
   );
 };
@@ -63,14 +78,14 @@ export default () => {
     <>
       <Input
         placeholder="邮箱"
-        prefix={<Icon size={18} type="yldiconweimingmingwenjianjia_rili" />}
+        prefix={<Icon size={18} type="weimingmingwenjianjia_rili" />}
       />
       <br />
-      <Input placeholder="查找" suffix={<Icon type="yldiconsearchicon" />} />
+      <Input placeholder="查找" suffix={<Icon type="searchicon" />} />
       <br />
       <Input
         placeholder="发送到"
-        prefix={<Icon size={18} type="yldiconduihao" style={{ color: '#4569d4' }} />}
+        prefix={<Icon size={18} type="duihao" style={{ color: '#4569d4' }} />}
         suffix={'.com'}
       />
     </>
@@ -91,7 +106,7 @@ export default () => {
       <br />
       <Input
         placeholder="支持清除"
-        suffix={<Icon type="yldiconweimingmingwenjianjia_rili" />}
+        suffix={<Icon type="weimingmingwenjianjia_rili" />}
         style={{ width: 300 }}
         allowClear
       />
@@ -130,7 +145,12 @@ export default () => (
       addonAfter={'限制100字符'}
       style={{ marginBottom: 20 }}
     />
-    <Input type="textarea" disabled placeholder="详细信息.." addonBefore={'描述'} />
+    <Input
+      type="textarea"
+      disabled
+      placeholder="详细信息.."
+      addonBefore={'描述'}
+    />
   </>
 );
 ```

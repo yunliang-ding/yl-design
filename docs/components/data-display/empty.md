@@ -29,6 +29,6 @@ export default () => {
 import React from 'react';
 import { Empty, Icon } from 'yl-design';
 export default () => {
-  return <Empty icon="yldiconsearchicon" label={'查找信息为空'} />;
+  return <Empty icon="searchicon" label={'查找信息为空'} />;
 };
 ```

@@ -1,6 +1,6 @@
 import { Icon } from '../../index';
 
-export default ({ label = 'No Data', icon = 'yldiconempty' }) => {
+export default ({ label = 'No Data', icon = 'empty' }) => {
   return (
     <div className="yld-empty-wrapper">
       <Icon type={icon} size={50} />

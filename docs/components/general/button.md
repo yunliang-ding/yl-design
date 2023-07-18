@@ -38,9 +38,9 @@ import { Button, Icon } from 'yl-design';
 export default () => {
   return (
     <>
-      <Button type="primary" icon="yldiconsearchicon"></Button>
+      <Button type="primary" icon="searchicon"></Button>
       &nbsp;&nbsp;&nbsp;
-      <Button type="primary" icon="yldiconsearchicon">
+      <Button type="primary" icon="searchicon">
         Search
       </Button>
     </>

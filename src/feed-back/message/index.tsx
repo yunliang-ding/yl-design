@@ -4,10 +4,10 @@ import { Icon } from '../../index';
 const $: any = document.querySelector.bind(document);
 const $$: any = document.querySelectorAll.bind(document);
 const typeMapping = {
-  1: 'yldiconmessage_SendSuccessfully',
-  2: 'yldiconcuo',
-  3: 'yldiconinfo_warning',
-  4: 'yldiconwarning',
+  1: 'message_SendSuccessfully',
+  2: 'cuo',
+  3: 'info_warning',
+  4: 'warning',
 };
 const colorMapping = {
   1: '#1ac7aa',
@@ -66,7 +66,7 @@ export default class Message {
         <div className="yld-message-content-message">{content}</div>
         <div className="yld-message-content-close">
           <Icon
-            type="yldiconguanbi"
+            type="guanbi"
             onClick={(e) => {
               this.close(e);
             }}

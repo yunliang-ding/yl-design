@@ -13,8 +13,12 @@ export default ({
   loading = false,
   rows = {},
 }: any) => {
-  const [_columns, setcolumns] = useState(Array.isArray(columns) ? [...columns] : []);
-  const [_dataSource, setdataSource] = useState(Array.isArray(dataSource) ? [...dataSource] : []);
+  const [_columns, setcolumns] = useState(
+    Array.isArray(columns) ? [...columns] : [],
+  );
+  const [_dataSource, setdataSource] = useState(
+    Array.isArray(dataSource) ? [...dataSource] : [],
+  );
   const [hovercolumn, sethovercolumn] = useState({}); // hover行
   const [checkedkeys, setcheckedkeys] = useState([]); // 内置选择器
   const [_pagination, setpagination] = useState({
@@ -212,7 +216,7 @@ export default ({
                 {column.sort && (
                   <>
                     <Icon
-                      type="yldiconxiala1"
+                      type="xiala1"
                       size={12}
                       style={{ left: 4, top: -6 }}
                       onClick={() => {
@@ -220,7 +224,7 @@ export default ({
                       }}
                     />
                     <Icon
-                      type="yldiconxialadown"
+                      type="xialadown"
                       size={12}
                       style={{ top: 6, right: 8 }}
                       onClick={() => {
@@ -305,12 +309,18 @@ export default ({
             {renderHeaderTable(_columns)}
           </div>
           <div className="yld-table-body" ref={tableBodyRef}>
-            {_dataSource.length === 0 ? <Empty /> : renderBodyTable(_dataSource, _columns)}
+            {_dataSource.length === 0 ? (
+              <Empty />
+            ) : (
+              renderBodyTable(_dataSource, _columns)
+            )}
           </div>
         </div>
         {showFixed && fixedLeft.length > 0 && (
           <div className="yld-table-fixed yld-table-fixed-left">
-            <div className="yld-table-header">{renderHeaderTable(fixedLeft)}</div>
+            <div className="yld-table-header">
+              {renderHeaderTable(fixedLeft)}
+            </div>
             <div className="yld-table-body" ref={tableFixedLeftRef}>
               {renderBodyTable(_dataSource, fixedLeft)}
             </div>
@@ -318,7 +328,9 @@ export default ({
         )}
         {showFixed && fixedRight.length > 0 && (
           <div className="yld-table-fixed yld-table-fixed-right">
-            <div className="yld-table-header">{renderHeaderTable(fixedRight)}</div>
+            <div className="yld-table-header">
+              {renderHeaderTable(fixedRight)}
+            </div>
             <div className="yld-table-body" ref={tableFixedRightRef}>
               {renderBodyTable(_dataSource, fixedRight)}
             </div>

@@ -78,7 +78,7 @@ export default ({
       <div className="yld-date-picker" style={style}>
         <div className="yld-date-picker-input">
           <Input
-            suffix={<Icon type="yldiconweimingmingwenjianjia_rili" />}
+            suffix={<Icon type="weimingmingwenjianjia_rili" />}
             addonBefore={addonBefore}
             disabled={disabled}
             addonAfter={addonAfter}
@@ -96,9 +96,14 @@ export default ({
         </div>
         {open && (
           <>
-            <div className="yld-date-picker-layer" onClick={setopen.bind(null, false)} />
+            <div
+              className="yld-date-picker-layer"
+              onClick={setopen.bind(null, false)}
+            />
             <div className="yld-date-picker-body">
-              <div className="yld-date-picker-body-value">{days || '请选择日期'}</div>
+              <div className="yld-date-picker-body-value">
+                {days || '请选择日期'}
+              </div>
               <div className="yld-date-picker-body-tools">
                 <div
                   title="上一年"
@@ -106,19 +111,7 @@ export default ({
                   onClick={() => {
                     updateDateCalendar(
                       dateUtil.date.getTime() -
-                        (dateUtil.isLeapYear() ? 366 : 355) * 24 * 60 * 60 * 1000,
-                    );
-                  }}
-                >
-                  <Icon type="yldiconicon-jiantouzuo" />
-                </div>
-                <div
-                  title="上个月"
-                  className="picker-tools-before picker-tools-before-month"
-                  onClick={() => {
-                    updateDateCalendar(
-                      dateUtil.date.getTime() -
-                        dateUtil.getDateNumberByMonth(dateUtil.date.getMonth() + 1) *
+                        (dateUtil.isLeapYear() ? 366 : 355) *
                           24 *
                           60 *
                           60 *
@@ -126,7 +119,25 @@ export default ({
                     );
                   }}
                 >
-                  <Icon type="yldiconxiangzuoshouqi" />
+                  <Icon type="icon-jiantouzuo" />
+                </div>
+                <div
+                  title="上个月"
+                  className="picker-tools-before picker-tools-before-month"
+                  onClick={() => {
+                    updateDateCalendar(
+                      dateUtil.date.getTime() -
+                        dateUtil.getDateNumberByMonth(
+                          dateUtil.date.getMonth() + 1,
+                        ) *
+                          24 *
+                          60 *
+                          60 *
+                          1000,
+                    );
+                  }}
+                >
+                  <Icon type="xiangzuoshouqi" />
                 </div>
                 <div className="picker-tools-date">
                   <Select
@@ -134,7 +145,9 @@ export default ({
                     value={year}
                     options={yearList}
                     onChange={(e) => {
-                      updateDateCalendar(`${e}-${month}-${dateUtil.date.getDate()}`);
+                      updateDateCalendar(
+                        `${e}-${month}-${dateUtil.date.getDate()}`,
+                      );
                     }}
                   />
                   <Select
@@ -142,7 +155,9 @@ export default ({
                     value={month}
                     options={monthList}
                     onChange={(e) => {
-                      updateDateCalendar(`${year}-${e}-${dateUtil.date.getDate()}`);
+                      updateDateCalendar(
+                        `${year}-${e}-${dateUtil.date.getDate()}`,
+                      );
                     }}
                   />
                 </div>
@@ -152,7 +167,9 @@ export default ({
                   onClick={() => {
                     updateDateCalendar(
                       dateUtil.date.getTime() +
-                        dateUtil.getDateNumberByMonth(dateUtil.date.getMonth() + 1) *
+                        dateUtil.getDateNumberByMonth(
+                          dateUtil.date.getMonth() + 1,
+                        ) *
                           24 *
                           60 *
                           60 *
@@ -160,7 +177,7 @@ export default ({
                     );
                   }}
                 >
-                  <Icon type="yldiconzuocedakai" />
+                  <Icon type="zuocedakai" />
                 </div>
                 <div
                   title="下一年"
@@ -168,15 +185,23 @@ export default ({
                   onClick={() => {
                     updateDateCalendar(
                       dateUtil.date.getTime() +
-                        (dateUtil.isLeapYear() ? 366 : 355) * 24 * 60 * 60 * 1000,
+                        (dateUtil.isLeapYear() ? 366 : 355) *
+                          24 *
+                          60 *
+                          60 *
+                          1000,
                     );
                   }}
                 >
-                  <Icon type="yldiconjiantou2" />
+                  <Icon type="jiantou2" />
                 </div>
               </div>
-              <div className="yld-date-picker-body-header">{renderHeader()}</div>
-              <div className="yld-date-picker-body-calendar">{renderContent()}</div>
+              <div className="yld-date-picker-body-header">
+                {renderHeader()}
+              </div>
+              <div className="yld-date-picker-body-calendar">
+                {renderContent()}
+              </div>
               <div className="yld-date-picker-body-footer">
                 <Button
                   type="primary"

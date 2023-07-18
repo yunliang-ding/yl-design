@@ -1,15 +1,23 @@
 import { useRef, useEffect } from 'react';
 import { Icon } from '../../index';
 
-export default ({ loading, icon = 'yldiconloading1', style, message, children }: any) => {
+export default ({
+  loading,
+  icon = 'loading1',
+  style,
+  message,
+  children,
+}: any) => {
   const spinMaskRef: any = useRef();
   const spinBodyRef: any = useRef();
   useEffect(() => {
     if (spinMaskRef.current && spinBodyRef.current) {
       spinMaskRef.current.style.width =
-        spinBodyRef.current.firstElementChild.getBoundingClientRect().width + 'px';
+        spinBodyRef.current.firstElementChild.getBoundingClientRect().width +
+        'px';
       spinMaskRef.current.style.height =
-        spinBodyRef.current.firstElementChild.getBoundingClientRect().height + 'px';
+        spinBodyRef.current.firstElementChild.getBoundingClientRect().height +
+        'px';
     }
     if (loading) {
       spinMaskRef.current.style.display = 'flex';
@@ -32,7 +40,9 @@ export default ({ loading, icon = 'yldiconloading1', style, message, children }:
             <div className="yld-loading-mask-spin">
               <Icon type={icon} />
             </div>
-            {message && <span className="yld-loading-mask-message">{message}</span>}
+            {message && (
+              <span className="yld-loading-mask-message">{message}</span>
+            )}
           </div>
         )}
       </div>

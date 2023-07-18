@@ -38,10 +38,14 @@ const MenuVerical = ({
             {item.icon && <Icon type={item.icon} />}
             <span>{item.label}</span>
           </span>
-          {item.children && <Icon type="yldiconxialadown" />}
+          {item.children && <Icon type="xialadown" />}
         </div>
         {item.children && (
-          <div className={!_openKey.includes(item.key) ? 'yld-nav-subMenu-hidden' : ''}>
+          <div
+            className={
+              !_openKey.includes(item.key) ? 'yld-nav-subMenu-hidden' : ''
+            }
+          >
             {renderMenus(item.children, paddingLeft + 24)}
           </div>
         )}

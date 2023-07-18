@@ -21,7 +21,10 @@ export default () => {
       &nbsp;&nbsp;&nbsp;&nbsp;
       <Badge dot>Dot</Badge>
       &nbsp;&nbsp;&nbsp;&nbsp;
-      <Badge color="transparent" count={<Icon color="red" type="yldiconpassword-visible" />}>
+      <Badge
+        color="transparent"
+        count={<Icon color="red" type="password-visible" />}
+      >
         Icon
       </Badge>
     </>

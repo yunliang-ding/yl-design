@@ -22,9 +22,15 @@ export default ({
     const loop = (options) => {
       options.forEach((option) => {
         option.key = Math.random();
-        option.label = fieldNames.label ? option[fieldNames.label] : option.label;
-        option.value = fieldNames.value ? option[fieldNames.value] : option.value;
-        option.children = fieldNames.children ? option[fieldNames.children] : option.children;
+        option.label = fieldNames.label
+          ? option[fieldNames.label]
+          : option.label;
+        option.value = fieldNames.value
+          ? option[fieldNames.value]
+          : option.value;
+        option.children = fieldNames.children
+          ? option[fieldNames.children]
+          : option.children;
         if (option.children) {
           loop(option.children);
         }
@@ -53,7 +59,9 @@ export default ({
    */
   useEffect(() => {
     optionsTransfrom(); // 自定义属性转换
-    const values = transfrom(options, value || []).filter((item) => item !== undefined);
+    const values = transfrom(options, value || []).filter(
+      (item) => item !== undefined,
+    );
     setselected(values); // 回显
     setvalue(values); // 回显
   }, [value]);
@@ -112,12 +120,16 @@ export default ({
         }}
       >
         <div className="yld-cascader-selection-selected-value" title={label}>
-          {selected.length === 0 ? <span style={{ color: '#aaa' }}>{placeholder}</span> : label}
+          {selected.length === 0 ? (
+            <span style={{ color: '#aaa' }}>{placeholder}</span>
+          ) : (
+            label
+          )}
         </div>
-        <Icon type="yldiconxialadown" />
+        <Icon type="xialadown" />
         {!disabled && allowClear && selected.length > 0 && (
           <Icon
-            type="yldiconcuo"
+            type="cuo"
             onClick={(e) => {
               e.stopPropagation(); // 阻止冒泡
               setvalue([]); // 还原
@@ -130,17 +142,23 @@ export default ({
       </div>
       {_open && (
         <>
-          <div className="yld-cascader-mask" onClick={setopen.bind(null, false)} />
+          <div
+            className="yld-cascader-mask"
+            onClick={setopen.bind(null, false)}
+          />
           <div style={dropdownStyle} className={dropDownClassName}>
             {list.length > 0 ? (
               list.map((item, index) => {
                 return (
                   <div className="yld-cascader-dropdown-col" key={index}>
                     {item.map((option) => {
-                      let className = _value.some((item) => item.value === option.value)
+                      let className = _value.some(
+                        (item) => item.value === option.value,
+                      )
                         ? 'yld-cascader-dropdown-menu yld-cascader-dropdown-menu-selected'
                         : 'yld-cascader-dropdown-menu';
-                      option.disabled && (className += ' yld-cascader-dropdown-menu-disabled');
+                      option.disabled &&
+                        (className += ' yld-cascader-dropdown-menu-disabled');
                       return (
                         <div
                           key={option.key}
@@ -163,7 +181,9 @@ export default ({
                           }}
                         >
                           {option.label}
-                          {option.children && <Icon type="yldiconjiantou2" size={14} />}
+                          {option.children && (
+                            <Icon type="jiantou2" size={14} />
+                          )}
                         </div>
                       );
                     })}

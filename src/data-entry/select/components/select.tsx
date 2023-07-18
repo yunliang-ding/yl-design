@@ -26,7 +26,9 @@ export default ({
   const [_value, setvalue] = useState(value);
   const selected: any = _options.find((item) => item.value === _value) || {}; // 选中项
   const [keyword, setkeyword] = useState('');
-  const [_placeholder, setplaceholder] = useState(selected.label || placeholder);
+  const [_placeholder, setplaceholder] = useState(
+    selected.label || placeholder,
+  );
   const [_dropdownStyle, setdropdownStyle] = useState(dropdownStyle || {});
   const [refresh, setrefresh] = useState(false);
   let className = _open ? 'yld-select yld-select-open' : 'yld-select';
@@ -47,7 +49,8 @@ export default ({
   useEffect(() => {
     setTimeout(() => {
       if (selectionRef && selectionRef.current) {
-        const { left, height, width } = selectionRef.current.getBoundingClientRect();
+        const { left, height, width } =
+          selectionRef.current.getBoundingClientRect();
         const top = getElementTop(selectionRef.current);
         setdropdownStyle({
           left,
@@ -110,10 +113,10 @@ export default ({
               selected.label
             )}
           </div>
-          <Icon type="yldiconxialadown" />
+          <Icon type="xialadown" />
           {!disabled && allowClear && selected.value !== undefined && (
             <Icon
-              type="yldiconcuo"
+              type="cuo"
               onClick={(e) => {
                 e.stopPropagation(); // 阻止冒泡
                 typeof onChange === 'function' && onChange(null, null);
@@ -136,7 +139,8 @@ export default ({
                 option.value === _value
                   ? 'yld-select-dropdown-menu yld-select-dropdown-menu-selected'
                   : 'yld-select-dropdown-menu';
-              option.disabled && (className += ' yld-select-dropdown-menu-disabled');
+              option.disabled &&
+                (className += ' yld-select-dropdown-menu-disabled');
               return (
                 <div
                   key={option.key}
@@ -148,7 +152,8 @@ export default ({
                     setkeyword(''); // 清空 keyword
                     setoptions(options); // 重制 options
                     setvalue(option.value);
-                    typeof onChange === 'function' && onChange(option.value, option);
+                    typeof onChange === 'function' &&
+                      onChange(option.value, option);
                   }}
                 >
                   {option.label}

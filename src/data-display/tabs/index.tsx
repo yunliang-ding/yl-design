@@ -1,7 +1,15 @@
 import { useState, useRef, useEffect } from 'react';
 import { Icon } from '../../index';
 
-export default ({ style, closable, data, activeKey, onClick, onRemove, tigger = 'click' }: any) => {
+export default ({
+  style,
+  closable,
+  data,
+  activeKey,
+  onClick,
+  onRemove,
+  tigger = 'click',
+}: any) => {
   useEffect(() => {
     if (activeKey !== undefined) {
       let index = data.findIndex((item) => item.key === activeKey);
@@ -19,7 +27,8 @@ export default ({ style, closable, data, activeKey, onClick, onRemove, tigger = 
    */
   useEffect(() => {
     if (activeItemRef.current) {
-      borderRef.current.style.width = activeItemRef.current.getBoundingClientRect().width + 'px';
+      borderRef.current.style.width =
+        activeItemRef.current.getBoundingClientRect().width + 'px';
       borderRef.current.style.left =
         activeItemRef.current.getBoundingClientRect().left -
         tabsRef.current.getBoundingClientRect().left +
@@ -36,7 +45,9 @@ export default ({ style, closable, data, activeKey, onClick, onRemove, tigger = 
                 ref={_index === index ? activeItemRef : null}
                 key={tab.key}
                 className={
-                  _index === index ? 'yld-tabs-header-item-active' : 'yld-tabs-header-item'
+                  _index === index
+                    ? 'yld-tabs-header-item-active'
+                    : 'yld-tabs-header-item'
                 }
                 onClick={() => {
                   if (tigger === 'click') {
@@ -54,7 +65,7 @@ export default ({ style, closable, data, activeKey, onClick, onRemove, tigger = 
                 {tab.label}
                 {closable && (
                   <Icon
-                    type="yldiconguanbi"
+                    type="guanbi"
                     size={13}
                     onClick={(e) => {
                       e.stopPropagation(); // 阻止往上冒泡

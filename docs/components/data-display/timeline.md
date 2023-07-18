@@ -1,6 +1,6 @@
 # Timeline 时间线
 
-```jsx
+```tsx
 /**
  * title: 基本使用
  */
@@ -9,14 +9,35 @@ import { Timeline, Icon } from 'yl-design';
 export default () => {
   const items = [
     {
-      title: '描述信息1',
+      title: 'Network problems being solved 2015-09-01',
+      color: 'red',
     },
     {
-      title: '描述信息2',
-      dot: <Icon type="DarkTheme" />,
+      title: (
+        <>
+          <p>Solve initial network problems 1</p>
+          <p>Solve initial network problems 2</p>
+          <p>Solve initial network problems 3 2015-09-01</p>
+          <p>Solve initial network problems 3 2015-09-01</p>
+          <p>Solve initial network problems 3 2015-09-01</p>
+          <p>Solve initial network problems 3 2015-09-01</p>
+        </>
+      ),
     },
     {
-      title: '描述信息2',
+      title: 'Solve initial network problems 2015-09-01',
+      dot: (
+        <Icon
+          color="green"
+          type="message_SendSuccessfully"
+          size={14}
+          style={{ left: 2 }}
+        />
+      ),
+    },
+    {
+      title: 'Technical testing 2015-09-01',
+      color: 'green',
     },
   ];
   return <Timeline items={items} />;

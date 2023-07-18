@@ -38,6 +38,7 @@ const copyToClipBoard = async (text, tips) => {
 export default ({ children, message, text = '' }) => {
   return (
     <div
+      style={{ cursor: 'pointer' }}
       onClick={async () => {
         await copyToClipBoard(text, message);
       }}

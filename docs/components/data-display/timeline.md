@@ -10,7 +10,6 @@ export default () => {
   const items = [
     {
       title: 'Network problems being solved 2015-09-01',
-      color: 'red',
     },
     {
       title: (
@@ -28,7 +27,7 @@ export default () => {
       title: 'Solve initial network problems 2015-09-01',
       dot: (
         <Icon
-          color="green"
+          primary
           type="message_SendSuccessfully"
           size={14}
           style={{ left: 2 }}
@@ -37,7 +36,7 @@ export default () => {
     },
     {
       title: 'Technical testing 2015-09-01',
-      color: 'green',
+      color: 'red',
     },
   ];
   return <Timeline items={items} />;

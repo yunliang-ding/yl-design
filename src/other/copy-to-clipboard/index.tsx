@@ -18,7 +18,7 @@ const copyToClipBoard = async (text, tips) => {
     const textArea = document.createElement('textarea');
     textArea.value = text;
     // 使textarea不在viewport，同时设置不可见
-    textArea.style.position = 'absolute';
+    textArea.style.position = 'fixed';
     textArea.style.opacity = '0';
     textArea.style.left = '-999999px';
     textArea.style.top = '-999999px';

@@ -10,7 +10,7 @@ export default ({ items }) => {
               {item.dot || (
                 <Icon
                   type="cc-dot-o"
-                  color={item.color || '#2f54eb'}
+                  color={item.color || 'var(--primary-color)'}
                   size={18}
                   style={{ fontWeight: 600 }}
                 />

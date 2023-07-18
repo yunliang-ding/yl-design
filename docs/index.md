@@ -15,19 +15,20 @@ features:
   - icon: https://gw.alipayobjects.com/zos/bmw-prod/d1ee0c6f-5aed-4a45-a507-339a4bfe076c/k7bjsocq_w144_h144.png
     title: 自定义UI
     desc: 可扩展Ui配置
-footer: Open-source MIT Licensed | Copyright © 2020<br />Powered by [dumi](https://d.umijs.org)
+footer: Open-source MIT Licensed | Copyright © 2023<br />Powered by [dumi](https://d.umijs.org)
 ---
 
-# 配置主题色
+# 配置主题
 
-```less
-@primary-color: #4569d4;
-@primary-box-shadow: #d8e2fc;
-@font-size-base: 12px; // 主字号
-@border-color-base: #f2f2f2; // 边框色
-@heading-color: rgba(0, 0, 0, 0.85); // 标题色
-@text-color: rgba(0, 0, 0, 0.65); // 主文本色
-@disabled-color: rgba(0, 0, 0, 0.05); // 失效色
-@box-shadow-base: 0 2px 8px rgba(0, 0, 0, 0.15); // 浮层阴影
-@border-radius-base: 2px; // 组件/浮层圆角
+```css
+:root {
+  --primary-color: #4569d4;
+  --primary-box-shadow: #d8e2fc;
+  --primary-spin-background: #d8e2fc52;
+  --font-size-base: 12px;
+  --border-color-base: #d9d9d9;
+  --text-color: rgba(0, 0, 0, 0.65);
+  --disabled-color: rgba(0, 0, 0, 0.05);
+  --border-radius-base: 2px;
+}
 ```

@@ -4,7 +4,7 @@
   transition: 0.5s;
   .yld-tree-node {
     width: 100%;
-    color: @text-color;
+    color: var(--text-color);
     font-size: 13px;
     cursor: pointer;
     .yld-tree-node-label {
@@ -32,7 +32,7 @@
           text-overflow: ellipsis;
         }
         .yld-tree-node-label-left-text-active {
-          color: @primary-color;
+          color: var(--primary-color);
         }
       }
       .yld-icon-xialadown {
@@ -56,14 +56,14 @@
     .yld-tree-node-parent {
       .yld-tree-node-collapsed {
         .yld-icon {
-          color: @primary-color;
+          color: var(--primary-color);
         }
       }
       .yld-tree-node-label-left {
         transition: 0.3s;
         .yld-icon,
         .yld-tree-node-label-left-text {
-          color: @primary-color;
+          color: var(--primary-color);
         }
       }
     }
@@ -72,14 +72,14 @@
     cursor: not-allowed !important;
     transition: 0.3s;
     .yld-tree-node-label {
-      color: @text-color !important;
+      color: var(--text-color) !important;
       opacity: 0.5;
     }
     &:hover {
       .yld-tree-node-label {
         .yld-tree-node-label-left,
         .yld-icon-xialadown {
-          color: @text-color !important;
+          color: var(--text-color) !important;
         }
       }
     }

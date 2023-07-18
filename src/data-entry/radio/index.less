@@ -1,8 +1,8 @@
 .yld-radio-wrapper {
   position: relative;
   display: inline;
-  color: @text-color;
-  font-size: @font-size-base;
+  color: var(--text-color);
+  font-size: var(--font-size-base);
   cursor: pointer;
   user-select: none;
   .yld-radio {
@@ -28,7 +28,7 @@
         display: table;
         width: 8px;
         height: 8px;
-        background-color: @primary-color;
+        background-color: var(--primary-color);
         border-top: 0;
         border-left: 0;
         border-radius: 8px;
@@ -53,13 +53,13 @@
       left: 0;
       width: 100%;
       height: 100%;
-      border: 1px solid @primary-color;
+      border: 1px solid var(--primary-color);
       border-radius: 50%;
       visibility: hidden;
       content: '';
     }
     .yld-radio-inner {
-      border-color: @primary-color;
+      border-color: var(--primary-color);
     }
     .yld-radio-inner::after {
       transform: rotate(45deg) scale(1) translate(-50%, -50%);

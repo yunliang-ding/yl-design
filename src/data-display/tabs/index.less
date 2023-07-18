@@ -17,13 +17,13 @@
       left: 0;
       width: 100%;
       height: 1px;
-      background-color: @border-color-base;
+      background-color: var(--border-color-base);
     }
     .yld-tabs-item-active-border {
       position: absolute;
       bottom: 0px;
       height: 2px;
-      background-color: @primary-color;
+      background-color: var(--primary-color);
       transition: 0.3s ease-in;
     }
     .yld-tabs-header-item,
@@ -33,7 +33,7 @@
       align-items: center;
       height: 100%;
       padding: 0 20px;
-      color: @text-color;
+      color: var(--text-color);
       font-size: 12px;
       white-space: nowrap;
       background: inherit;
@@ -54,18 +54,18 @@
         top: 50%;
         right: 0px;
         display: none;
-        color: @text-color;
+        color: var(--text-color);
         border-radius: 50%;
         &:active {
-          background-color: @primary-box-shadow;
+          background-color: var(--primary-box-shadow);
         }
       }
     }
     .yld-tabs-header-item-active {
-      color: @primary-color;
+      color: var(--primary-color);
       transition: 0.3s;
       span {
-        color: @primary-color;
+        color: var(--primary-color);
       }
     }
   }

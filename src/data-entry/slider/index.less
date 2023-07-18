@@ -25,7 +25,7 @@
   .yld-slider-track {
     position: absolute;
     height: 4px;
-    background-color: @primary-color;
+    background-color: var(--primary-color);
     border-radius: 4px;
   }
   .yld-slider-step {
@@ -40,7 +40,7 @@
     height: 14px;
     margin-top: -5px;
     background-color: #fff;
-    border: solid 2px @primary-color;
+    border: solid 2px var(--primary-color);
     border-radius: 50%;
     box-shadow: 0 0 3px 0px #797575;
     cursor: pointer;
@@ -51,7 +51,8 @@
     transition: border-color 0.3s, box-shadow 0.6s,
       transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
     transition: border-color 0.3s, box-shadow 0.6s,
-      transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28), -webkit-box-shadow 0.6s,
+      transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28),
+      -webkit-box-shadow 0.6s,
       -webkit-transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
   }
   .yld-slider-mark {

@@ -34,7 +34,7 @@
     left: 0;
     display: block;
     border-radius: inherit;
-    box-shadow: 0 0 0 0 @primary-color;
+    box-shadow: 0 0 0 0 var(--primary-color);
     opacity: 0.2;
     content: '';
     pointer-events: none;
@@ -60,7 +60,7 @@
     top: 0px;
     right: 26px;
     z-index: 2;
-    color: @primary-color;
+    color: var(--primary-color);
     font-size: 12px;
     animation: spin 1.2s linear infinite;
   }
@@ -83,7 +83,7 @@
   }
 }
 .yld-switch-checked {
-  background-color: @primary-color;
+  background-color: var(--primary-color);
   &::after {
     left: 100%;
     margin-left: -1px;
@@ -107,7 +107,7 @@
     right: auto;
     left: 26px;
     z-index: 2;
-    color: @primary-color;
+    color: var(--primary-color);
     font-size: 12px;
   }
 }

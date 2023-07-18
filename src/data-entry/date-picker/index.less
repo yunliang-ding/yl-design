@@ -19,7 +19,7 @@
     z-index: 930226;
     min-width: 300px;
     min-height: 360px;
-    color: @text-color;
+    color: var(--text-color);
     background: #fff;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
     user-select: none;
@@ -62,7 +62,7 @@
       }
       .picker-tools-before:hover,
       .picker-tools-next:hover {
-        color: @primary-color;
+        color: var(--primary-color);
       }
       .picker-tools-date {
         width: 160px;
@@ -78,7 +78,7 @@
         justify-content: center;
         width: 14.28%;
         height: 100%;
-        color: @text-color;
+        color: var(--text-color);
         font-size: 12px;
         cursor: pointer;
       }
@@ -96,7 +96,7 @@
           justify-content: center;
           width: 14.28%;
           height: 100%;
-          color: @text-color;
+          color: var(--text-color);
           font-size: 12px;
           cursor: pointer;
           opacity: 0.4;
@@ -112,19 +112,19 @@
         .yld-picker-calendar-row-col-active {
           .yld-picker-calendar-inner {
             color: #fff;
-            background: @primary-color;
+            background: var(--primary-color);
           }
           opacity: 1;
         }
         .yld-picker-calendar-row-col:hover,
         .yld-picker-calendar-row-col-current-month:hover {
-          color: @primary-color;
+          color: var(--primary-color);
         }
         .yld-picker-calendar-row-col-current-month {
           opacity: 1;
         }
         .yld-picker-calendar-row-col-current {
-          color: @primary-color;
+          color: var(--primary-color);
           opacity: 1;
         }
       }

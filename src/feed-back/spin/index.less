@@ -11,20 +11,20 @@
     display: none;
     align-items: center;
     justify-content: center;
-    background-color: @primary-spin-background;
+    background-color: var(--primary-spin-background);
     animation: yld-spin-show 0.3s ease-in;
     .yld-loading-mask-spin {
       display: inline-block;
       animation: yld-spin-move 1.2s linear infinite;
       .yld-icon {
-        color: @primary-color;
+        color: var(--primary-color);
         font-weight: 900;
         font-size: 18px;
       }
     }
     .yld-loading-mask-message {
       padding-left: 8px;
-      color: @primary-color;
+      color: var(--primary-color);
       font-size: 12px;
     }
   }

@@ -7,14 +7,14 @@
   padding: 0 15px;
   color: rgba(0, 0, 0, 0.65);
   font-weight: 400;
-  font-size: @font-size-base;
+  font-size: var(--font-size-base);
   white-space: nowrap;
   text-align: center;
   background-color: #fff;
   background-image: none;
   border: 1px solid transparent;
-  border-color: @border-color-base;
-  border-radius: @border-radius-base;
+  border-color: var(--border-color-base);
+  border-radius: var(----border-radius-base);
   outline: none;
   box-shadow: 0 2px 0 rgba(0, 0, 0, 0.015);
   cursor: pointer;
@@ -23,9 +23,9 @@
   touch-action: manipulation;
   &:hover,
   &:focus {
-    color: @primary-color;
+    color: var(--primary-color);
     background-color: #fff;
-    border-color: @primary-color;
+    border-color: var(--primary-color);
   }
   .yld-icon {
     margin-right: 4px;
@@ -56,26 +56,26 @@
 }
 .yld-btn-primary {
   color: #fff;
-  background-color: @primary-color;
-  border-color: @primary-color;
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
   &:hover,
   &:focus {
     color: #fff;
-    background-color: @primary-color;
-    border-color: @primary-color;
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
     opacity: 0.9;
   }
 }
 .yld-btn-dashed {
   color: rgba(0, 0, 0, 0.65);
   background-color: #fff;
-  border-color: @border-color-base;
+  border-color: var(--border-color-base);
   border-style: dashed;
   &:hover,
   &:focus {
-    color: @primary-color;
+    color: var(--primary-color);
     background-color: #fff;
-    border-color: @primary-color;
+    border-color: var(--primary-color);
   }
 }
 .yld-btn-danger {

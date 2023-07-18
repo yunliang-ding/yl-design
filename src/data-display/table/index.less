@@ -57,7 +57,7 @@
           box-sizing: border-box;
           height: 100%;
           padding: 0 10px;
-          font-size: @font-size-base;
+          font-size: var(--font-size-base);
         }
         .yld-table-td-grid {
           border-right: 1px solid #f2f2f2;
@@ -77,11 +77,11 @@
             position: relative;
             top: 0;
             right: 0;
-            color: @text-color;
+            color: var(--text-color);
             cursor: pointer;
             transition: 0.6s;
             &:hover {
-              color: @primary-color;
+              color: var(--primary-color);
               cursor: pointer;
               transition: 0.6s;
             }
@@ -134,7 +134,7 @@
       border: 0;
     }
     .yld-pagination-item-active {
-      background-color: @primary-color;
+      background-color: var(--primary-color);
       border: 0;
     }
   }

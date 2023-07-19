@@ -61,7 +61,7 @@ export default ({
           ...dropdownStyle,
         });
       }
-    }, 1000);
+    }, 10);
   }, []);
   return (
     <>

@@ -28,6 +28,7 @@ export { default as DatePicker } from './data-entry/date-picker';
 export { default as TimePicker } from './data-entry/time-picker';
 export { default as Cascader } from './data-entry/cascader';
 export { default as Slider } from './data-entry/slider';
+export { default as Form } from './data-entry/form';
 /** navigation */
 export { default as Pagination } from './navigation/pagination';
 export { default as Dropdown } from './navigation/dropdown';

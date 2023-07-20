@@ -2,6 +2,8 @@ import { useEffect, useRef } from 'react';
 import Item from './item';
 import Error from './error';
 import mapping from './mapping';
+import Schema from 'async-validator';
+import { isEmpty } from '@/tools';
 
 const Form = ({
   form = Form.useForm(),
@@ -10,6 +12,8 @@ const Form = ({
   items = [],
 }) => {
   const store = useRef(initialValues);
+  const descriptorRef: any = useRef({});
+  const itemRef: any = useRef({});
   // 挂载 api
   useEffect(() => {
     Object.assign(form, {
@@ -23,20 +27,39 @@ const Form = ({
         };
       },
       validateValues: async () => {
-        return store.current;
+        const validator = new Schema(descriptorRef.current);
+        const values = form.getValues();
+        return new Promise((res, rej) => {
+          validator.validate(values, (errors) => {
+            if (errors) {
+              rej(errors);
+            } else {
+              res(values);
+            }
+          });
+        });
       },
     });
   }, []);
   return (
     <div className="yld-form">
       {items.map((item) => {
+        itemRef.current[item.name] = {};
         const itemProps = {
           ...item,
         };
         const Comp = mapping[item.type] || <Error type={item.type} />;
         delete itemProps.props;
+        // 生成校验规则
+        if (item.required) {
+          descriptorRef.current[item.name] = {
+            type: 'string',
+            required: true,
+            validator: (rule, value) => !isEmpty(value),
+          };
+        }
         return (
-          <Item {...itemProps}>
+          <Item {...itemProps} itemRef={itemRef[item.name]}>
             <Comp
               {...item.props}
               /** 注入属性 */

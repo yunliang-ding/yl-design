@@ -2,10 +2,10 @@ import { useState, useEffect, useRef } from 'react';
 import { Tooltip } from '../../index';
 
 export default ({
-  value,
   min = 0,
   max = 100,
   disabled = false,
+  value = 0,
   onChange,
   style,
   tooltipVisible = null,
@@ -30,7 +30,9 @@ export default ({
     setposition(sliderHandleRef.current.getBoundingClientRect());
     setCoefficient(
       Number(
-        100 / (sliderRailRef.current.getBoundingClientRect().width || (style && style.width)),
+        100 /
+          (sliderRailRef.current.getBoundingClientRect().width ||
+            (style && style.width)),
       ).toFixed(2),
     );
   }, [_value]);
@@ -61,7 +63,11 @@ export default ({
           <div
             className="yld-slider-handle"
             ref={sliderHandleRef}
-            style={{ left: _value + '%', right: 'auto', transform: 'translateX(-50%)' }}
+            style={{
+              left: _value + '%',
+              right: 'auto',
+              transform: 'translateX(-50%)',
+            }}
             onMouseDown={disabled ? noop : setstatus.bind(null, true)}
           />
         ) : (
@@ -69,7 +75,11 @@ export default ({
             <div
               className="yld-slider-handle"
               ref={sliderHandleRef}
-              style={{ left: _value + '%', right: 'auto', transform: 'translateX(-50%)' }}
+              style={{
+                left: _value + '%',
+                right: 'auto',
+                transform: 'translateX(-50%)',
+              }}
               onMouseDown={disabled ? noop : setstatus.bind(null, true)}
             />
           </Tooltip>
@@ -86,7 +96,8 @@ export default ({
             onMouseMove={({ pageX }) => {
               if (disabled) return;
               if (status) {
-                let __value: any = Number(_value) + Number((pageX - position.x) * coefficient);
+                let __value: any =
+                  Number(_value) + Number((pageX - position.x) * coefficient);
                 if (__value >= min && __value <= max) {
                   setvalue(parseInt(__value));
                 }

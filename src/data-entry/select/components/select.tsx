@@ -119,7 +119,8 @@ export default ({
               type="cuo"
               onClick={(e) => {
                 e.stopPropagation(); // 阻止冒泡
-                typeof onChange === 'function' && onChange(null, null);
+                typeof onChange === 'function' &&
+                  onChange(undefined, undefined);
               }}
             />
           )}

@@ -24,7 +24,7 @@ export default () => {
           radioGroup: 1,
           checkGroup: [1],
           slider: 7,
-          selectMore: 1,
+          selectMore: [1, 2],
           cascader: ['zhejiang', 'hangzhou'],
           datePicker: '2023-07-14',
           timePicker: '00:02:00',
@@ -53,6 +53,7 @@ export default () => {
             type: 'InputNumber',
             name: 'inputNumber',
             label: '数字输入框',
+            required: true,
             props: {
               min: 1,
               max: 999,
@@ -62,7 +63,9 @@ export default () => {
             type: 'Select',
             name: 'select',
             label: '下拉选',
+            required: true,
             props: {
+              allowClear: true,
               options: [
                 { label: '选项1', value: 1 },
                 { label: '选项2', value: 2 },
@@ -85,6 +88,7 @@ export default () => {
             type: 'CheckGroup',
             name: 'checkGroup',
             label: '复选框',
+            required: true,
             props: {
               options: [
                 { label: '选项1', value: 1 },
@@ -110,12 +114,14 @@ export default () => {
             type: 'Select',
             name: 'selectMore',
             label: '下拉多选',
+            required: true,
             props: {
-              mode: 'multiple',
+              multiple: true,
+              allowClear: true,
               options: [
                 { label: '选项1', value: 1 },
                 { label: '选项2', value: 2 },
-                { label: '选项2', value: 3 },
+                { label: '选项3', value: 3 },
               ],
             },
           },
@@ -123,6 +129,7 @@ export default () => {
             type: 'Cascader',
             name: 'cascader',
             label: '级联选择器',
+            required: true,
             props: {
               options: [
                 {
@@ -152,16 +159,19 @@ export default () => {
             type: 'DatePicker',
             name: 'datePicker',
             label: '选择日期',
+            required: true,
           },
           {
             type: 'TimePicker',
             name: 'timePicker',
             label: '时间选择',
+            required: true,
           },
           {
             type: 'Input',
             name: 'textarea',
             label: '大文本输入框',
+            required: true,
             props: {
               type: 'textarea',
             },

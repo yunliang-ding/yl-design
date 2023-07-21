@@ -6,6 +6,18 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+    &-wapper-error {
+      &-message {
+        font-size: 12px;
+        padding: 4px 0;
+        color: red;
+      }
+      .yld-input,
+      .yld-cascader-selection,
+      .yld-textarea {
+        border: 1px solid red;
+      }
+    }
     & > label {
       font-size: var(--font-size-base);
     }

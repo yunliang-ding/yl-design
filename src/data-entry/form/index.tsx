@@ -1,9 +1,6 @@
 import { useEffect, useRef } from 'react';
 import Item from './item';
-import Error from './error';
-import mapping from './mapping';
 import Schema from 'async-validator';
-import { isEmpty } from '@/tools';
 
 const Form = ({
   form = Form.useForm(),
@@ -14,6 +11,7 @@ const Form = ({
   const store = useRef(initialValues);
   const descriptorRef: any = useRef({});
   const itemRef: any = useRef({});
+  const errorItemRef: any = useRef([]); // 保存上一次检验失败的字段
   // 挂载 api
   useEffect(() => {
     Object.assign(form, {
@@ -32,8 +30,23 @@ const Form = ({
         return new Promise((res, rej) => {
           validator.validate(values, (errors) => {
             if (errors) {
+              errors.map((error) => {
+                itemRef.current[error.field].showError(error.message);
+              });
+              // 找到在errorItemRef里面却不在errors里的需要清除下
+              const needClear = errorItemRef.current.filter(
+                (i) => !errors.some((error) => error.field === i.field),
+              );
+              needClear.map((error) => {
+                itemRef.current[error.field].clearError();
+              });
+              errorItemRef.current = errors; // 更新
               rej(errors);
             } else {
+              errorItemRef.current.map((error) => {
+                itemRef.current[error.field].clearError();
+              });
+              errorItemRef.current = []; // 清空
               res(values);
             }
           });
@@ -45,38 +58,27 @@ const Form = ({
     <div className="yld-form">
       {items.map((item) => {
         itemRef.current[item.name] = {};
-        const itemProps = {
-          ...item,
-        };
-        const Comp = mapping[item.type] || <Error type={item.type} />;
-        delete itemProps.props;
-        // 生成校验规则
-        if (item.required) {
-          descriptorRef.current[item.name] = {
-            type: 'string',
-            required: true,
-            validator: (rule, value) => !isEmpty(value),
-          };
-        }
         return (
-          <Item {...itemProps} itemRef={itemRef[item.name]}>
-            <Comp
-              {...item.props}
-              /** 注入属性 */
-              value={store.current[item.name]}
-              onChange={(value) => {
-                form.setValues({
-                  [item.name]: value.eventPhase ? value.target.value : value,
-                });
-                onValuesChange(
-                  {
-                    [item.name]: store.current[item.name],
-                  },
-                  form.getValues(),
-                );
-              }}
-            />
-          </Item>
+          <Item
+            {...item}
+            itemRef={itemRef.current[item.name]}
+            descriptorRef={descriptorRef}
+            value={store.current[item.name]}
+            onChange={(value) => {
+              form.setValues({
+                [item.name]: value?.eventPhase ? value.target.value : value,
+              });
+              form.validateValues(); // 校验规则
+              onValuesChange(
+                {
+                  [item.name]: store.current[item.name],
+                },
+                form.getValues(),
+              );
+              // 提示该item拿最新的value去更新, 确保原子性，哪个 item 值改变，就更新 哪个 item
+              itemRef.current[item.name].setValue(store.current[item.name]);
+            }}
+          />
         );
       })}
     </div>

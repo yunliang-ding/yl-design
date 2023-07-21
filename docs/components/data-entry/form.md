@@ -33,6 +33,7 @@ export default () => {
           password: '2323',
           inputNumber: 2323,
           select: 1,
+          switch: false,
           radioGroup: 1,
           checkGroup: [1],
           slider: 7,

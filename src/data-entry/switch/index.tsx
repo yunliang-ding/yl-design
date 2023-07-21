@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Icon } from '../../index';
 
 export default ({
-  checked = true,
+  value = true,
   checkedChildren,
   unCheckedChildren,
   disabled = false,
@@ -10,23 +10,23 @@ export default ({
   onChange,
   style = {},
 }: any) => {
-  const [_checked, setchecked] = useState(checked);
-  let className = _checked ? 'yld-switch-checked' : 'yld-switch';
+  const [checked, setchecked] = useState(value);
+  let className = checked ? 'yld-switch-checked' : 'yld-switch';
   if (disabled || loading) {
     className += ' yld-switch-disabled';
   }
-  let innerText = _checked ? checkedChildren : unCheckedChildren;
+  let innerText = checked ? checkedChildren : unCheckedChildren;
   useEffect(() => {
-    setchecked(checked);
-  }, [checked]);
+    setchecked(value);
+  }, [value]);
   return (
     <button
       className={className}
       style={style}
       onClick={(e) => {
         if (disabled || loading) return;
-        setchecked(!_checked);
-        typeof onChange === 'function' && onChange(!_checked, e);
+        setchecked(!checked);
+        typeof onChange === 'function' && onChange(!checked, e);
       }}
     >
       {loading && <Icon type="loading" size={10} />}

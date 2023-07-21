@@ -25,7 +25,7 @@ export default () => {
   return (
     <Space>
       <Switch checkedChildren="开" unCheckedChildren="关" />
-      <Switch checkedChildren="1" unCheckedChildren="0" checked={false} />
+      <Switch checkedChildren="1" unCheckedChildren="0" value={false} />
       <Switch
         checkedChildren={<Icon type="duihao" />}
         unCheckedChildren={<Icon type="guanbi" />}
@@ -67,7 +67,7 @@ export default () => {
       <Switch loading checkedChildren="开" unCheckedChildren="关" />
       <Switch
         loading
-        checked={false}
+        value={false}
         checkedChildren="开"
         unCheckedChildren="关"
       />

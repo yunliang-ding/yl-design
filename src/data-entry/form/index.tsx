@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import Schema from 'async-validator';
 import Item from './item';
 /**
- * 禁止使用 useState, 所有状态变更可通过 itemRef 发布通知
+ * 禁止使用 useState, 所有状态变通过 itemRef 发布通知
  */
 const Form = ({
   form = Form.useForm(),
@@ -90,9 +90,10 @@ const Form = ({
             itemRef={itemRef.current[item.name]}
             descriptorRef={descriptorRef}
             value={store.current[item.name]}
-            onChange={(value) => {
+            onChange={(e) => {
+              const value = e?.eventPhase ? e.target.value : e;
               form.setValues({
-                [item.name]: value?.eventPhase ? value.target.value : value,
+                [item.name]: value,
               });
               // 校验自己
               if (descriptorRef.current[item.name]) {

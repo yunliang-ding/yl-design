@@ -80,7 +80,7 @@ export default () => {
     <>
       <Form
         form={form}
-        column={2} // 设置3等分布局
+        column={3}
         items={items}
         onValuesChange={(v) => {
           if ('select' in v) {

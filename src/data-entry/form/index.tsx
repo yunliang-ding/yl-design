@@ -36,7 +36,7 @@ const Form = ({
           ...values,
         };
       },
-      validateByName: (name: string, value: any) => {
+      validateField: (name: string, value: any) => {
         const validator = new Schema({
           [name]: descriptorRef.current[name],
         });
@@ -50,7 +50,7 @@ const Form = ({
           }
         });
       },
-      validateValues: async () => {
+      validateFields: async () => {
         const validator = new Schema(descriptorRef.current);
         const values = form.getValues();
         return new Promise((res, rej) => {
@@ -97,7 +97,7 @@ const Form = ({
               });
               // 校验自己
               if (descriptorRef.current[item.name]) {
-                form.validateByName(item.name, value);
+                form.validateField(item.name, value);
               }
               onValuesChange(
                 {

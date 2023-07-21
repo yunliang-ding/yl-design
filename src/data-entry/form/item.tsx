@@ -68,6 +68,7 @@ export default ({ descriptorRef, itemRef, value, onChange, item }) => {
       >
         <Comp
           disabled={disabled}
+          placeholder={`${placeholderMapping[type]}${label}`}
           {...props}
           /** 注入属性 value 和 onChange */
           value={_value}
@@ -79,4 +80,14 @@ export default ({ descriptorRef, itemRef, value, onChange, item }) => {
       </div>
     </div>
   );
+};
+
+const placeholderMapping = {
+  Input: '请输入',
+  InputNumber: '请输入',
+  Select: '请选择',
+  AutoComplete: '请输入',
+  Cascader: '请选择',
+  DatePicker: '请选择',
+  TimePicker: '请选择',
 };

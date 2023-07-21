@@ -56,7 +56,7 @@ export default () => {
       <Button
         type="primary"
         onClick={async () => {
-          console.log(await form.validateValues());
+          console.log(await form.validateFields());
         }}
       >
         提交
@@ -94,7 +94,7 @@ export default () => {
       <Button
         type="primary"
         onClick={async () => {
-          console.log(await form.validateValues());
+          console.log(await form.validateFields());
         }}
       >
         提交

@@ -24,6 +24,9 @@ const Form = ({
           itemRef.current[name].setDisabled(v);
         });
       },
+      mergeItemByName(name, item) {
+        itemRef.current[name].setItem(item);
+      },
       getValues: () => {
         return store.current;
       },
@@ -32,6 +35,20 @@ const Form = ({
           ...store.current,
           ...values,
         };
+      },
+      validateByName: (name: string, value: any) => {
+        const validator = new Schema({
+          [name]: descriptorRef.current[name],
+        });
+        validator.validate({ [name]: value }, (errors) => {
+          if (errors) {
+            errors.map((error) => {
+              itemRef.current[error.field].showError(error.message);
+            });
+          } else {
+            itemRef.current[name].clearError();
+          }
+        });
       },
       validateValues: async () => {
         const validator = new Schema(descriptorRef.current);
@@ -69,7 +86,7 @@ const Form = ({
         itemRef.current[item.name] = {};
         return (
           <Item
-            {...item}
+            item={item}
             itemRef={itemRef.current[item.name]}
             descriptorRef={descriptorRef}
             value={store.current[item.name]}
@@ -77,7 +94,10 @@ const Form = ({
               form.setValues({
                 [item.name]: value?.eventPhase ? value.target.value : value,
               });
-              form.validateValues(); // 校验规则
+              // 校验自己
+              if (descriptorRef.current[item.name]) {
+                form.validateByName(item.name, value);
+              }
               onValuesChange(
                 {
                   [item.name]: store.current[item.name],

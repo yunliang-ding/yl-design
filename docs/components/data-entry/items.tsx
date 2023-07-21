@@ -3,7 +3,6 @@ export default [
     type: 'Input',
     name: 'input',
     label: '输入框',
-    required: true,
   },
   {
     type: 'Input',
@@ -18,7 +17,6 @@ export default [
     type: 'InputNumber',
     name: 'inputNumber',
     label: '数字输入框',
-    required: true,
     props: {
       min: 1,
       max: 999,
@@ -28,7 +26,6 @@ export default [
     type: 'Select',
     name: 'select',
     label: '下拉选',
-    required: true,
     props: {
       allowClear: true,
       options: [
@@ -53,7 +50,6 @@ export default [
     type: 'CheckGroup',
     name: 'checkGroup',
     label: '复选框',
-    required: true,
     props: {
       options: [
         { label: '选项1', value: 1 },
@@ -79,7 +75,6 @@ export default [
     type: 'Select',
     name: 'selectMore',
     label: '下拉多选',
-    required: true,
     props: {
       multiple: true,
       allowClear: true,
@@ -94,7 +89,6 @@ export default [
     type: 'Cascader',
     name: 'cascader',
     label: '级联选择器',
-    required: true,
     props: {
       options: [
         {
@@ -124,19 +118,16 @@ export default [
     type: 'DatePicker',
     name: 'datePicker',
     label: '选择日期',
-    required: true,
   },
   {
     type: 'TimePicker',
     name: 'timePicker',
     label: '时间选择',
-    required: true,
   },
   {
     type: 'Input',
     name: 'textarea',
     label: '大文本输入框',
-    required: true,
     span: 3, // 占3个格子空间
     props: {
       type: 'textarea',

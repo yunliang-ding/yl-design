@@ -45,7 +45,50 @@ export default () => {
         onValuesChange={(v, vs) => {
           console.log(v, vs);
         }}
+        items={items.map((i) => {
+          return {
+            ...i,
+            required: true,
+          };
+        })}
+      />
+      <br />
+      <Button
+        type="primary"
+        onClick={async () => {
+          console.log(await form.validateValues());
+        }}
+      >
+        提交
+      </Button>
+    </>
+  );
+};
+```
+
+```jsx
+/**
+ * title: 动态更新模型
+ */
+import React, { useState } from 'react';
+import { Switch, Form, Button } from 'yl-design';
+import items from './items';
+
+export default () => {
+  const form = Form.useForm();
+  return (
+    <>
+      <Form
+        form={form}
+        column={2} // 设置3等分布局
         items={items}
+        onValuesChange={(v) => {
+          if ('select' in v) {
+            form.mergeItemByName('radioGroup', {
+              visible: v.select !== 1,
+            });
+          }
+        }}
       />
       <br />
       <Button

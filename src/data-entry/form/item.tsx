@@ -3,19 +3,18 @@ import mapping from './mapping';
 import Error from './error';
 import { isEmpty } from '@/tools';
 
-export default ({
-  label,
-  required,
-  name,
-  type,
-  descriptorRef,
-  itemRef,
-  value,
-  style = {},
-  onChange,
-  span = 1,
-  props,
-}) => {
+export default ({ descriptorRef, itemRef, value, onChange, item }) => {
+  const [_item, setItem] = useState(item);
+  const {
+    label,
+    required,
+    name,
+    type,
+    style = {},
+    span = 1,
+    props,
+    visible = true,
+  } = _item;
   const [_value, setValue] = useState(value);
   const [disabled, setDisabled] = useState(false);
   const [error, setError] = useState(false);
@@ -40,14 +39,21 @@ export default ({
       },
       setValue,
       setDisabled,
+      setItem: (item) => {
+        // 做一个合并操作, 之后重新渲染
+        setItem({
+          ..._item,
+          ...item,
+        });
+      },
     });
   }, []);
-  console.log(disabled);
   return (
     <div
       className="yld-form-item"
       style={{
         ...style,
+        display: visible ? 'grid' : 'none',
         gridColumnStart: `span ${span}`,
       }}
     >

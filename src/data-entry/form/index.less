@@ -1,7 +1,7 @@
 .yld-form {
-  display: flex;
+  display: grid;
   flex-direction: column;
-  gap: 12px;
+  gap: 12px 20px;
   &-item {
     display: flex;
     flex-direction: column;
@@ -22,4 +22,20 @@
       font-size: var(--font-size-base);
     }
   }
+}
+
+.yld-form-grid-1 {
+  grid-template-columns: repeat(1, 1fr);
+}
+
+.yld-form-grid-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.yld-form-grid-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.yld-form-grid-4 {
+  grid-template-columns: repeat(4, 1fr);
 }

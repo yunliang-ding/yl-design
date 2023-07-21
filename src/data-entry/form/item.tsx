@@ -11,10 +11,13 @@ export default ({
   descriptorRef,
   itemRef,
   value,
+  style = {},
   onChange,
+  span = 1,
   props,
 }) => {
   const [_value, setValue] = useState(value);
+  const [disabled, setDisabled] = useState(false);
   const [error, setError] = useState(false);
   const Comp = mapping[type] || <Error type={type} />;
   // 生成校验规则
@@ -36,10 +39,18 @@ export default ({
         setError(false);
       },
       setValue,
+      setDisabled,
     });
   }, []);
+  console.log(disabled);
   return (
-    <div className="yld-form-item">
+    <div
+      className="yld-form-item"
+      style={{
+        ...style,
+        gridColumnStart: `span ${span}`,
+      }}
+    >
       <label>
         {required && <span style={{ color: 'red', marginRight: 4 }}>*</span>}
         {label}
@@ -50,6 +61,7 @@ export default ({
         }
       >
         <Comp
+          disabled={disabled}
           {...props}
           /** 注入属性 value 和 onChange */
           value={_value}

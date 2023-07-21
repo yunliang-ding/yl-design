@@ -1,12 +1,15 @@
 import { useEffect, useRef } from 'react';
-import Item from './item';
 import Schema from 'async-validator';
-
+import Item from './item';
+/**
+ * 禁止使用 useState, 所有状态变更可通过 itemRef 发布通知
+ */
 const Form = ({
   form = Form.useForm(),
   initialValues = {},
   onValuesChange = (v, vs) => {},
   items = [],
+  column = 1,
 }) => {
   const store = useRef(initialValues);
   const descriptorRef: any = useRef({});
@@ -15,10 +18,16 @@ const Form = ({
   // 挂载 api
   useEffect(() => {
     Object.assign(form, {
+      // 通知所有的Item全部禁用
+      setDisabled: (v: boolean) => {
+        Object.keys(itemRef.current).forEach((name) => {
+          itemRef.current[name].setDisabled(v);
+        });
+      },
       getValues: () => {
         return store.current;
       },
-      setValues: (values) => {
+      setValues: (values: any) => {
         store.current = {
           ...store.current,
           ...values,
@@ -55,7 +64,7 @@ const Form = ({
     });
   }, []);
   return (
-    <div className="yld-form">
+    <div className={`yld-form yld-form-grid-${column}`}>
       {items.map((item) => {
         itemRef.current[item.name] = {};
         return (

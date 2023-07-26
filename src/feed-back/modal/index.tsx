@@ -45,11 +45,11 @@ export default ({
             <div className="yld-modal-footer">
               {footer === null || footer === undefined ? (
                 <>
-                  <Button type="primary" style={{ width: 60 }} onClick={ok}>
-                    确定
-                  </Button>
                   <Button style={{ width: 60 }} onClick={close}>
                     取消
+                  </Button>
+                  <Button type="primary" style={{ width: 60 }} onClick={ok}>
+                    确定
                   </Button>
                 </>
               ) : (

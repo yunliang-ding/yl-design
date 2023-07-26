@@ -119,8 +119,8 @@ export default ({
         setFixScrollTop(tableBodyRef.current.scrollTop);
       };
 
-      tableBodyRef.current.addEventListener('scroll', scroll);
-      return () => tableBodyRef.current.removeEventListener('scroll', scroll);
+      tableBodyRef.current?.addEventListener('scroll', scroll);
+      return () => tableBodyRef.current?.removeEventListener('scroll', scroll);
     }
     // 监听resize事件
     const resize = debounce(() => {

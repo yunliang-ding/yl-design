@@ -15,8 +15,8 @@ export default () => {
       rowKey="id"
       columns={columns}
       style={{ height: 260 }}
-      bordered
-      checkable
+      // bordered
+      // checkable
       paginationConfig={{
         pageSize: 10,
         showJumper: true,

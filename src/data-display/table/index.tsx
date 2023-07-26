@@ -1,59 +1,128 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, ReactNode, CSSProperties } from 'react';
 import { Icon, Pagination, Checkbox, Empty, Spin } from '../../index';
 
+const debounce = (fn, delay = 10) => {
+  if (typeof fn !== 'function') {
+    // 参数类型为函数
+    throw new TypeError('fn is not a function');
+  }
+  let timer = null;
+  return function (...args) {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      fn.call(this, ...args);
+    }, delay);
+  };
+};
+
+interface columnProps {
+  title?: ReactNode;
+  width?: number;
+  dataIndex: string;
+  fixed?: 'left' | 'right';
+  render?: (e, record, index) => ReactNode;
+}
+
+interface PaginationProps {
+  pageSize: number;
+  pageNum: number;
+  total: number;
+  onChange?: Function;
+  onPageSizeChange?: Function;
+}
+
+interface TableProps {
+  columns: columnProps[];
+  request: (params) => Promise<{
+    success: boolean;
+    total: number;
+    data: [];
+  }>;
+  rowOperations?: (api: { record: any; refresh: Function }) => ReactNode;
+  rowKey: string;
+  style?: CSSProperties;
+  paginationConfig?: PaginationProps | false;
+  bordered?: boolean;
+  checkable?: boolean;
+  onCheck?: Function;
+}
+
 export default ({
-  columns,
-  dataSource,
-  rowKey,
-  style,
-  pagination,
-  bordered,
+  columns = [],
+  request = async (params) => {
+    return {
+      success: true,
+      total: 0,
+      data: [],
+    };
+  },
+  rowOperations = () => null,
+  rowKey = 'id',
+  style = {},
+  paginationConfig = false,
+  bordered = false,
   checkable = false,
   onCheck,
-  loading = false,
-  rows = {},
-}: any) => {
-  const [_columns, setcolumns] = useState(
-    Array.isArray(columns) ? [...columns] : [],
-  );
-  const [_dataSource, setdataSource] = useState(
-    Array.isArray(dataSource) ? [...dataSource] : [],
-  );
-  const [hovercolumn, sethovercolumn] = useState({}); // hover行
-  const [checkedkeys, setcheckedkeys] = useState([]); // 内置选择器
-  const [_pagination, setpagination] = useState({
-    // 内置分页器
-    current: 1,
-    pageSize: 10,
-    total: _dataSource.length,
+}: TableProps) => {
+  const [reload, setReload] = useState(Math.random());
+  // 控制刷新
+  const refresh = () => {
+    setReload(Math.random());
+  };
+  const [loading, setLoading] = useState(false); // 控制loading
+  const tableRef: any = useRef({
+    loading: false,
+    dataSource: [],
+    pagination:
+      typeof paginationConfig === 'object'
+        ? {
+            pageSize: paginationConfig.pageSize,
+            pageNum: paginationConfig.pageNum,
+          }
+        : {},
+    params: {},
   });
-  // /**自分页处理逻辑 */
-  // const __dataSource =
-  //   pagination === false
-  //     ? _dataSource
-  //     : _dataSource.slice(
-  //         _pagination.pageSize * (_pagination.current - 1),
-  //         _pagination.pageSize * _pagination.current
-  //       );
-  /**全选当前数据 */
+  const query = async (sort: any = {}) => {
+    setLoading(true);
+    try {
+      const { success, data, total } = await request({
+        ...tableRef.current.params,
+        ...tableRef.current.pagination,
+        ...sort,
+      });
+      if (success) {
+        tableRef.current.dataSource = data;
+        tableRef.current.pagination.total = total;
+      }
+    } catch (error) {
+      console.log('request error: ', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+  useEffect(() => {
+    query();
+  }, [reload]);
+  const [checkedkeys, setCheckedkeys] = useState([]); // 内置选择器
+  /** 全选当前数据 */
   const checkedAll = (checked) => {
     let checkedkeys = [];
     if (checked) {
-      _dataSource.forEach((item) => {
-        checkedkeys.push(item[rowKey || 'key']);
-      });
+      checkedkeys = tableRef.current.dataSource.map(
+        (item) => item[rowKey || 'key'],
+      );
     }
-    setcheckedkeys(checkedkeys);
+    setCheckedkeys(checkedkeys);
     typeof onCheck === 'function' && onCheck(checkedkeys);
   };
+  // 判断是否已经全选
   const isCheckedAll = () => {
-    // 判断是否已经全选
-    let check =
+    return (
       checkedkeys.length > 0 &&
-      _dataSource.every((item) => {
+      tableRef.current.dataSource.every((item) => {
         return checkedkeys.some((key) => key === item[rowKey || 'key']);
-      });
-    return check;
+      })
+    );
   };
   /**
    * useRef 调整Dom
@@ -99,41 +168,11 @@ export default ({
   useEffect(() => {
     setWidthSize();
   });
-  // debounce 防抖
-  const debounce = (fn, delay = 10) => {
-    if (typeof fn !== 'function') {
-      // 参数类型为函数
-      throw new TypeError('fn is not a function');
-    }
-    let timer = null;
-    return function (...args) {
-      clearTimeout(timer);
-      timer = setTimeout(() => {
-        fn.call(this, ...args);
-      }, delay);
-    };
-  };
-  /**
-   * 更新数据头和数据
-   */
-  useEffect(() => {
-    if (Array.isArray(columns)) {
-      setcolumns([...columns]);
-    }
-  }, [columns]);
-  useEffect(() => {
-    if (Array.isArray(dataSource)) {
-      setdataSource([...dataSource]);
-      _pagination.total = dataSource.length;
-      _pagination.current = 1; // 重制第1页
-      setpagination({ ..._pagination });
-    }
-  }, [dataSource]);
   /**
    * 内部多选
    */
   if (checkable) {
-    let column = {
+    let column: any = {
       title: (
         <Checkbox
           checked={isCheckedAll()}
@@ -156,39 +195,20 @@ export default ({
               } else {
                 checkedkeys.push(record[rowKey || 'key']);
               }
-              setcheckedkeys([...checkedkeys]);
+              setCheckedkeys([...checkedkeys]);
               typeof onCheck === 'function' && onCheck(checkedkeys);
             }}
           />
         );
       },
     };
-    if (_columns[0] && _columns[0].dataIndex !== 'yld-checked-930226') {
+    if (columns[0] && columns[0].dataIndex !== 'yld-checked-930226') {
       // 没有添加1项
-      _columns.unshift(column);
+      columns.unshift(column);
     } else {
-      _columns[0] = column;
+      columns[0] = column;
     }
   }
-  /**
-   * 内部排序
-   * @param sort
-   * @param orderBy
-   * @param column
-   */
-  const sort = (sort, orderBy, column) => {
-    if (typeof sort === 'function') {
-    } else {
-      _dataSource.sort((a, b) => {
-        if (orderBy === 'asc') {
-          return a[column] > b[column] ? 1 : -1;
-        } else {
-          return a[column] > b[column] ? -1 : 1;
-        }
-      });
-      setdataSource([..._dataSource]); // render
-    }
-  };
   /**
    * 渲染表头
    * @param columns
@@ -220,7 +240,10 @@ export default ({
                       size={12}
                       style={{ left: 4, top: -6 }}
                       onClick={() => {
-                        sort(column.sort, 'asc', column.dataIndex);
+                        query({
+                          type: 'asc',
+                          dataIndex: column.dataIndex,
+                        });
                       }}
                     />
                     <Icon
@@ -228,7 +251,10 @@ export default ({
                       size={12}
                       style={{ top: 6, right: 8 }}
                       onClick={() => {
-                        sort(column.sort, 'desc', column.dataIndex);
+                        query({
+                          type: 'desc',
+                          dataIndex: column.dataIndex,
+                        });
                       }}
                     />
                   </>
@@ -250,22 +276,8 @@ export default ({
       <div className="yld-table">
         {dataSource.map((data, index) => {
           let trClassName = ['yld-table-tr'];
-          if (hovercolumn[rowKey] === data[rowKey]) {
-            trClassName.push('yld-table-tr-hover');
-          }
           return (
-            <div
-              key={data[rowKey]}
-              className={trClassName.join(' ')}
-              onMouseEnter={() => {
-                sethovercolumn(data);
-                rows.onMouseEnter && rows.onMouseEnter(data);
-              }}
-              onMouseLeave={() => {
-                sethovercolumn({});
-                rows.onMouseLeave && rows.onMouseLeave({});
-              }}
-            >
+            <div key={data[rowKey]} className={trClassName.join(' ')}>
               {columns.map((column) => {
                 let minWidth = column.width || 100 / columns.length + '%';
                 let label = column.render
@@ -298,21 +310,21 @@ export default ({
   /**
    * 左右 fixed 列
    */
-  const fixedLeft = _columns.filter((item) => item.fixed === 'left');
-  const fixedRight = _columns.filter((item) => item.fixed === 'right');
+  const fixedLeft = columns.filter((item) => item.fixed === 'left');
+  const fixedRight = columns.filter((item) => item.fixed === 'right');
   const [showFixed, setshowFixed] = useState(false);
   return (
     <Spin loading={loading}>
       <div className="yld-table-wrapper" style={style}>
         <div className="yld-table-box" ref={tableBoxRef}>
           <div className="yld-table-header" ref={tableHeaderRef}>
-            {renderHeaderTable(_columns)}
+            {renderHeaderTable(columns)}
           </div>
           <div className="yld-table-body" ref={tableBodyRef}>
-            {_dataSource.length === 0 ? (
+            {tableRef.current.dataSource.length === 0 ? (
               <Empty />
             ) : (
-              renderBodyTable(_dataSource, _columns)
+              renderBodyTable(tableRef.current.dataSource, columns)
             )}
           </div>
         </div>
@@ -322,7 +334,7 @@ export default ({
               {renderHeaderTable(fixedLeft)}
             </div>
             <div className="yld-table-body" ref={tableFixedLeftRef}>
-              {renderBodyTable(_dataSource, fixedLeft)}
+              {renderBodyTable(tableRef.current.dataSource, fixedLeft)}
             </div>
           </div>
         )}
@@ -332,26 +344,31 @@ export default ({
               {renderHeaderTable(fixedRight)}
             </div>
             <div className="yld-table-body" ref={tableFixedRightRef}>
-              {renderBodyTable(_dataSource, fixedRight)}
+              {renderBodyTable(tableRef.current.dataSource, fixedRight)}
             </div>
           </div>
         )}
       </div>
-      {typeof pagination === 'object' ? (
-        <div className="yld-table-footer">
-          <Pagination {...pagination} />
-        </div>
-      ) : pagination !== false ? (
+      {paginationConfig !== false && (
         <div className="yld-table-footer">
           <Pagination
-            {..._pagination}
-            onChange={(e) => {
-              _pagination.current = e;
-              setpagination({ ..._pagination });
+            {...paginationConfig}
+            current={tableRef.current.pagination.pageNum}
+            pageSize={tableRef.current.pagination.pageSize}
+            total={tableRef.current.pagination.total}
+            onChange={(pageNum) => {
+              tableRef.current.pagination.pageNum = pageNum;
+              paginationConfig.onChange?.(pageNum);
+              refresh();
+            }}
+            onPageSizeChange={(pageSize) => {
+              tableRef.current.pagination.pageSize = pageSize;
+              paginationConfig.onPageSizeChange?.(pageSize);
+              refresh();
             }}
           />
         </div>
-      ) : null}
+      )}
     </Spin>
   );
 };

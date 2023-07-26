@@ -40,6 +40,7 @@ export { default as Drawer } from './feed-back/drawer';
 export { default as Modal } from './feed-back/modal';
 export { default as Spin } from './feed-back/spin';
 export { default as Alert } from './feed-back/alert';
+export { default as Progress } from './feed-back/progress';
 export { default as Message } from './feed-back/message';
 import Message from './feed-back/message';
 export const message = new Message({

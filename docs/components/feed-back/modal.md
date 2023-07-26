@@ -56,6 +56,44 @@ export default () => {
       type="primary"
       onClick={() => {
         Modal({
+          title: '没有底部按钮',
+          style: {
+            width: 600,
+            height: 400,
+          },
+          mask: false,
+          render() {
+            return (
+              <>
+                <p>Some contents...</p>
+                <p>Some contents...</p>
+                <p>Some contents...</p>
+              </>
+            );
+          },
+          footer: false,
+        }).open();
+      }}
+    >
+      没有底部按钮
+    </Button>
+  );
+};
+```
+
+```jsx
+/**
+ * title: 自定义渲染 Footer
+ */
+import React from 'react';
+import { Modal, Button } from 'yl-design';
+
+export default () => {
+  return (
+    <Button
+      type="primary"
+      onClick={() => {
+        Modal({
           title: '自定义底部渲染',
           style: {
             width: 600,

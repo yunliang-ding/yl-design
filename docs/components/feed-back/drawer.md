@@ -113,6 +113,45 @@ export default () => {
 
 ```jsx
 /**
+ * title: 没有底部按钮
+ */
+import React, { useState } from 'react';
+import { Drawer, Button } from 'yl-design';
+
+export default () => {
+  return (
+    <Button
+      onClick={() => {
+        Drawer({
+          title: '没有底部按钮',
+          okText: '完成',
+          onClose() {
+            console.log('onClose');
+          },
+          onOk() {
+            console.log('onOk');
+          },
+          render() {
+            return (
+              <>
+                <p>Some contents...</p>
+                <p>Some contents...</p>
+                <p>Some contents...</p>
+              </>
+            );
+          },
+          footer: false,
+        }).open();
+      }}
+    >
+      没有底部按钮
+    </Button>
+  );
+};
+```
+
+```jsx
+/**
  * title: 自定义底部渲染
  */
 import React, { useState } from 'react';

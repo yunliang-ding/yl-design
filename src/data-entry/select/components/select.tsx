@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { SelectProps } from '..';
 import { Icon, Empty, Layer } from '../../../index';
 
 export default ({
@@ -8,31 +9,45 @@ export default ({
   placeholder,
   disabled = false,
   style = {},
+  className,
   dropdownClassName,
   dropdownStyle = {},
   onChange,
   onSearch,
-  filter = false,
   open = false,
-}: any) => {
+  filter = false,
+}: SelectProps) => {
+  if (filter === true) {
+    filter = ({ label }, value) => {
+      return label.toLowerCase().includes(value.trim().toLowerCase());
+    };
+  }
   useEffect(() => {
-    setvalue(value); // update
+    setValue(value); // update
   }, [value]);
   useEffect(() => {
-    setoptions(options); // update
+    setOptions(options); // update
   }, [options]);
   const [_open, setopen] = useState(open);
-  const [_options, setoptions] = useState(options);
-  const [_value, setvalue] = useState(value);
+  const [_options, setOptions] = useState(options);
+  const [_value, setValue] = useState(value);
   const selected: any = _options.find((item) => item.value === _value) || {}; // 选中项
-  const [keyword, setkeyword] = useState('');
+  const [keyword, setKeyword] = useState('');
   const [_placeholder, setplaceholder] = useState(
     selected.label || placeholder,
   );
   const [_dropdownStyle, setdropdownStyle] = useState(dropdownStyle || {});
-  const [refresh, setrefresh] = useState(false);
-  let className = _open ? 'yld-select yld-select-open' : 'yld-select';
-  disabled && (className += ' yld-select-disabled');
+  const [refresh, setRefresh] = useState(false);
+  const _className = ['yld-select'];
+  if (className) {
+    _className.push(className);
+  }
+  if (_open) {
+    _className.push('yld-select-open');
+  }
+  if (disabled) {
+    _className.push('yld-select-disabled');
+  }
   /** ref */
   const selectionRef: any = useRef();
   /** 计算实际高度 */
@@ -65,7 +80,7 @@ export default ({
   }, []);
   return (
     <>
-      <div className={className} style={style}>
+      <div className={_className.join(' ')} style={style}>
         <div
           ref={selectionRef}
           className="yld-select-selection"
@@ -81,28 +96,27 @@ export default ({
                 className="yld-select-selection-selected-input"
                 placeholder={_placeholder}
                 onBlur={() => {
-                  setkeyword(''); // 清空 keyword
+                  setKeyword(''); // 清空 keyword
                   setTimeout(() => {
                     // 避免闪动
-                    setoptions(options); // 重制 options
+                    setOptions(options); // 重制 options
                   }, 500);
                 }}
                 onChange={(e: any) => {
-                  setkeyword(e.target.value);
+                  setKeyword(e.target.value);
                   if (e.target.value.trim() !== '') {
-                    setoptions(
+                    setOptions(
                       options.filter((option) => {
-                        return typeof filter === 'function'
-                          ? filter(option, e.target.value)
-                          : option.label
-                              .toLowerCase()
-                              .includes(e.target.value.trim().toLowerCase());
+                        return (
+                          typeof filter === 'function' &&
+                          filter(option, e.target.value)
+                        );
                       }),
                     );
-                    setrefresh(!refresh);
+                    setRefresh(!refresh);
                   } else {
-                    setoptions(options);
-                    setrefresh(!refresh);
+                    setOptions(options);
+                    setRefresh(!refresh);
                   }
                   typeof onSearch === 'function' && onSearch(e.target.value);
                 }}
@@ -144,15 +158,15 @@ export default ({
                 (className += ' yld-select-dropdown-menu-disabled');
               return (
                 <div
-                  key={option.key}
+                  key={option.value}
                   className={className}
                   onClick={() => {
                     if (option.disabled) return;
                     setopen(false);
                     setplaceholder(option.value); // 设置 placeholder
-                    setkeyword(''); // 清空 keyword
-                    setoptions(options); // 重制 options
-                    setvalue(option.value);
+                    setKeyword(''); // 清空 keyword
+                    setOptions(options); // 重制 options
+                    setValue(option.value);
                     typeof onChange === 'function' &&
                       onChange(option.value, option);
                   }}

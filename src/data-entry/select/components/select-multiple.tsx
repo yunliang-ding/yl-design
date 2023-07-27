@@ -1,7 +1,9 @@
 import { useState, useRef, useEffect } from 'react';
+import { SelectProps } from '..';
 import { Icon, Empty, Layer } from '../../../index';
 
 export default ({
+  className,
   options,
   value,
   allowClear = false,
@@ -12,13 +14,21 @@ export default ({
   dropdownStyle = {},
   onChange,
   open = false,
-}) => {
+}: SelectProps) => {
   const [_open, setopen] = useState(open);
-  const [_options, setoptions] = useState(options);
-  const [_value, setvalue] = useState(Array.isArray(value) ? value : []); // 格式处理 deep
+  const [_options, setOptions] = useState(options);
+  const [_value, setValue] = useState(Array.isArray(value) ? value : []); // 格式处理 deep
   const [_dropdownStyle, setdropdownStyle]: any = useState(dropdownStyle || {});
-  let className = _open ? 'yld-select yld-select-open' : 'yld-select';
-  disabled && (className += ' yld-select-disabled');
+  const _className = ['yld-select'];
+  if (className) {
+    _className.push(className);
+  }
+  if (_open) {
+    _className.push('yld-select-open');
+  }
+  if (disabled) {
+    _className.push('yld-select-disabled');
+  }
   /** ref */
   const selectSelectionWapper: any = useRef();
   const selectValueWapper: any = useRef();
@@ -34,10 +44,10 @@ export default ({
   };
   /**update */
   useEffect(() => {
-    setvalue(Array.isArray(value) ? value : []); // 引用类型需要拷贝一下，不然观测失败
+    setValue(Array.isArray(value) ? value : []); // 引用类型需要拷贝一下，不然观测失败
   }, [value]);
   useEffect(() => {
-    setoptions(options);
+    setOptions(options);
   }, [options]);
   /** 获取位置 */
   useEffect(() => {
@@ -66,7 +76,7 @@ export default ({
   };
   return (
     <>
-      <div className={className} style={style}>
+      <div className={_className.join(' ')} style={style}>
         <div
           ref={selectSelectionWapper}
           className="yld-select-selection yld-select-selection-multiple"
@@ -89,7 +99,7 @@ export default ({
                     return (
                       <span
                         className="yld-select-selection-choice"
-                        key={item.key}
+                        key={item.value}
                       >
                         {item.label}
                         <Icon
@@ -97,10 +107,8 @@ export default ({
                           type="guanbi"
                           onClick={(e) => {
                             e.stopPropagation(); // 阻止冒泡
-                            let value = _value.filter(
-                              (item) => item !== item.value,
-                            ); // 删除
-                            setvalue([..._value]);
+                            let value = _value.filter((i) => i !== item.value);
+                            setValue([...value]);
                             typeof onChange === 'function' &&
                               onChange(value, null);
                           }}
@@ -142,7 +150,7 @@ export default ({
                 (className += ' yld-select-dropdown-menu-disabled');
               return (
                 <div
-                  key={option.key}
+                  key={option.value}
                   className={className}
                   onClick={(e) => {
                     if (option.disabled) return;
@@ -153,7 +161,7 @@ export default ({
                     } else {
                       _value.splice(index, 1);
                     }
-                    setvalue([..._value]);
+                    setValue([..._value]);
                     typeof onChange === 'function' &&
                       onChange([..._value], option);
                   }}

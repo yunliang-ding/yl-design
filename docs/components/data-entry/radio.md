@@ -1,5 +1,5 @@
 ---
-order: 3
+order: 4
 ---
 
 # Radio 单选框
@@ -67,7 +67,12 @@ export default () => {
           setvalue(value);
         }}
       />
-      <RadioGroup options={options} disabled style={{ marginTop: 20 }} value={value} />
+      <RadioGroup
+        options={options}
+        disabled
+        style={{ marginTop: 20 }}
+        value={value}
+      />
     </>
   );
 };

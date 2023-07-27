@@ -1,9 +1,39 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, CSSProperties } from 'react';
 import { Icon } from '../../index';
 
+interface InputNumberProps {
+  /** 值 */
+  value?: string;
+  /** 类名 */
+  className?: string;
+  /** 是否禁用 */
+  disabled?: boolean;
+  /** 样式 */
+  style?: CSSProperties;
+  /** 提示文案 */
+  placeholder?: string;
+  /** 最大位数 */
+  maxLength?: number;
+  /** 改变钩子 */
+  onChange?: Function;
+  /** 失去焦点钩子 */
+  onBlur?: Function;
+  /** 得到焦点钩子 */
+  onFocus?: Function;
+  /** 回车钩子 */
+  onPressEnter?: Function;
+  /** 跨度 */
+  step?: number;
+  /** 最小范围 */
+  min?: number;
+  /** 最大范围 */
+  max?: number;
+}
+
 export default ({
-  value = '',
-  disabled,
+  value,
+  className,
+  disabled = false,
   style = {},
   placeholder,
   maxLength,
@@ -14,10 +44,10 @@ export default ({
   step = 1,
   min,
   max,
-}: any) => {
-  const [_value, setvalue] = useState(value);
+}: InputNumberProps) => {
+  const [_value, setValue] = useState(value);
   useEffect(() => {
-    setvalue(value);
+    setValue(value);
   }, [value]);
   const add = () => {
     let value = Number(_value) + Number(step);
@@ -36,27 +66,28 @@ export default ({
     }
   };
   const updateValue = (value) => {
-    setvalue(step < 1 ? Number(value).toFixed(1) : Number(value));
-    typeof onChange === 'function' &&
-      onChange(step < 1 ? Number(value).toFixed(1) : Number(value));
+    const number =
+      step < 1 ? Number(value).toFixed(1) : Number(value).toFixed(0);
+    setValue(number);
+    typeof onChange === 'function' && onChange(number);
   };
+  const _className = ['yld-input-number-wrapper'];
+  if (className) {
+    _className.push(className);
+  }
   return (
-    <div className="yld-input-number-wrapper" style={style}>
+    <div className={_className.join(' ')} style={style}>
       <input
-        type="text"
+        type="number"
         className={disabled ? 'yld-input-number-disabled' : 'yld-input-number'}
         placeholder={placeholder}
         value={_value}
         maxLength={maxLength}
-        readOnly={disabled}
         onChange={(e) => {
-          setvalue(e.target.value);
+          setValue(e.target.value);
         }}
         onBlur={() => {
           let value: any = Number(_value);
-          if (isNaN(value)) {
-            value = '';
-          }
           updateValue(value);
           typeof onBlur === 'function' && onBlur(value);
         }}

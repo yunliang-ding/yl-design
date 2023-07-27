@@ -155,21 +155,6 @@ export default () => (
 );
 ```
 
-# API
+## API
 
-| **属性名**   | **类型**    | **描述**               | **默认** |
-| ------------ | ----------- | ---------------------- | -------- |
-| addonAfter   | ReactNode   | 设置前置标签           | 无       |
-| addonBefore  | ReactNode   | 设置后置标签           | 无       |
-| value        | string      | 输入框默认内容         | 无       |
-| disabled     | boolean     | 是否禁用状态           | false    |
-| maxLength    | number      | 最大长度               | 无       |
-| prefix       | ReactNode   | 带有前缀图标的         | 无       |
-| suffix       | ReactNode   | 带有后缀图标的         | 无       |
-| type         | string      | text/password/textarea | text     |
-| allowClear   | boolean     | 支持清除               | false    |
-| onChange     | Function(e) | 输入框内容变化时的回调 | 无       |
-| onPressEnter | Function(e) | 按下回车的回调         | 无       |
-| onBlur       | Function(e) | 输入框得到焦点         | 无       |
-| onFocus      | Function(e) | 输入框失去焦点         | 无       |
-| style        | Object      | 样式                   | 无       |
+<API src="../../../src/data-entry/input/index.tsx" hideTitle></API>

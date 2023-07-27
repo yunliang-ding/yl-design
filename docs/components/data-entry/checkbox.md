@@ -1,5 +1,5 @@
 ---
-order: 2
+order: 5
 ---
 
 # Checkbox 多选框
@@ -50,7 +50,12 @@ export default () => {
           setvalue(value);
         }}
       />
-      <CheckboxGroup options={options} disabled style={{ marginTop: 20 }} value={value} />
+      <CheckboxGroup
+        options={options}
+        disabled
+        style={{ marginTop: 20 }}
+        value={value}
+      />
     </>
   );
 };

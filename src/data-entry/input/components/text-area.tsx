@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react';
+import { InputProps } from '..';
+
 export default ({
   value = '',
   addonBefore,
@@ -10,11 +12,13 @@ export default ({
   onBlur,
   onFocus,
   onPressEnter,
-}) => {
+}: InputProps) => {
   const [_value, setvalue] = useState(value);
   let style: any = {};
-  addonBefore && ((style.borderTopLeftRadius = 0), (style.borderTopRightRadius = 0));
-  addonAfter && ((style.borderBottomLeftRadius = 0), (style.borderBottomRightRadius = 0));
+  addonBefore &&
+    ((style.borderTopLeftRadius = 0), (style.borderTopRightRadius = 0));
+  addonAfter &&
+    ((style.borderBottomLeftRadius = 0), (style.borderBottomRightRadius = 0));
   useEffect(() => {
     setvalue(value);
   }, [value]);

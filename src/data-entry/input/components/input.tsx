@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react';
-import { Suffix, Prefix } from './index';
 import { Icon } from '../../../index';
+import { InputProps } from '..';
+import Prefix from './prefix';
+import Suffix from './suffix';
+
 export default ({
   value,
   prefix,
@@ -18,7 +21,7 @@ export default ({
   allowClear,
   onAllowClear,
   readOnly,
-}) => {
+}: InputProps) => {
   let style: any = {};
   const [_value, setvalue] = useState(value);
   prefix && (style.paddingLeft = 30);

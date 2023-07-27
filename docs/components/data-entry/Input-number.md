@@ -1,5 +1,5 @@
 ---
-order: 10
+order: 2
 ---
 
 # InputNumber 数字输入框
@@ -37,3 +37,7 @@ export default () => {
   );
 };
 ```
+
+## API
+
+<API src="../../../src/data-entry/input-number/index.tsx" hideTitle></API>

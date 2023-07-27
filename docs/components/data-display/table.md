@@ -15,8 +15,43 @@ export default () => {
       rowKey="id"
       columns={columns}
       style={{ height: 260 }}
-      // bordered
-      // checkable
+      bordered
+      checkable
+      tools={[
+        {
+          label: '新增',
+          type: 'primary',
+          onClick() {},
+        },
+        {
+          label: '刷新',
+          async onClick({ refresh }) {
+            await refresh();
+          },
+        },
+      ]}
+      rowOperations={({ record, refresh }) => {
+        return [
+          {
+            label: '编辑',
+            onClick() {
+              console.log(record);
+            },
+          },
+          {
+            label: '查看',
+            onClick() {
+              console.log(record);
+            },
+          },
+          {
+            label: '删除',
+            onClick() {
+              console.log(record);
+            },
+          },
+        ];
+      }}
       paginationConfig={{
         pageSize: 10,
         showJumper: true,

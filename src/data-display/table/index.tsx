@@ -1,19 +1,18 @@
+import { ButtonProps } from '../../general/button';
 import { useRef, ReactNode, CSSProperties, MutableRefObject } from 'react';
 import { Button } from '../../index';
 import Table from './table';
 
 export interface columnProps {
   title?: ReactNode;
-  width?: number;
+  width?: string | number;
   dataIndex: string;
   fixed?: 'left' | 'right';
   render?: (e, record, index) => ReactNode;
 }
 
-export interface ToolProps {
-  label?: ReactNode;
-  type?: string;
-  onClick?: Function;
+export interface ToolProps extends ButtonProps {
+  label?: string;
 }
 
 export interface PaginationProps {
@@ -25,6 +24,7 @@ export interface PaginationProps {
 }
 
 export interface TableProps {
+  title?: ReactNode;
   columns: columnProps[];
   request: (params) => Promise<{
     success: boolean;
@@ -46,8 +46,10 @@ export interface TableProps {
 }
 
 export default ({
+  title = '',
   table = useRef({}),
   columns = [],
+  tools = [],
   rowOperations,
   ...rest
 }: TableProps) => {
@@ -56,21 +58,56 @@ export default ({
   if (typeof rowOperations === 'function') {
     lastColums.push({
       title: '操作',
-      width: 100,
-      dataIndex: '_yl_table_operation',
+      width: 'fit-content',
+      dataIndex: 'yl-table-row-operation',
+      fixed: 'right',
       render(e, record, index) {
-        return rowOperations({
-          record,
-          refresh: table.current.refresh,
-        }).map((item) => {
-          return (
-            <Button key={item.label} {...item}>
-              {item.label}
-            </Button>
-          );
-        });
+        return (
+          <div className="yl-table-row-operation">
+            {rowOperations({
+              record,
+              refresh: table.current.refresh,
+            }).map((item) => {
+              return (
+                <Button key={item.label} {...item} type={item.type || 'link'}>
+                  {item.label}
+                </Button>
+              );
+            })}
+          </div>
+        );
       },
     });
   }
-  return <Table table={table} columns={lastColums} {...rest} />;
+  return (
+    <div className="yld-table-contianer">
+      {tools.length > 0 && (
+        <div className="yld-table-contianer-tools">
+          <h3>{title}</h3>
+          <div
+            style={{
+              display: 'flex',
+              gap: 10,
+            }}
+          >
+            {tools.map((item) => {
+              return (
+                <Button
+                  key={item.label}
+                  {...item}
+                  type={item.type}
+                  onClick={async () => {
+                    await item.onClick?.({ refresh: table.current.refresh });
+                  }}
+                >
+                  {item.label}
+                </Button>
+              );
+            })}
+          </div>
+        </div>
+      )}
+      <Table table={table} columns={lastColums} {...rest} />
+    </div>
+  );
 };

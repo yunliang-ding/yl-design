@@ -10,19 +10,19 @@ export default ({
   onPageSizeChange,
   showJumper,
 }: any) => {
-  const [_current, setcurrent] = useState(current);
+  const [_current, setCurrent] = useState(current);
   const [_pageSize, setpageSize] = useState(pageSize);
   /**
    * update
    */
   useEffect(() => {
-    setcurrent(current);
+    setCurrent(current);
   }, [current]);
   useEffect(() => {
     setpageSize(pageSize);
   }, [pageSize]);
   const pageChange = (current) => {
-    setcurrent(current);
+    setCurrent(current);
     typeof onChange === 'function' && onChange(current);
   };
   let totalPage = Math.ceil(total / _pageSize);
@@ -95,6 +95,7 @@ export default ({
       );
     }
   }
+  console.log('totalPage', totalPage);
   return (
     <>
       <div className="yld-pagination">
@@ -131,7 +132,7 @@ export default ({
               style={{ width: 104, height: 32 }}
               value={_pageSize}
               onChange={(pageSize) => {
-                setcurrent(1);
+                setCurrent(1);
                 setpageSize(pageSize);
                 typeof onPageSizeChange === 'function' &&
                   onPageSizeChange(pageSize);
@@ -154,8 +155,9 @@ export default ({
               onBlur={(e) => {
                 let current = parseInt(e.target.value);
                 if (!isNaN(current)) {
-                  setcurrent(current > totalPage ? totalPage : current);
-                  typeof onChange === 'function' && onChange(current);
+                  const pageNum = current > totalPage ? totalPage : current;
+                  setCurrent(pageNum);
+                  typeof onChange === 'function' && onChange(pageNum);
                 }
               }}
             />

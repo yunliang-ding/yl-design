@@ -1,7 +1,7 @@
+import item from '@/data-entry/form/item';
 import { useState, useEffect, useRef } from 'react';
 import { TableProps } from '.';
 import { Icon, Pagination, Checkbox, Empty, Spin } from '../../index';
-import { debounce } from './util';
 
 export default ({
   columns = [],
@@ -19,13 +19,8 @@ export default ({
   checkable = false,
   onCheck,
   table,
-  tools = [],
 }: TableProps) => {
-  const [reload, setReload] = useState(Math.random());
-  // 控制刷新
-  const refresh = () => {
-    setReload(Math.random());
-  };
+  // 刷新逻辑
   const [loading, setLoading] = useState(false); // 控制loading
   const tableRef: any = useRef({
     loading: false,
@@ -59,12 +54,14 @@ export default ({
   };
   // 挂载api
   useEffect(() => {
-    table.current.refresh = refresh;
+    table.current.refresh = async (params = {}) => {
+      await query(params);
+    };
   }, []);
   // 请求数据
   useEffect(() => {
     query();
-  }, [reload]);
+  }, []);
   const [checkedkeys, setCheckedkeys] = useState([]); // 内置选择器
   /** 全选当前数据 */
   const checkedAll = (checked) => {
@@ -86,49 +83,6 @@ export default ({
       })
     );
   };
-  /**
-   * useRef 调整Dom
-   */
-  const tableHeaderRef: any = useRef();
-  const tableBodyRef: any = useRef();
-  const tableBoxRef: any = useRef();
-  const tableFixedLeftRef: any = useRef();
-  const tableFixedRightRef: any = useRef();
-  const setWidthSize = () => {
-    tableHeaderRef.current && (tableHeaderRef.current.style.width = '100%'); // tableBodyRef.current.getBoundingClientRect().width + "px");
-    // 宽度不够才展示fixed
-    tableBoxRef.current &&
-      setshowFixed(
-        tableBoxRef.current.getBoundingClientRect().width <
-          tableBodyRef.current.getBoundingClientRect().width,
-      );
-  };
-  const setFixScrollTop = (scrollTop) => {
-    if (tableFixedLeftRef.current && tableFixedRightRef.current) {
-      tableFixedLeftRef.current.scrollTop = scrollTop;
-      tableFixedRightRef.current.scrollTop = scrollTop;
-    }
-  };
-  /**
-   * 监听事件
-   */
-  useEffect(() => {
-    // 监听scroll事件
-    if (tableBodyRef.current) {
-      const scroll = () => {
-        setFixScrollTop(tableBodyRef.current.scrollTop);
-      };
-
-      tableBodyRef.current?.addEventListener('scroll', scroll);
-      return () => tableBodyRef.current?.removeEventListener('scroll', scroll);
-    }
-    // 监听resize事件
-    const resize = debounce(() => {
-      setWidthSize();
-    });
-    window.addEventListener('resize', resize);
-    return () => window.removeEventListener('resize', resize);
-  }, []);
   /**
    * 内部多选
    */
@@ -170,13 +124,10 @@ export default ({
       columns[0] = column;
     }
   }
-  /**
-   * 渲染表头
-   * @param columns
-   */
+  /** 渲染表头 */
   const renderHeaderTable = (columns) => {
     return (
-      <div className="yld-table">
+      <div className="yld-table-header">
         <div className="yld-table-tr">
           {columns.map((column) => {
             let minWidth = column.width || 100 / columns.length + '%';
@@ -186,6 +137,9 @@ export default ({
             }
             if (bordered) {
               columnClassName.push('yld-table-td-grid');
+            }
+            if (column.fixed) {
+              columnClassName.push(`yld-table-td-fixed-${column.fixed}`);
             }
             return (
               <div
@@ -227,14 +181,10 @@ export default ({
       </div>
     );
   };
-  /**
-   * 渲染主体表格
-   * @param dataSource
-   * @param columns
-   */
+  /** 渲染主体表格 */
   const renderBodyTable = (dataSource, columns) => {
     return (
-      <div className="yld-table">
+      <div className="yld-table-body">
         {dataSource.map((data, index) => {
           let trClassName = ['yld-table-tr'];
           return (
@@ -250,6 +200,9 @@ export default ({
                 }
                 if (bordered) {
                   columnClassName.push('yld-table-td-grid');
+                }
+                if (column.fixed) {
+                  columnClassName.push(`yld-table-td-fixed-${column.fixed}`);
                 }
                 return (
                   <div
@@ -268,18 +221,14 @@ export default ({
       </div>
     );
   };
-  /** 左右 fixed 列 */
-  const fixedLeft = columns.filter((item) => item.fixed === 'left');
-  const fixedRight = columns.filter((item) => item.fixed === 'right');
-  const [showFixed, setshowFixed] = useState(false);
   return (
     <Spin loading={loading}>
-      <div className="yld-table-wrapper" style={style}>
-        <div className="yld-table-box" ref={tableBoxRef}>
-          <div className="yld-table-header" ref={tableHeaderRef}>
+      <div className="yld-table" style={style}>
+        <div className="yld-table-wrap">
+          <div className="yld-table-wrap-header">
             {renderHeaderTable(columns)}
           </div>
-          <div className="yld-table-body" ref={tableBodyRef}>
+          <div className="yld-table-wrap-body">
             {tableRef.current.dataSource.length === 0 ? (
               <Empty />
             ) : (
@@ -287,26 +236,6 @@ export default ({
             )}
           </div>
         </div>
-        {showFixed && fixedLeft.length > 0 && (
-          <div className="yld-table-fixed yld-table-fixed-left">
-            <div className="yld-table-header">
-              {renderHeaderTable(fixedLeft)}
-            </div>
-            <div className="yld-table-body" ref={tableFixedLeftRef}>
-              {renderBodyTable(tableRef.current.dataSource, fixedLeft)}
-            </div>
-          </div>
-        )}
-        {showFixed && fixedRight.length > 0 && (
-          <div className="yld-table-fixed yld-table-fixed-right">
-            <div className="yld-table-header">
-              {renderHeaderTable(fixedRight)}
-            </div>
-            <div className="yld-table-body" ref={tableFixedRightRef}>
-              {renderBodyTable(tableRef.current.dataSource, fixedRight)}
-            </div>
-          </div>
-        )}
       </div>
       {paginationConfig !== false && (
         <div className="yld-table-footer">
@@ -318,12 +247,12 @@ export default ({
             onChange={(pageNum) => {
               tableRef.current.pagination.pageNum = pageNum;
               paginationConfig.onChange?.(pageNum);
-              refresh();
+              table.current.refresh();
             }}
             onPageSizeChange={(pageSize) => {
               tableRef.current.pagination.pageSize = pageSize;
               paginationConfig.onPageSizeChange?.(pageSize);
-              refresh();
+              table.current.refresh();
             }}
           />
         </div>

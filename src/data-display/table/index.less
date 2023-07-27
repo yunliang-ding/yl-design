@@ -1,4 +1,4 @@
-.yld-table-wrapper {
+.yld-table {
   position: relative;
   width: 100%;
   height: 100%;
@@ -6,39 +6,38 @@
   overflow-y: hidden;
   border: 1px solid #f2f2f2;
   transition: 0.3s;
-  .yld-table-box {
+  &-wrap {
     width: 100%;
     height: 100%;
     overflow: auto;
-  }
-  .yld-table-header {
-    align-items: center;
-    width: 100%;
-    height: 45px;
-    background: #fafafa;
-    .yld-table-tr {
-      font-weight: 900;
-      &:hover {
-        background-color: #fafafa !important;
+    background-color: #fafafa;
+    &-header {
+      align-items: center;
+      width: 100%;
+      height: 45px;
+      background: #fafafa;
+      .yld-table-tr {
+        font-weight: 900;
+        &:hover {
+          background-color: #fafafa !important;
+        }
       }
     }
-  }
-  .yld-table-body {
-    width: fit-content;
-    min-width: 100%;
-    height: calc(100% - 45px);
-    overflow-x: auto;
-    overflow-y: auto;
-    background: #fff;
-    .yld-table-tr {
-      &:first-child {
-        border-top: 1px solid #f2f2f2;
+    &-body {
+      width: fit-content;
+      min-width: 100%;
+      height: calc(100% - 45px);
+      overflow-x: auto;
+      overflow-y: auto;
+      background: #fff;
+      .yld-table-tr {
+        &:first-child {
+          border-top: 1px solid #f2f2f2;
+        }
       }
     }
-  }
-  .yld-table-header,
-  .yld-table-body {
-    .yld-table {
+    .yld-table-header,
+    .yld-table-body {
       width: 100%;
       height: 100%;
       .yld-table-tr {
@@ -93,22 +92,13 @@
       }
     }
   }
-  .yld-table-fixed {
-    position: absolute;
-    top: 0;
-    .yld-table-body {
-      overflow: hidden;
+  .yl-table-row-operation {
+    display: flex;
+    gap: 10 px;
+    .yld-btn {
+      padding-right: 16px;
+      padding-left: 0;
     }
-  }
-  .yld-table-fixed-left {
-    left: 0;
-    height: 100%;
-    box-shadow: -1px 1px 6px 2px #e4e2e2;
-  }
-  .yld-table-fixed-right {
-    right: 0;
-    height: 100%;
-    box-shadow: -1px -2px 3px 0px #e4e2e2;
   }
 }
 .yld-table-footer {
@@ -138,5 +128,21 @@
       background-color: var(--primary-color);
       border: 0;
     }
+  }
+}
+
+.yld-table-contianer {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  height: 100%;
+  width: 100%;
+  &-tools {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 40px;
+    background-color: #fff;
   }
 }

@@ -83,7 +83,15 @@ export default ({
     <div className="yld-table-contianer">
       {tools.length > 0 && (
         <div className="yld-table-contianer-tools">
-          <h3>{title}</h3>
+          <h3
+            style={{
+              fontSize: 13,
+              borderLeft: '3px solid var(--primary-color)',
+              paddingLeft: 8,
+            }}
+          >
+            {title}
+          </h3>
           <div
             style={{
               display: 'flex',

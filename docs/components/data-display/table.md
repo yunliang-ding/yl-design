@@ -13,6 +13,7 @@ export default () => {
   return (
     <Table
       rowKey="id"
+      title="用户信息表"
       columns={columns}
       style={{ height: 260 }}
       bordered

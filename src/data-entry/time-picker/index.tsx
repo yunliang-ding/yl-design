@@ -1,5 +1,32 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, CSSProperties, ReactNode } from 'react';
 import { Icon, Input } from '../../index';
+
+interface TimePickerProps {
+  /** 类名 */
+  className?: string;
+  /** 值 */
+  value?: string;
+  /** 是否清空 */
+  allowClear?: boolean;
+  /** 提示语 */
+  placeholder?: string;
+  /** 是否禁用 */
+  disabled?: boolean;
+  /** 样式 */
+  style?: CSSProperties;
+  /** 下拉层类名 */
+  dropdownClassName?: string;
+  /** 下拉层样式 */
+  dropdownStyle?: CSSProperties;
+  /** 改变钩子 */
+  onChange?: Function;
+  /** 是否打开 */
+  open?: boolean;
+  /** 前缀 */
+  addonBefore?: ReactNode;
+  /** 后缀 */
+  addonAfter?: ReactNode;
+}
 
 export default ({
   value,
@@ -13,7 +40,7 @@ export default ({
   open = false,
   addonBefore,
   addonAfter,
-}: any) => {
+}: TimePickerProps) => {
   const timeList: any = [
     Object.keys(new Array(24).fill('')).map((item: any) => {
       return {
@@ -41,15 +68,15 @@ export default ({
    * value Change
    */
   useEffect(() => {
-    settimes(value ? value.split(':') : []);
-    setvalue(value ? value.split(':') : []);
+    setTimes(value ? value.split(':') : []);
+    setValue(value ? value.split(':') : []);
   }, [value]);
   /**
    * 数据转化 转为2维数组渲染
    */
-  const [times, settimes] = useState([]); // 最终选中的指
-  const [_value, setvalue] = useState(value ? value.split(':') : []); // 内部存选中值容器
-  const [_open, setopen] = useState(open);
+  const [times, setTimes] = useState([]); // 最终选中的指
+  const [_value, setValue] = useState(value ? value.split(':') : []); // 内部存选中值容器
+  const [_open, setOpen] = useState(open);
   /**
    * 内部状态
    */
@@ -91,20 +118,20 @@ export default ({
         readOnly
         allowClear={allowClear && times.length > 0}
         onAllowClear={() => {
-          setvalue([]);
+          setValue([]);
           typeof onChange === 'function' && onChange('');
         }}
-        onFocus={setopen.bind(null, true)}
+        onFocus={setOpen.bind(null, true)}
       />
       {_open && (
         <>
           <div
             className="yld-time-picker-mask"
             onClick={() => {
-              setopen(false);
+              setOpen(false);
               if (_value.length === timeList.length) {
                 // 选择完毕
-                settimes(_value);
+                setTimes(_value);
                 typeof onChange === 'function' && onChange(_value.join(':'));
               }
             }}
@@ -158,7 +185,7 @@ export default ({
                                 _value[i] = '00';
                               }
                             }
-                            setvalue([..._value]);
+                            setValue([..._value]);
                           }}
                         >
                           {option.label}

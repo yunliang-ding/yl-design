@@ -1,5 +1,24 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, CSSProperties } from 'react';
 import { Tooltip } from '../../index';
+
+interface SliderProps {
+  /** 值 */
+  value?: number;
+  /** 类名 */
+  className?: string;
+  /** 是否禁用 */
+  disabled?: boolean;
+  /** 样式 */
+  style?: CSSProperties;
+  /** 改变钩子 */
+  onChange?: Function;
+  /** 最小范围 */
+  min?: number;
+  /** 最大范围 */
+  max?: number;
+  /** 是否提示 */
+  tooltipVisible?: boolean;
+}
 
 export default ({
   min = 0,
@@ -8,26 +27,26 @@ export default ({
   value = 0,
   onChange,
   style,
-  tooltipVisible = null,
-}) => {
+  tooltipVisible = false,
+}: SliderProps) => {
   const noop = () => {};
   useEffect(() => {
     if (value < min) {
-      setvalue(min);
+      setValue(min);
     } else if (value > max) {
-      setvalue(max);
+      setValue(max);
     } else {
-      setvalue(value);
+      setValue(value);
     }
   }, [value]);
-  const [_value, setvalue] = useState(value);
-  const [status, setstatus] = useState(false);
-  const [position, setposition]: any = useState({});
+  const [_value, setValue] = useState(value);
+  const [status, setStatus] = useState(false);
+  const [position, setPosition]: any = useState({});
   const [coefficient, setCoefficient]: any = useState(1); // 系数 1px对应的value
   const sliderRailRef: any = useRef();
   const sliderHandleRef: any = useRef();
   useEffect(() => {
-    setposition(sliderHandleRef.current.getBoundingClientRect());
+    setPosition(sliderHandleRef.current.getBoundingClientRect());
     setCoefficient(
       Number(
         100 /
@@ -47,7 +66,7 @@ export default ({
           const { x } = sliderHandleRef.current.getBoundingClientRect();
           let __value: any = Number(_value) + Number((pageX - x) * coefficient);
           if (__value >= min && __value <= max) {
-            setvalue(parseInt(__value));
+            setValue(parseInt(__value));
             let number: any = Math.round(__value);
             typeof onChange === 'function' && onChange(parseInt(number));
           }
@@ -59,7 +78,7 @@ export default ({
           style={{ left: '0%', right: 'auto', width: _value + '%' }}
         />
         <div className="yld-slider-step" />
-        {tooltipVisible === null ? (
+        {!tooltipVisible ? (
           <div
             className="yld-slider-handle"
             ref={sliderHandleRef}
@@ -68,7 +87,7 @@ export default ({
               right: 'auto',
               transform: 'translateX(-50%)',
             }}
-            onMouseDown={disabled ? noop : setstatus.bind(null, true)}
+            onMouseDown={disabled ? noop : setStatus.bind(null, true)}
           />
         ) : (
           <Tooltip title={_value} visible={tooltipVisible} theme="dark">
@@ -80,7 +99,7 @@ export default ({
                 right: 'auto',
                 transform: 'translateX(-50%)',
               }}
-              onMouseDown={disabled ? noop : setstatus.bind(null, true)}
+              onMouseDown={disabled ? noop : setStatus.bind(null, true)}
             />
           </Tooltip>
         )}
@@ -89,7 +108,7 @@ export default ({
             className="yld-slider-mark"
             onMouseUp={() => {
               if (disabled) return;
-              setstatus(false);
+              setStatus(false);
               let number: any = Math.round(_value);
               typeof onChange === 'function' && onChange(parseInt(number));
             }}
@@ -99,7 +118,7 @@ export default ({
                 let __value: any =
                   Number(_value) + Number((pageX - position.x) * coefficient);
                 if (__value >= min && __value <= max) {
-                  setvalue(parseInt(__value));
+                  setValue(parseInt(__value));
                 }
               }
             }}

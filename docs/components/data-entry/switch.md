@@ -21,6 +21,7 @@ export default () => {
  */
 import React from 'react';
 import { Switch, Icon, Space } from 'yl-design';
+
 export default () => {
   return (
     <Space>
@@ -41,13 +42,14 @@ export default () => {
  */
 import React, { useState } from 'react';
 import { Switch, Button, Space } from 'yl-design';
+
 export default () => {
-  const [disabled, setdisabled] = useState(true);
+  const [disabled, setDisabled] = useState(true);
   return (
     <Space>
       <Switch disabled={disabled} />
-      <Button type="primary" onClick={setdisabled.bind(null, !disabled)}>
-        Toogle
+      <Button type="primary" onClick={setDisabled.bind(null, !disabled)}>
+        Disabled
       </Button>
     </Space>
   );
@@ -56,22 +58,25 @@ export default () => {
 
 ```jsx
 /**
- * title: 加载状态
+ * title: 自动加载状态
  */
 import React, { useState } from 'react';
 import { Switch, Space } from 'yl-design';
+
 export default () => {
-  const [disabled, setdisabled] = useState(true);
   return (
-    <Space>
-      <Switch loading checkedChildren="开" unCheckedChildren="关" />
-      <Switch
-        loading
-        value={false}
-        checkedChildren="开"
-        unCheckedChildren="关"
-      />
-    </Space>
+    <Switch
+      value={false}
+      checkedChildren="开"
+      unCheckedChildren="关"
+      onClick={() => {
+        return new Promise((res) => setTimeout(res, 1000));
+      }}
+    />
   );
 };
 ```
+
+## API
+
+<API src="../../../src/data-entry/switch/index.tsx" hideTitle></API>

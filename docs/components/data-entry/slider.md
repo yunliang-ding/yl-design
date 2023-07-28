@@ -29,6 +29,8 @@ export default () => {
         <InputNumber
           value={value}
           disabled={disabled}
+          min={0}
+          max={100}
           style={{ width: 60 }}
           onChange={(value) => {
             setvalue(value);
@@ -47,14 +49,6 @@ export default () => {
 };
 ```
 
-# API
+## API
 
-| **属性名**     | **类型**        | **描述**     | **默认** |
-| -------------- | --------------- | ------------ | -------- |
-| value          | number          | 值           | 0        |
-| disabled       | boolean         | 是否禁用     | false    |
-| tooltipVisible | boolean         | 是否显示进度 | false    |
-| onChange       | Function(value) | 改变后的回调 | 无       |
-| min            | number          | 开始区间     | 0        |
-| max            | number          | 结束区间     | 100      |
-| style          | object          | 滑块样式     | 无       |
+<API src="../../../src/data-entry/slider/index.tsx" hideTitle></API>

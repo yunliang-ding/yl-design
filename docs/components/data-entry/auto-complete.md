@@ -11,17 +11,17 @@ order: 6
 import React, { useState } from 'react';
 import { AutoComplete, Switch } from 'yl-design';
 export default () => {
-  const dataSource = ['@163.com', '@qq.com', '@aliyun.com'];
-  const [value, setvalue] = useState('');
-  const [disabled, setdisabled] = useState('');
+  const [value, setValue] = useState('');
+  const [disabled, setDisabled] = useState('');
   const onSelect = (value) => {
-    setvalue(value);
+    console.log(value);
+    setValue(value);
   };
   return (
     <>
       <AutoComplete
         allowClear
-        dataSource={dataSource}
+        options={['@163.com', '@qq.com', '@aliyun.com']}
         style={{ width: 200 }}
         placeholder="请输入邮箱"
         onSelect={onSelect}
@@ -34,9 +34,13 @@ export default () => {
         checkedChildren="启用"
         unCheckedChildren="禁用"
         checked={!disabled}
-        onChange={setdisabled.bind(null, !disabled)}
+        onChange={setDisabled.bind(null, !disabled)}
       />
     </>
   );
 };
 ```
+
+## API
+
+<API src="../../../src/data-entry/auto-complete/index.tsx" hideTitle></API>

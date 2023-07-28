@@ -1,4 +1,5 @@
 import dayjs from 'dayjs';
+
 class DateUtil {
   date: Date;
   format: string;
@@ -54,7 +55,9 @@ class DateUtil {
     // 获取这个月1号是周几再决定补几位
     let before = Array.from(new Array(week).keys())
       .map((item, index) => {
-        let date = new Date(fristDate.getTime() - (index + 1) * 24 * 60 * 60 * 1000);
+        let date = new Date(
+          fristDate.getTime() - (index + 1) * 24 * 60 * 60 * 1000,
+        );
         return {
           date: date.getDate(),
           dateString: dayjs(date.toLocaleDateString()).format(this.format),
@@ -63,29 +66,31 @@ class DateUtil {
         };
       })
       .reverse();
-    let current = Array.from(new Array(this.getDateNumberByMonth(month)).keys()).map(
-      (item, index) => {
-        let date = new Date(fristDate.getTime() + index * 24 * 60 * 60 * 1000);
-        return {
-          date: date.getDate(),
-          dateString: dayjs(date.toLocaleDateString()).format(this.format),
-          currentMonth: true,
-          current: date.toLocaleDateString() === new Date().toLocaleDateString(),
-        };
-      },
-    );
+    let current = Array.from(
+      new Array(this.getDateNumberByMonth(month)).keys(),
+    ).map((item, index) => {
+      let date = new Date(fristDate.getTime() + index * 24 * 60 * 60 * 1000);
+      return {
+        date: date.getDate(),
+        dateString: dayjs(date.toLocaleDateString()).format(this.format),
+        currentMonth: true,
+        current: date.toLocaleDateString() === new Date().toLocaleDateString(),
+      };
+    });
     // 后补齐
-    let after = Array.from(new Array(42 - before.length - current.length).keys()).map(
-      (item, index) => {
-        let date = new Date(lastDate.getTime() + (index + 1) * 24 * 60 * 60 * 1000);
-        return {
-          date: date.getDate(),
-          dateString: dayjs(date.toLocaleDateString()).format(this.format),
-          currentMonth: false,
-          current: false,
-        };
-      },
-    );
+    let after = Array.from(
+      new Array(42 - before.length - current.length).keys(),
+    ).map((item, index) => {
+      let date = new Date(
+        lastDate.getTime() + (index + 1) * 24 * 60 * 60 * 1000,
+      );
+      return {
+        date: date.getDate(),
+        dateString: dayjs(date.toLocaleDateString()).format(this.format),
+        currentMonth: false,
+        current: false,
+      };
+    });
     let calendar = before.concat(current).concat(after);
     return [
       calendar.slice(0, 7),

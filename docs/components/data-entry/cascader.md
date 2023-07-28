@@ -10,39 +10,40 @@ order: 7
  */
 import React, { useState } from 'react';
 import { Cascader, Switch } from 'yl-design';
+
 export default () => {
   const options = [
     {
       value: 'zhejiang',
-      label: 'Zhejiang',
+      label: '浙江',
       children: [
         {
           value: 'hangzhou',
-          label: 'Hangzhou',
+          label: '杭州',
           children: [
             {
               value: 'xihu',
-              label: 'West Lake',
+              label: '西湖区',
             },
           ],
         },
       ],
     },
     {
-      value: 'jiangsu',
-      label: 'Jiangsu',
+      value: 'anhui',
+      label: '安徽',
       children: [
         {
-          value: 'nanjing',
-          label: 'Nanjing',
+          value: 'hefei',
+          label: '合肥',
           children: [
             {
-              value: 'zhonghuamen',
-              label: 'Zhong Hua Men',
+              value: 'lujiang',
+              label: '庐江',
             },
             {
-              value: 'disabled',
-              label: 'disabled',
+              value: 'feixi',
+              label: '肥西',
               disabled: true,
             },
           ],
@@ -50,13 +51,14 @@ export default () => {
       ],
     },
   ];
-  const [disabled, setdisabled] = useState();
+  const [disabled, setDisabled] = useState();
   return (
     <>
       <Cascader
         placeholder="请选择"
         disabled={disabled}
         options={options}
+        value={['anhui', 'hefei', 'lujiang']}
         style={{ width: 200 }}
         onChange={(value) => {
           console.log(value);
@@ -68,64 +70,9 @@ export default () => {
         checkedChildren="启用"
         unCheckedChildren="禁用"
         checked={!disabled}
-        onChange={setdisabled.bind(null, !disabled)}
+        onChange={setDisabled.bind(null, !disabled)}
       />
     </>
-  );
-};
-```
-
-```jsx
-/**
- * title: 设置默认值
- */
-import React, { useState } from 'react';
-import { Cascader } from 'yl-design';
-export default () => {
-  const options = [
-    {
-      value: 'zhejiang',
-      label: 'Zhejiang',
-      children: [
-        {
-          value: 'hangzhou',
-          label: 'Hangzhou',
-          children: [
-            {
-              value: 'xihu',
-              label: 'West Lake',
-            },
-          ],
-        },
-      ],
-    },
-    {
-      value: 'jiangsu',
-      label: 'Jiangsu',
-      children: [
-        {
-          value: 'nanjing',
-          label: 'Nanjing',
-          children: [
-            {
-              value: 'zhonghuamen',
-              label: 'Zhong Hua Men',
-            },
-          ],
-        },
-      ],
-    },
-  ];
-  return (
-    <Cascader
-      placeholder="请选择"
-      options={options}
-      style={{ width: 200 }}
-      value={['jiangsu', 'nanjing', 'zhonghuamen']}
-      onChange={(value) => {
-        console.log(value);
-      }}
-    />
   );
 };
 ```
@@ -140,31 +87,41 @@ export default () => {
   const options = [
     {
       code: 'zhejiang',
-      name: 'Zhejiang',
+      name: '浙江',
       items: [
         {
           code: 'hangzhou',
-          name: 'Hangzhou',
+          name: '杭州',
           items: [
             {
               code: 'xihu',
-              name: 'West Lake',
+              name: '西湖',
             },
           ],
         },
       ],
     },
     {
-      code: 'jiangsu',
-      name: 'Jiangsu',
+      code: 'anhui',
+      name: '安徽',
       items: [
         {
-          code: 'nanjing',
-          name: 'Nanjing',
+          code: 'hefei',
+          name: '合肥',
           items: [
             {
-              code: 'zhonghuamen',
-              name: 'Zhong Hua Men',
+              code: 'lujiang',
+              name: '庐江',
+            },
+          ],
+        },
+        {
+          code: 'anqing',
+          name: '安庆',
+          items: [
+            {
+              code: 'anqing1',
+              name: '安庆1',
             },
           ],
         },
@@ -184,3 +141,7 @@ export default () => {
   );
 };
 ```
+
+## API
+
+<API src="../../../src/data-entry/cascader/index.tsx" hideTitle></API>

@@ -1,6 +1,25 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, CSSProperties, ReactNode } from 'react';
 import { Select, Button, Input, Icon } from '../../index';
-import dateUtil from './components/util';
+import dateUtil from './util';
+
+interface DatePickerProps {
+  /** 值 */
+  value?: string;
+  /** 改变的钩子 */
+  onChange?: Function;
+  /** 提示文案 */
+  placeholder?: string;
+  /** 前缀 */
+  addonBefore?: ReactNode;
+  /** 后缀 */
+  addonAfter?: ReactNode;
+  /** 样式 */
+  style?: CSSProperties;
+  /** 是否清空 */
+  allowClear?: boolean;
+  /** 是否禁用 */
+  disabled?: boolean;
+}
 
 export default ({
   value,
@@ -11,20 +30,20 @@ export default ({
   style,
   allowClear = true,
   disabled = false,
-}: any) => {
+}: DatePickerProps) => {
   useEffect(() => {
     let date = value || new Date().getTime();
-    setvalue(value); // update
+    setValue(value); // update
     updateDateCalendar(date); // 更新时间
   }, [value]);
   let yearList = dateUtil.getYearList(); // 获取年列表
   let monthList = dateUtil.getMonthList(); // 获取月列表
-  const [open, setopen] = useState(false);
-  const [_value, setvalue] = useState(value);
-  const [year, setyear] = useState(dateUtil.date.getFullYear());
-  const [month, setmonth] = useState(dateUtil.date.getMonth() + 1);
-  const [days, setdays] = useState(value);
-  const [calendar, setcalendar] = useState(dateUtil.getCalendar());
+  const [_value, setValue] = useState(value);
+  const [open, setOpen] = useState(false);
+  const [year, setYear] = useState(dateUtil.date.getFullYear());
+  const [month, setMonth] = useState(dateUtil.date.getMonth() + 1);
+  const [days, setDays] = useState(value);
+  const [calendar, setCalendar] = useState(dateUtil.getCalendar());
   const renderHeader = () => {
     return ['日', '一', '二', '三', '四', '五', '六'].map((item) => {
       return (
@@ -51,7 +70,7 @@ export default ({
                     ? 'yld-picker-calendar-row-col-current-month'
                     : 'yld-picker-calendar-row-col'
                 }
-                onClick={setdays.bind(null, col.dateString)}
+                onClick={setDays.bind(null, col.dateString)}
               >
                 <div className="yld-picker-calendar-inner">{col.date}</div>
               </div>
@@ -68,10 +87,10 @@ export default ({
     month = month > 9 ? month : '0' + month; // safari 不兼容不标准的字符转日期
     day = day > 9 ? day : '0' + day; // safari 不兼容不标准的字符转日期
     dateUtil.setDate(new Date(date));
-    setcalendar(dateUtil.getCalendar());
-    setyear(dateUtil.date.getFullYear());
-    setmonth(dateUtil.date.getMonth() + 1);
-    setdays(`${dateUtil.date.getFullYear()}-${month}-${day}`);
+    setCalendar(dateUtil.getCalendar());
+    setYear(dateUtil.date.getFullYear());
+    setMonth(dateUtil.date.getMonth() + 1);
+    setDays(`${dateUtil.date.getFullYear()}-${month}-${day}`);
   };
   return (
     <>
@@ -85,20 +104,20 @@ export default ({
             placeholder={placeholder}
             value={_value}
             readOnly
-            allowClear={allowClear && _value}
+            allowClear={allowClear}
             onAllowClear={() => {
-              setvalue('');
+              setValue(undefined);
               updateDateCalendar(new Date()); // 更新时间
-              typeof onChange === 'function' && onChange('');
+              typeof onChange === 'function' && onChange(undefined);
             }}
-            onFocus={setopen.bind(null, true)}
+            onFocus={setOpen.bind(null, true)}
           />
         </div>
         {open && (
           <>
             <div
               className="yld-date-picker-layer"
-              onClick={setopen.bind(null, false)}
+              onClick={setOpen.bind(null, false)}
             />
             <div className="yld-date-picker-body">
               <div className="yld-date-picker-body-value">
@@ -207,8 +226,8 @@ export default ({
                   type="primary"
                   style={{ height: 30, width: 60 }}
                   onClick={() => {
-                    setopen(false);
-                    setvalue(days);
+                    setOpen(false);
+                    setValue(days);
                     typeof onChange === 'function' && onChange(days);
                   }}
                 >

@@ -1,33 +1,58 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, CSSProperties, ReactNode } from 'react';
+import { OptionsProps } from '../select';
+
+export interface CheckBoxProps {
+  /** 类名 */
+  className?: string;
+  /** 数据源 */
+  options: OptionsProps[];
+  /** 值 */
+  value?: any;
+  /** 改变的钩子 */
+  onChange?: Function;
+  /** 是否禁用 */
+  disabled?: boolean;
+  /** 样式 */
+  style?: CSSProperties;
+  children?: ReactNode;
+  checked?: boolean;
+}
 
 export default ({
+  className,
   checked = false,
   disabled = false,
   onChange,
   style = {},
   children,
-  name = '',
-}: any) => {
-  const [_checked, setchecked] = useState(checked);
-  let className = _checked ? 'yld-checkbox yld-checkbox-checked' : 'yld-checkbox';
-  disabled && (className += ' yld-checkbox-disabled');
+}: CheckBoxProps) => {
+  const [_checked, setChecked] = useState(checked);
+  const _className = ['yld-checkbox'];
+  if (_checked) {
+    _className.push('yld-checkbox-checked');
+  }
+  if (disabled) {
+    _className.push('yld-checkbox-disabled');
+  }
+  if (className) {
+    _className.push(className);
+  }
   useEffect(() => {
-    setchecked(checked);
+    setChecked(checked);
   }, [checked]);
   return (
     <>
       <label className="yld-checkbox-wrapper">
-        <span className={className}>
+        <span className={_className.join(' ')}>
           <input
             type="checkbox"
             readOnly={disabled}
             style={style}
-            name={name}
             checked={_checked}
             className="yld-checkbox-input"
             onChange={(e) => {
               if (disabled) return;
-              setchecked(e.target.checked);
+              setChecked(e.target.checked);
               typeof onChange === 'function' && onChange(e);
             }}
           />

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Checkbox } from '../../../index';
+import { CheckBoxProps } from '.';
+import { Checkbox } from '../../index';
 
 export default ({
   options = [],
@@ -7,8 +8,7 @@ export default ({
   disabled = false,
   onChange,
   style = {},
-  name = '',
-}) => {
+}: CheckBoxProps) => {
   const [_value, setvalue] = useState(Array.isArray(value) ? value : []);
   const _options = options.map((option) => {
     return {
@@ -28,8 +28,9 @@ export default ({
           <Checkbox
             key={option.key}
             disabled={disabled || option.disabled}
-            name={name}
-            checked={Array.isArray(_value) ? _value.indexOf(option.value) > -1 : false}
+            checked={
+              Array.isArray(_value) ? _value.indexOf(option.value) > -1 : false
+            }
             onChange={(e) => {
               let __value = [..._value];
               if (e.target.checked) {
@@ -40,6 +41,7 @@ export default ({
               setvalue(__value);
               typeof onChange === 'function' && onChange(__value);
             }}
+            options={[]}
           >
             {option.label}
           </Checkbox>

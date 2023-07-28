@@ -2,7 +2,7 @@ import { CSSProperties, ReactNode } from 'react';
 import Select from './components/select';
 import SelectMultiple from './components/select-multiple';
 
-interface OptionsProps {
+export interface OptionsProps {
   label: ReactNode;
   value: number | string;
   disabled?: boolean;

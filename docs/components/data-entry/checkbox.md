@@ -38,25 +38,38 @@ export default () => {
 import React, { useState } from 'react';
 import { CheckboxGroup } from 'yl-design';
 export default () => {
-  const options = ['html', 'css', 'javascript', 'node', 'nginx'];
-  const [value, setvalue] = useState();
+  const options = [
+    {
+      label: 'Html',
+      value: 'Html',
+    },
+    {
+      label: 'Css',
+      value: 'Css',
+    },
+    {
+      label: 'JavaScript',
+      value: 'JavaScript',
+    },
+    {
+      label: 'React',
+      value: 'React',
+    },
+    {
+      label: 'Vue',
+      value: 'Vue',
+    },
+  ];
+  const [value, setValue] = useState(['React']);
   console.log('checkbox value is: ', value);
   return (
-    <>
-      <CheckboxGroup
-        options={options}
-        value={value}
-        onChange={(value) => {
-          setvalue(value);
-        }}
-      />
-      <CheckboxGroup
-        options={options}
-        disabled
-        style={{ marginTop: 20 }}
-        value={value}
-      />
-    </>
+    <CheckboxGroup
+      options={options}
+      value={value}
+      onChange={(value) => {
+        setValue(value);
+      }}
+    />
   );
 };
 ```
@@ -87,33 +100,10 @@ export default () => {
       value: 3,
     },
   ];
-  return (
-    <>
-      <CheckboxGroup options={options} />
-    </>
-  );
+  return <CheckboxGroup options={options} />;
 };
 ```
 
-# API
+## API
 
-# Checkbox
-
-| **属性名** | **类型**    | **描述**               | **默认** |
-| ---------- | ----------- | ---------------------- | -------- |
-| checked    | boolean     | 指定当前是否选中       | 无       |
-| disabled   | boolean     | 失效状态               | 无       |
-| onChange   | Function(e) | 输入框内容变化时的回调 | 无       |
-| style      | Object      | 样式                   | 无       |
-| name       | string      | 样式                   | 无       |
-
-# CheckboxGroup
-
-| **属性名** | **类型**        | **描述**               | **默认** |
-| ---------- | --------------- | ---------------------- | -------- |
-| value      | string[]        | 指定选中的选项         | 无       |
-| disabled   | boolean         | 失效状态               | 无       |
-| onChange   | Function(value) | 输入框内容变化时的回调 | 无       |
-| name       | string          | 样式                   | 无       |
-| options    | string[]        | 指定可选项             | 无       |
-| style      | Object          | 样式                   | 无       |
+<API src="../../../src/data-entry/checkbox/index.tsx" hideTitle></API>

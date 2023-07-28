@@ -167,7 +167,7 @@ export default ({
                   }}
                 >
                   {option.label}
-                  <Icon size={14} type="duihao" />
+                  <Icon size={12} type="duihao" />
                 </div>
               );
             })

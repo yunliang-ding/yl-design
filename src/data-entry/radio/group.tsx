@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Radio } from '../../../index';
+import { RadioProps } from '.';
+import Radio from './index';
 
 export default ({
   options = [],
@@ -7,8 +8,8 @@ export default ({
   disabled = false,
   onChange,
   style = {},
-  name = '',
-}) => {
+  ...rest
+}: RadioProps) => {
   const [_value, setvalue] = useState(value);
   useEffect(() => {
     setvalue(value);
@@ -28,12 +29,13 @@ export default ({
           <Radio
             key={option.key}
             disabled={disabled || option.disabled}
-            name={name}
             checked={option.value === _value}
             onChange={() => {
               setvalue(option.value);
               typeof onChange === 'function' && onChange(option.value);
             }}
+            options={[]}
+            {...rest}
           >
             {option.label}
           </Radio>

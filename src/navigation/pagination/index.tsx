@@ -95,7 +95,6 @@ export default ({
       );
     }
   }
-  console.log('totalPage', totalPage);
   return (
     <>
       <div className="yld-pagination">
@@ -153,8 +152,8 @@ export default ({
               style={{ width: 80 }}
               min={1}
               max={totalPage}
-              onBlur={(e) => {
-                let current = parseInt(e.target.value);
+              onBlur={(v) => {
+                let current = parseInt(v);
                 if (!isNaN(current)) {
                   const pageNum = current > totalPage ? totalPage : current;
                   setCurrent(pageNum);

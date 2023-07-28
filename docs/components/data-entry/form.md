@@ -105,6 +105,14 @@ export default () => {
 };
 ```
 
-## API
+## Form 属性
 
-<API src="../../../src/data-entry/form/index.tsx" hideTitle></API>
+<API src="../../../src/data-entry/form/type.form.tsx" hideTitle></API>
+
+## Form 实例
+
+<API src="../../../src/data-entry/form/type.instance.tsx" hideTitle></API>
+
+## Item 属性
+
+<API src="../../../src/data-entry/form/type.item.tsx" hideTitle></API>

@@ -37,12 +37,15 @@ export interface TableProps {
   }>;
   tools?: ToolProps[];
   rowOperations?: (api: { record: any; refresh: Function }) => ToolProps[];
-  rowKey: string;
+  rowKey?: string;
   style?: CSSProperties;
   paginationConfig?: PaginationProps | false;
   bordered?: boolean;
   checkable?: boolean;
   onCheck?: Function;
+  useRefresh?: boolean;
+  useFilter?: boolean;
+  useAdjust?: boolean;
 }
 
 export default ({
@@ -51,8 +54,31 @@ export default ({
   columns = [],
   tools = [],
   rowOperations,
+  useRefresh = true,
+  useFilter = true,
+  useAdjust = true,
   ...rest
 }: TableProps) => {
+  if (useFilter) {
+    tools.unshift({
+      icon: 'shezhi',
+      async onClick({ refresh }) {},
+    });
+  }
+  if (useAdjust) {
+    tools.unshift({
+      icon: 'da-xiao',
+      async onClick({ refresh }) {},
+    });
+  }
+  if (useRefresh) {
+    tools.unshift({
+      icon: 'refresh',
+      async onClick({ refresh }) {
+        await refresh();
+      },
+    });
+  }
   // 解析 cloums
   const lastColums = [...columns];
   if (typeof rowOperations === 'function') {

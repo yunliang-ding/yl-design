@@ -11,6 +11,27 @@ order: 5
 import React, { useState } from 'react';
 import { Checkbox } from 'yl-design';
 export default () => {
+  const [checked, setCheck] = useState(false);
+  return (
+    <Checkbox
+      checked={checked}
+      onChange={(e) => {
+        setCheck(e.target.checked);
+      }}
+    >
+      单一选择
+    </Checkbox>
+  );
+};
+```
+
+```jsx
+/**
+ * title: 选项组
+ */
+import React, { useState } from 'react';
+import { CheckGroup } from 'yl-design';
+export default () => {
   const options = [
     {
       label: 'Html',
@@ -31,12 +52,13 @@ export default () => {
     {
       label: 'Vue',
       value: 'Vue',
+      disabled: true,
     },
   ];
   const [value, setValue] = useState(['React']);
   console.log('checkbox value is: ', value);
   return (
-    <Checkbox
+    <CheckGroup
       options={options}
       value={value}
       onChange={(value) => {
@@ -44,36 +66,6 @@ export default () => {
       }}
     />
   );
-};
-```
-
-```jsx
-/**
- * title: 组多选部分禁用
- */
-import React from 'react';
-import { Checkbox } from 'yl-design';
-export default () => {
-  const options = [
-    {
-      label: 'A',
-      value: 0,
-    },
-    {
-      label: 'B',
-      value: 1,
-      disabled: true,
-    },
-    {
-      label: 'C',
-      value: 2,
-    },
-    {
-      label: 'D',
-      value: 3,
-    },
-  ];
-  return <Checkbox options={options} />;
 };
 ```
 

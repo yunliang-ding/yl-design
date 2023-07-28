@@ -8,15 +8,15 @@ import {
   Slider,
   Switch,
   TimePicker,
-  Checkbox,
-  Radio,
+  CheckGroup,
+  RadioGroup,
 } from '../../index';
 
 export default {
   Input: Input,
   InputNumber: InputNumber,
-  Checkbox: Checkbox,
-  Radio: Radio,
+  CheckGroup: CheckGroup,
+  RadioGroup: RadioGroup,
   Switch: Switch,
   Slider: Slider,
   Select: Select,

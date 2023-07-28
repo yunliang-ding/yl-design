@@ -10,6 +10,27 @@ order: 4
  */
 import React, { useState } from 'react';
 import { Radio } from 'yl-design';
+export default () => {
+  const [checked, setCheck] = useState(false);
+  return (
+    <Radio
+      checked={checked}
+      onChange={(e) => {
+        setCheck(e.target.checked);
+      }}
+    >
+      单一选择
+    </Radio>
+  );
+};
+```
+
+```jsx
+/**
+ * title: 基本使用
+ */
+import React, { useState } from 'react';
+import { RadioGroup } from 'yl-design';
 
 export default () => {
   const options = [
@@ -32,11 +53,12 @@ export default () => {
     {
       label: 'Vue',
       value: 'Vue',
+      disabled: true,
     },
   ];
   const [value, setValue] = useState('React');
   return (
-    <Radio
+    <RadioGroup
       options={options}
       value={value}
       onChange={(value) => {
@@ -46,42 +68,6 @@ export default () => {
   );
 };
 ```
-
-```jsx
-/**
- * title: 组多选部分禁用
- */
-import React, { useState } from 'react';
-import { Radio } from 'yl-design';
-
-export default () => {
-  const options = [
-    {
-      label: 'A',
-      value: 'A',
-      disabled: true,
-    },
-    {
-      label: 'B',
-      value: 'B',
-    },
-  ];
-  const [value, setValue] = useState();
-  return (
-    <>
-      <Radio
-        options={options}
-        value={value}
-        onChange={(value) => {
-          setValue(value);
-        }}
-      />
-    </>
-  );
-};
-```
-
-`
 
 ## API
 

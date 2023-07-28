@@ -18,19 +18,6 @@ export default () => {
       style={{ height: 260 }}
       bordered
       checkable
-      tools={[
-        {
-          label: '新增',
-          type: 'primary',
-          onClick() {},
-        },
-        {
-          label: '刷新',
-          async onClick({ refresh }) {
-            await refresh();
-          },
-        },
-      ]}
       rowOperations={({ record, refresh }) => {
         return [
           {
@@ -84,3 +71,7 @@ export default () => {
   );
 };
 ```
+
+## API
+
+<API src="../../../src/data-display/table/index.tsx" hideTitle></API>

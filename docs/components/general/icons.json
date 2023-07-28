@@ -1,5 +1,26 @@
 [
   {
+    "icon_id": "1410489",
+    "name": "refresh",
+    "font_class": "refresh",
+    "unicode": "e6bb",
+    "unicode_decimal": 59067
+  },
+  {
+    "icon_id": "8499922",
+    "name": "大-小",
+    "font_class": "da-xiao",
+    "unicode": "e628",
+    "unicode_decimal": 58920
+  },
+  {
+    "icon_id": "18309270",
+    "name": "设 置",
+    "font_class": "shezhi",
+    "unicode": "e611",
+    "unicode_decimal": 58897
+  },
+  {
     "icon_id": "372811",
     "name": "cc-dot-o",
     "font_class": "cc-dot-o",

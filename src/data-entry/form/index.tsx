@@ -1,18 +1,10 @@
 import { useEffect, useRef } from 'react';
 import Schema from 'async-validator';
-import { FormInstance, FormRefInstance, ItemProps } from './types';
+import { FormProps, FormRefInstance } from './type.form';
 import Item from './item';
 /**
  * 禁止使用 useState, 所有状态变通过 itemRef 发布通知
  */
-export interface FormProps {
-  form?: FormInstance;
-  initialValues?: any;
-  onValuesChange?: Function;
-  items: ItemProps[];
-  column?: 1 | 2 | 3 | 4;
-}
-
 const Form = ({
   initialValues = {},
   onValuesChange = (v, vs) => {},

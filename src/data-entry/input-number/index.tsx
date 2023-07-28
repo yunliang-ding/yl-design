@@ -1,7 +1,7 @@
 import { useState, useEffect, CSSProperties } from 'react';
 import { Icon } from '../../index';
 
-interface InputNumberProps {
+export interface InputNumberProps {
   /** 值 */
   value?: string;
   /** 类名 */

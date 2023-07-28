@@ -6,7 +6,7 @@ export interface CheckBoxProps {
   /** 类名 */
   className?: string;
   /** 数据源 */
-  options: OptionsProps[];
+  options?: OptionsProps[];
   /** 值 */
   value?: any;
   /** 改变的钩子 */
@@ -20,7 +20,13 @@ export interface CheckBoxProps {
 }
 
 export default ({
-  options = [],
+  children,
+  options = [
+    {
+      label: children,
+      value: '',
+    },
+  ],
   value = undefined, // 不能为引用类型不然造成死循环
   disabled = false,
   onChange,

@@ -6,7 +6,7 @@ export interface RadioProps {
   /** 类名 */
   className?: string;
   /** 数据源 */
-  options: OptionsProps[];
+  options?: OptionsProps[];
   /** 值 */
   value?: any;
   /** 改变的钩子 */
@@ -20,7 +20,13 @@ export interface RadioProps {
 }
 
 export default ({
-  options = [],
+  children,
+  options = [
+    {
+      label: children,
+      value: '',
+    },
+  ],
   value = '',
   disabled = false,
   onChange,

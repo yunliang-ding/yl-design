@@ -43,7 +43,7 @@ export interface InputProps {
   suffix?: ReactNode;
 }
 
-const InputWrapper = ({ className, ...props }: InputProps) => {
+export default ({ className, ...props }: InputProps) => {
   const _className = [
     props.type === 'textarea' ? 'yld-textarea-wrapper' : 'yld-input-wrapper',
   ];
@@ -62,5 +62,3 @@ const InputWrapper = ({ className, ...props }: InputProps) => {
     </span>
   );
 };
-InputWrapper.displayName = 'Input';
-export default InputWrapper;

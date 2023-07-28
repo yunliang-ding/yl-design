@@ -3,13 +3,15 @@ export default {
   esm: {
     type: 'rollup',
     minify: true,
+    // file: 'yl-design',
   },
   cjs: {
     type: 'rollup',
     minify: true,
+    // file: 'yl-design',
   },
   // umd: {
-  //   name: 'ReactCoreForm',
+  //   name: 'yld',
   //   minFile: true,
   // },
   extractCSS: true,

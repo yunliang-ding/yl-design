@@ -1,7 +1,7 @@
 import { useState, useEffect, CSSProperties, ReactNode } from 'react';
 import { Icon } from '../../index';
 
-interface SwitchProps {
+export interface SwitchProps {
   /** 值 */
   value?: boolean;
   /** 选中的提示 */

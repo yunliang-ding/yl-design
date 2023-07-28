@@ -13,7 +13,7 @@
 import { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 
-interface LayerProps {}
+export interface LayerProps {}
 
 export default ({
   children,

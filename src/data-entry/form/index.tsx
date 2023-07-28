@@ -1,23 +1,26 @@
 import { useEffect, useRef } from 'react';
 import Schema from 'async-validator';
+import { FormInstance, FormRefInstance, ItemProps } from './types';
 import Item from './item';
 /**
  * 禁止使用 useState, 所有状态变通过 itemRef 发布通知
  */
-
-interface FormInstance {}
-
-interface FormProps {
-  form: FormInstance;
+export interface FormProps {
+  form?: FormInstance;
+  initialValues?: any;
+  onValuesChange?: Function;
+  items: ItemProps[];
+  column?: 1 | 2 | 3 | 4;
 }
 
 const Form = ({
-  form = Form.useForm(),
   initialValues = {},
   onValuesChange = (v, vs) => {},
   items = [],
   column = 1,
-}) => {
+  ...rest
+}: FormProps) => {
+  const form = rest.form || Form.useForm();
   const store = useRef(initialValues);
   const descriptorRef: any = useRef({});
   const itemRef: any = useRef({});
@@ -123,7 +126,14 @@ const Form = ({
 };
 
 Form.useForm = () => {
-  const ref = useRef({});
+  const ref: FormRefInstance = useRef({
+    getValues: () => {},
+    setValues: () => {},
+    setDisabled: () => {},
+    mergeItemByName: () => {},
+    validateField: () => {},
+    validateFields: () => {},
+  });
   return ref.current;
 };
 

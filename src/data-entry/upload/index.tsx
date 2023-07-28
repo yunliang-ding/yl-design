@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-interface UploadProps {
+export interface UploadProps {
   text?: ReactNode;
 }
 export default ({ text }: UploadProps) => {

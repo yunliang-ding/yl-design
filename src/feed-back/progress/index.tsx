@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 
-interface ProgressProps {
+export interface ProgressProps {
   percent: number;
   strokeColor: string;
   active?: boolean;

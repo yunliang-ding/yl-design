@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Button, Icon } from '../../index';
 import { uuid, $ } from '../modal';
 
-interface DrawerProps {
+export interface DrawerProps {
   containId?: string;
   title?: ReactNode;
   closable?: boolean;

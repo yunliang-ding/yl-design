@@ -8,7 +8,7 @@ export const uuid = function uuid(size) {
 
 export const $: any = document.querySelector.bind(document);
 
-interface ModalProps {
+export interface ModalProps {
   containId?: string;
   title?: ReactNode;
   closable?: boolean;

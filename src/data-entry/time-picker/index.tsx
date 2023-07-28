@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, CSSProperties, ReactNode } from 'react';
 import { Icon, Input } from '../../index';
 
-interface TimePickerProps {
+export interface TimePickerProps {
   /** 类名 */
   className?: string;
   /** 值 */

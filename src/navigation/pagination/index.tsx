@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Input, Select, Icon } from '../../index';
+import { Input, Select, Icon, InputNumber } from '../../index';
 
 export default ({
   current = 1,
@@ -149,9 +149,10 @@ export default ({
         {showJumper && (
           <div className="yld-pagination-jump">
             <span className="yld-pagination-jump-label">跳转至</span>
-            <Input
+            <InputNumber
               style={{ width: 80 }}
               min={1}
+              max={totalPage}
               onBlur={(e) => {
                 let current = parseInt(e.target.value);
                 if (!isNaN(current)) {

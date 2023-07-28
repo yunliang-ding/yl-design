@@ -10,7 +10,7 @@ import {
   TimePicker,
   Checkbox,
   Radio,
-} from '@/index';
+} from '../../index';
 
 export default {
   Input: Input,

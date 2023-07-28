@@ -1,6 +1,12 @@
-interface BadgeProps {}
+export interface BadgeProps {}
 
-export default ({ color, count, dot = false, title, children }: BadgeProps | any) => {
+export default ({
+  color,
+  count,
+  dot = false,
+  title,
+  children,
+}: BadgeProps | any) => {
   let style: any = {};
   if (color) {
     style.backgroundColor = color;

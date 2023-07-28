@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, CSSProperties } from 'react';
 import { Tooltip } from '../../index';
 
-interface SliderProps {
+export interface SliderProps {
   /** 值 */
   value?: number;
   /** 类名 */

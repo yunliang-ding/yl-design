@@ -1,7 +1,7 @@
 import { useState, useEffect, CSSProperties } from 'react';
 import { Icon, Empty } from '../../index';
 
-interface AutoCompleteProps {
+export interface AutoCompleteProps {
   /** 类名 */
   className?: string;
   /** 数据源 */

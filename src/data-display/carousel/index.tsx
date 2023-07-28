@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Icon } from '../../index';
 
-interface CarouselProps {}
+export interface CarouselProps {}
 let swipeX = false;
 const position = {
   x: 0,

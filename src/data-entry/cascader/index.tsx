@@ -3,14 +3,14 @@ import { Icon, Empty } from '../../index';
 import { fieldNamesTransfrom, getLabelByValue } from './util';
 import { cloneDeep } from 'lodash';
 
-interface OptionsProps {
+export interface OptionsProps {
   label: ReactNode;
   value: number | string;
   disabled?: boolean;
   children: OptionsProps[];
 }
 
-interface CascaderProps {
+export interface CascaderProps {
   /** 别名 */
   fieldNames?: {
     label?: string;

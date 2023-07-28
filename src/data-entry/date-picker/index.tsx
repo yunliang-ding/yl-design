@@ -2,7 +2,7 @@ import { useState, useEffect, CSSProperties, ReactNode } from 'react';
 import { Select, Button, Input, Icon } from '../../index';
 import dateUtil from './util';
 
-interface DatePickerProps {
+export interface DatePickerProps {
   /** 值 */
   value?: string;
   /** 改变的钩子 */

@@ -51,28 +51,16 @@ export default () => {
       ],
     },
   ];
-  const [disabled, setDisabled] = useState();
   return (
-    <>
-      <Cascader
-        placeholder="请选择"
-        disabled={disabled}
-        options={options}
-        value={['anhui', 'hefei', 'lujiang']}
-        style={{ width: 200 }}
-        onChange={(value) => {
-          console.log(value);
-        }}
-      />
-      <br />
-      <br />
-      <Switch
-        checkedChildren="启用"
-        unCheckedChildren="禁用"
-        checked={!disabled}
-        onChange={setDisabled.bind(null, !disabled)}
-      />
-    </>
+    <Cascader
+      placeholder="请选择"
+      options={options}
+      value={['anhui', 'hefei', 'lujiang']}
+      style={{ width: 200 }}
+      onChange={(value) => {
+        console.log(value);
+      }}
+    />
   );
 };
 ```

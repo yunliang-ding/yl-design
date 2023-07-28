@@ -115,8 +115,8 @@ export default ({
             type="cuo"
             onClick={(e) => {
               e.stopPropagation(); // 阻止冒泡
-              setValue(undefined); // 还原
-              typeof onChange === 'function' && onChange(undefined, undefined);
+              setValue([]); // 还原
+              typeof onChange === 'function' && onChange([], null);
             }}
           />
         )}

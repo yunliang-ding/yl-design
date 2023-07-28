@@ -1,5 +1,6 @@
 import { useState, useEffect, CSSProperties, ReactNode } from 'react';
 import { OptionsProps } from '../select';
+import Option from './option';
 
 export interface CheckBoxProps {
   /** 类名 */
@@ -19,47 +20,50 @@ export interface CheckBoxProps {
 }
 
 export default ({
-  className,
-  checked = false,
+  options = [],
+  value = undefined, // 不能为引用类型不然造成死循环
   disabled = false,
   onChange,
   style = {},
-  children,
 }: CheckBoxProps) => {
-  const [_checked, setChecked] = useState(checked);
-  const _className = ['yld-checkbox'];
-  if (_checked) {
-    _className.push('yld-checkbox-checked');
-  }
-  if (disabled) {
-    _className.push('yld-checkbox-disabled');
-  }
-  if (className) {
-    _className.push(className);
-  }
+  const [_value, setvalue] = useState(Array.isArray(value) ? value : []);
+  const _options = options.map((option) => {
+    return {
+      key: Math.random(),
+      label: typeof option === 'string' ? option : option.label,
+      value: typeof option === 'string' ? option : option.value,
+      disabled: typeof option === 'string' ? false : option.disabled,
+    };
+  });
   useEffect(() => {
-    setChecked(checked);
-  }, [checked]);
+    setvalue(Array.isArray(value) ? value : []);
+  }, [value]);
   return (
-    <>
-      <label className="yld-checkbox-wrapper">
-        <span className={_className.join(' ')}>
-          <input
-            type="checkbox"
-            readOnly={disabled}
-            style={style}
-            checked={_checked}
-            className="yld-checkbox-input"
+    <div className="yld-checkbox-group" style={style}>
+      {_options.map((option: any) => {
+        return (
+          <Option
+            key={option.key}
+            disabled={disabled || option.disabled}
+            checked={
+              Array.isArray(_value) ? _value.indexOf(option.value) > -1 : false
+            }
             onChange={(e) => {
-              if (disabled) return;
-              setChecked(e.target.checked);
-              typeof onChange === 'function' && onChange(e);
+              let __value = [..._value];
+              if (e.target.checked) {
+                __value.push(option.value);
+              } else {
+                __value = _value.filter((value) => value !== option.value);
+              }
+              setvalue(__value);
+              typeof onChange === 'function' && onChange(__value);
             }}
-          />
-          <span className="yld-checkbox-inner"></span>
-        </span>
-        <span>{children}</span>
-      </label>
-    </>
+            options={[]}
+          >
+            {option.label}
+          </Option>
+        );
+      })}
+    </div>
   );
 };

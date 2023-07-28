@@ -36,8 +36,8 @@ export default [
     extra: '这是一段描述信息',
   },
   {
-    type: 'RadioGroup',
-    name: 'radioGroup',
+    type: 'Radio',
+    name: 'radio',
     label: '单选按钮组',
     props: {
       options: [
@@ -47,8 +47,8 @@ export default [
     },
   },
   {
-    type: 'CheckGroup',
-    name: 'checkGroup',
+    type: 'Checkbox',
+    name: 'checkbox',
     label: '复选框',
     props: {
       options: [

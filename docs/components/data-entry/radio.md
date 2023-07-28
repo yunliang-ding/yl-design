@@ -9,71 +9,40 @@ order: 4
  * title: 基本使用
  */
 import React, { useState } from 'react';
-import { Radio, Switch } from 'yl-design';
-export default () => {
-  const [disabled, setdisabled] = useState();
-  const onChange = (e) => {
-    console.log(`checked is ${e.target.checked}`);
-  };
-  return (
-    <>
-      <Radio disabled={disabled} onChange={onChange}>
-        Radio
-      </Radio>
-      <br />
-      <br />
-      <Switch
-        checkedChildren="启用"
-        unCheckedChildren="禁用"
-        checked={!disabled}
-        onChange={setdisabled.bind(null, !disabled)}
-      />
-    </>
-  );
-};
-```
-
-```jsx
-/**
- * title: 默认选中
- */
-import React from 'react';
 import { Radio } from 'yl-design';
-export default () => {
-  return (
-    <>
-      <Radio checked>Radio</Radio>
-    </>
-  );
-};
-```
 
-```jsx
-/**
- * title: 组多选
- */
-import React, { useState } from 'react';
-import { RadioGroup } from 'yl-design';
 export default () => {
-  const options = ['html', 'css', 'javascript', 'node', 'nginx'];
-  const [value, setvalue] = useState();
-  console.log('radio value is: ', value);
+  const options = [
+    {
+      label: 'Html',
+      value: 'Html',
+    },
+    {
+      label: 'Css',
+      value: 'Css',
+    },
+    {
+      label: 'JavaScript',
+      value: 'JavaScript',
+    },
+    {
+      label: 'React',
+      value: 'React',
+    },
+    {
+      label: 'Vue',
+      value: 'Vue',
+    },
+  ];
+  const [value, setValue] = useState('React');
   return (
-    <>
-      <RadioGroup
-        options={options}
-        value={value}
-        onChange={(value) => {
-          setvalue(value);
-        }}
-      />
-      <RadioGroup
-        options={options}
-        disabled
-        style={{ marginTop: 20 }}
-        value={value}
-      />
-    </>
+    <Radio
+      options={options}
+      value={value}
+      onChange={(value) => {
+        setValue(value);
+      }}
+    />
   );
 };
 ```
@@ -83,7 +52,8 @@ export default () => {
  * title: 组多选部分禁用
  */
 import React, { useState } from 'react';
-import { RadioGroup } from 'yl-design';
+import { Radio } from 'yl-design';
+
 export default () => {
   const options = [
     {
@@ -96,14 +66,14 @@ export default () => {
       value: 'B',
     },
   ];
-  const [value, setvalue] = useState();
+  const [value, setValue] = useState();
   return (
     <>
-      <RadioGroup
+      <Radio
         options={options}
         value={value}
         onChange={(value) => {
-          setvalue(value);
+          setValue(value);
         }}
       />
     </>

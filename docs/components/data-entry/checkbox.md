@@ -9,34 +9,7 @@ order: 5
  * title: 基本使用
  */
 import React, { useState } from 'react';
-import { Checkbox, Switch } from 'yl-design';
-export default () => {
-  const [disabled, setdisabled] = useState('');
-  return (
-    <>
-      <Checkbox disabled={disabled}>Checkbox</Checkbox>
-      <Checkbox disabled={disabled} checked>
-        Default Checked
-      </Checkbox>
-      <br />
-      <br />
-      <Switch
-        checkedChildren="启用"
-        unCheckedChildren="禁用"
-        checked={!disabled}
-        onChange={setdisabled.bind(null, !disabled)}
-      />
-    </>
-  );
-};
-```
-
-```jsx
-/**
- * title: 组多选
- */
-import React, { useState } from 'react';
-import { CheckboxGroup } from 'yl-design';
+import { Checkbox } from 'yl-design';
 export default () => {
   const options = [
     {
@@ -63,7 +36,7 @@ export default () => {
   const [value, setValue] = useState(['React']);
   console.log('checkbox value is: ', value);
   return (
-    <CheckboxGroup
+    <Checkbox
       options={options}
       value={value}
       onChange={(value) => {
@@ -79,7 +52,7 @@ export default () => {
  * title: 组多选部分禁用
  */
 import React from 'react';
-import { CheckboxGroup } from 'yl-design';
+import { Checkbox } from 'yl-design';
 export default () => {
   const options = [
     {
@@ -100,7 +73,7 @@ export default () => {
       value: 3,
     },
   ];
-  return <CheckboxGroup options={options} />;
+  return <Checkbox options={options} />;
 };
 ```
 

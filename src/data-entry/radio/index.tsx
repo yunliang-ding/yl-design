@@ -1,5 +1,6 @@
 import { useState, useEffect, CSSProperties, ReactNode } from 'react';
 import { OptionsProps } from '../select';
+import Option from './option';
 
 export interface RadioProps {
   /** 类名 */
@@ -19,49 +20,36 @@ export interface RadioProps {
 }
 
 export default ({
-  className,
-  checked = false,
+  options = [],
+  value = '',
   disabled = false,
   onChange,
   style = {},
-  children,
+  ...rest
 }: RadioProps) => {
-  const [_checked, setChecked] = useState(checked);
-  const _className = ['yld-radio'];
-  if (_checked) {
-    _className.push('yld-radio-checked');
-  }
-  if (disabled) {
-    _className.push('yld-radio-disabled');
-  }
-  if (className) {
-    _className.push(className);
-  }
+  const [_value, setValue] = useState(value);
   useEffect(() => {
-    setChecked(checked);
-  }, [checked]);
+    setValue(value);
+  }, [value]);
   return (
-    <>
-      <label className="yld-radio-wrapper">
-        <span className={_className.join(' ')}>
-          <input
-            type="radio"
-            readOnly={disabled}
-            style={style}
-            checked={_checked}
-            className="yld-radio-input"
-            onChange={(e) => {
-              if (disabled) {
-                return;
-              }
-              setChecked(e.target.checked);
-              typeof onChange === 'function' && onChange(e);
+    <div className="yld-radio-group" style={style}>
+      {options.map((option) => {
+        return (
+          <Option
+            key={option.value}
+            disabled={disabled || option.disabled}
+            checked={option.value === _value}
+            onChange={() => {
+              setValue(option.value);
+              typeof onChange === 'function' && onChange(option.value);
             }}
-          />
-          <span className="yld-radio-inner"></span>
-        </span>
-        <span>{children}</span>
-      </label>
-    </>
+            options={[]}
+            {...rest}
+          >
+            {option.label}
+          </Option>
+        );
+      })}
+    </div>
   );
 };

@@ -1,4 +1,3 @@
-import item from '@/data-entry/form/item';
 import { useState, useEffect, useRef } from 'react';
 import { TableProps } from '.';
 import { Icon, Pagination, Checkbox, Empty, Spin } from '../../index';
@@ -91,6 +90,7 @@ export default ({
       title: (
         <Checkbox
           checked={isCheckedAll()}
+          options={[]}
           onChange={(e) => {
             checkedAll(e.target.checked);
           }}
@@ -102,6 +102,7 @@ export default ({
       render: (e, record) => {
         return (
           <Checkbox
+            options={[]}
             checked={checkedkeys.includes(record[rowKey || 'key'])}
             onChange={() => {
               let index = checkedkeys.indexOf(record[rowKey || 'key']);

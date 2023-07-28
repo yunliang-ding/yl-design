@@ -1,22 +1,22 @@
 import {
   AutoComplete,
   Cascader,
-  CheckboxGroup,
   DatePicker,
   Input,
   InputNumber,
-  RadioGroup,
   Select,
   Slider,
   Switch,
   TimePicker,
+  Checkbox,
+  Radio,
 } from '@/index';
 
 export default {
   Input: Input,
   InputNumber: InputNumber,
-  CheckGroup: CheckboxGroup,
-  RadioGroup: RadioGroup,
+  Checkbox: Checkbox,
+  Radio: Radio,
   Switch: Switch,
   Slider: Slider,
   Select: Select,

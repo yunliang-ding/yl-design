@@ -4,6 +4,13 @@ import Item from './item';
 /**
  * 禁止使用 useState, 所有状态变通过 itemRef 发布通知
  */
+
+interface FormInstance {}
+
+interface FormProps {
+  form: FormInstance;
+}
+
 const Form = ({
   form = Form.useForm(),
   initialValues = {},

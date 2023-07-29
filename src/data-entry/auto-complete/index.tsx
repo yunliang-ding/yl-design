@@ -17,7 +17,7 @@ export interface AutoCompleteProps {
   /** 样式 */
   style?: CSSProperties;
   /** 选择后钩子 */
-  onSelect?: Function;
+  onChange?: Function;
   /** 自动打开 */
   open?: boolean;
 }
@@ -30,21 +30,21 @@ export default ({
   placeholder,
   disabled = false,
   style = {},
-  onSelect,
+  onChange,
   open = false,
 }: AutoCompleteProps) => {
-  const [_value, setvalue] = useState(value);
+  const [_value, setValue] = useState(value || '');
+  const [_open, setOpen] = useState(open);
+  const [suffix, setSuffix] = useState('');
   useEffect(() => {
-    let suffix = options.find((item) => _value.endsWith(item)); // 拆分 value / suffix
+    let suffix = options.find((item) => _value?.endsWith(item)); // 拆分 value / suffix
     if (suffix) {
-      setvalue(_value.substr(0, _value.lastIndexOf(suffix)));
-      setsuffix(suffix);
+      setValue(_value.substr(0, _value.lastIndexOf(suffix)));
+      setSuffix(suffix);
     } else {
-      setvalue(_value);
+      setValue(_value);
     }
   }, [_value]);
-  const [_open, setopen] = useState(open);
-  const [suffix, setsuffix] = useState('');
   const _className = ['yld-auto'];
   if (_open) {
     _className.push('yld-auto-open');
@@ -61,7 +61,7 @@ export default ({
         className="yld-auto-selection"
         onClick={() => {
           if (disabled) return;
-          setopen(!_open);
+          setOpen(!_open);
         }}
       >
         <div className="yld-auto-selection-selected-value">
@@ -71,8 +71,8 @@ export default ({
               className="yld-auto-selection-selected-input"
               placeholder={placeholder}
               onChange={(e) => {
-                setvalue(e.target.value);
-                setsuffix('');
+                setValue(e.target.value);
+                setSuffix('');
               }}
             />
           }
@@ -82,16 +82,16 @@ export default ({
             type="cuo"
             onClick={(e) => {
               e.stopPropagation(); // 阻止冒泡
-              setvalue('');
-              setsuffix('');
-              typeof onSelect === 'function' && onSelect('');
+              setValue('');
+              setSuffix('');
+              typeof onChange === 'function' && onChange(undefined);
             }}
           />
         )}
       </div>
       {_open && _value !== '' && (
         <>
-          <div className="yld-auto-mask" onClick={setopen.bind(null, false)} />
+          <div className="yld-auto-mask" onClick={setOpen.bind(null, false)} />
           <div className="yld-auto-dropdown">
             {options.length > 0 ? (
               options.map((option) => {
@@ -104,10 +104,10 @@ export default ({
                     key={option}
                     className={className}
                     onClick={() => {
-                      setopen(false);
-                      setsuffix(option);
-                      typeof onSelect === 'function' &&
-                        onSelect(_value + option);
+                      setOpen(false);
+                      setSuffix(option);
+                      typeof onChange === 'function' &&
+                        onChange(_value + option);
                     }}
                   >
                     {_value + option}

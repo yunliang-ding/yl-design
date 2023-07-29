@@ -58,6 +58,7 @@ export default () => {
         type="primary"
         onClick={async () => {
           console.log(await form.validateFields());
+          await new Promise((res) => setTimeout(res, 1000));
         }}
       >
         提交
@@ -96,6 +97,7 @@ export default () => {
         type="primary"
         onClick={async () => {
           console.log(await form.validateFields());
+          await new Promise((res) => setTimeout(res, 1000));
         }}
       >
         提交
@@ -109,10 +111,10 @@ export default () => {
 
 <API src="../../../src/data-entry/form/type.form.tsx" hideTitle></API>
 
-## Form 实例
-
-<API src="../../../src/data-entry/form/type.instance.tsx" hideTitle></API>
-
 ## Item 属性
 
 <API src="../../../src/data-entry/form/type.item.tsx" hideTitle></API>
+
+## Form 实例
+
+<API src="../../../src/data-entry/form/type.instance.tsx" hideTitle></API>

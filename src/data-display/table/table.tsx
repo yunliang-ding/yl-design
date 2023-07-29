@@ -17,11 +17,11 @@ export default ({
   bordered = false,
   checkable = false,
   onCheck,
-  table,
+  tableRef,
 }: TableProps) => {
   // 刷新逻辑
   const [loading, setLoading] = useState(false); // 控制loading
-  const tableRef: any = useRef({
+  const innerTableRef: any = useRef({
     loading: false,
     dataSource: [],
     pagination:
@@ -37,13 +37,13 @@ export default ({
     setLoading(true);
     try {
       const { success, data, total } = await request({
-        ...tableRef.current.params,
-        ...tableRef.current.pagination,
+        ...innerTableRef.current.params,
+        ...innerTableRef.current.pagination,
         ...sort,
       });
       if (success) {
-        tableRef.current.dataSource = data;
-        tableRef.current.pagination.total = total;
+        innerTableRef.current.dataSource = data;
+        innerTableRef.current.pagination.total = total;
       }
     } catch (error) {
       console.log('request error: ', error);
@@ -53,7 +53,11 @@ export default ({
   };
   // 挂载api
   useEffect(() => {
-    table.current.refresh = async (params = {}) => {
+    tableRef.current.refresh = async (params = {}) => {
+      await query(params);
+    };
+    tableRef.current.search = async (params = {}) => {
+      innerTableRef.current.pagination.pageNum = 1; // 回到第一页
       await query(params);
     };
   }, []);
@@ -66,7 +70,7 @@ export default ({
   const checkedAll = (checked) => {
     let checkedkeys = [];
     if (checked) {
-      checkedkeys = tableRef.current.dataSource.map(
+      checkedkeys = innerTableRef.current.dataSource.map(
         (item) => item[rowKey || 'key'],
       );
     }
@@ -77,7 +81,7 @@ export default ({
   const isCheckedAll = () => {
     return (
       checkedkeys.length > 0 &&
-      tableRef.current.dataSource.every((item) => {
+      innerTableRef.current.dataSource.every((item) => {
         return checkedkeys.some((key) => key === item[rowKey || 'key']);
       })
     );
@@ -228,10 +232,10 @@ export default ({
             {renderHeaderTable(columns)}
           </div>
           <div className="yld-table-wrap-body">
-            {tableRef.current.dataSource.length === 0 ? (
+            {innerTableRef.current.dataSource.length === 0 ? (
               <Empty />
             ) : (
-              renderBodyTable(tableRef.current.dataSource, columns)
+              renderBodyTable(innerTableRef.current.dataSource, columns)
             )}
           </div>
         </div>
@@ -240,18 +244,18 @@ export default ({
         <div className="yld-table-footer">
           <Pagination
             {...paginationConfig}
-            current={tableRef.current.pagination.pageNum}
-            pageSize={tableRef.current.pagination.pageSize}
-            total={tableRef.current.pagination.total}
+            current={innerTableRef.current.pagination.pageNum}
+            pageSize={innerTableRef.current.pagination.pageSize}
+            total={innerTableRef.current.pagination.total}
             onChange={(pageNum) => {
-              tableRef.current.pagination.pageNum = pageNum;
+              innerTableRef.current.pagination.pageNum = pageNum;
               paginationConfig.onChange?.(pageNum);
-              table.current.refresh();
+              tableRef.current.refresh();
             }}
             onPageSizeChange={(pageSize) => {
-              tableRef.current.pagination.pageSize = pageSize;
+              innerTableRef.current.pagination.pageSize = pageSize;
               paginationConfig.onPageSizeChange?.(pageSize);
-              table.current.refresh();
+              tableRef.current.search();
             }}
           />
         </div>

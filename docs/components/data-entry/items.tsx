@@ -5,21 +5,21 @@ export default [
     label: '输入框',
   },
   {
-    type: 'Input',
-    name: 'password',
-    label: '密码输入框',
-    tooltip: '密码至少6位字符',
-    props: {
-      type: 'password',
-    },
-  },
-  {
     type: 'InputNumber',
     name: 'inputNumber',
     label: '数字输入框',
     props: {
       min: 1,
       max: 999,
+    },
+  },
+  {
+    type: 'AutoComplete',
+    name: 'autoComplete',
+    label: '邮箱',
+    props: {
+      options: ['@163.com', '@qq.com', '@aliyun.com'],
+      allowClear: true,
     },
   },
   {

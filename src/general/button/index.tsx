@@ -52,8 +52,13 @@ export default ({
       onClick={async (e: any) => {
         setLoading(true);
         if (disabled) return;
-        typeof onClick === 'function' && (await onClick(e));
-        setLoading(false);
+        try {
+          typeof onClick === 'function' && (await onClick(e));
+        } catch (error) {
+          console.error('按钮点击异常:', error);
+        } finally {
+          setLoading(false);
+        }
       }}
     >
       {loading && <Icon type="loading" size={12} />}

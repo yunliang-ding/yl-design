@@ -24,33 +24,48 @@ export interface PaginationProps {
 }
 
 export interface TableProps {
+  /** 标题 */
   title?: ReactNode;
+  /** 列信息 */
   columns: columnProps[];
+  /** 统一数据请求 */
   request: (params) => Promise<{
     success: boolean;
     total: number;
     data: [];
   }>;
-  table?: MutableRefObject<{
+  /** table 实例 */
+  tableRef?: MutableRefObject<{
     refresh?: Function;
     search?: Function;
   }>;
+  /** 工具配置 */
   tools?: ToolProps[];
+  /** 操作列配置 */
   rowOperations?: (api: { record: any; refresh: Function }) => ToolProps[];
+  /** 唯一标示 */
   rowKey?: string;
+  /** 样式 */
   style?: CSSProperties;
+  /** 分页配置 */
   paginationConfig?: PaginationProps | false;
+  /** 是否带边框 */
   bordered?: boolean;
+  /** 是否带选择 */
   checkable?: boolean;
+  /** 选择的钩子 */
   onCheck?: Function;
+  /** 是否开启刷新 */
   useRefresh?: boolean;
+  /** 是否开启列过滤 */
   useFilter?: boolean;
+  /** 是否开启大小调整 */
   useAdjust?: boolean;
 }
 
 export default ({
   title = '',
-  table = useRef({}),
+  tableRef = useRef({}),
   columns = [],
   tools = [],
   rowOperations,
@@ -92,7 +107,7 @@ export default ({
           <div className="yl-table-row-operation">
             {rowOperations({
               record,
-              refresh: table.current.refresh,
+              refresh: tableRef.current.refresh,
             }).map((item) => {
               return (
                 <Button key={item.label} {...item} type={item.type || 'link'}>
@@ -131,7 +146,7 @@ export default ({
                   {...item}
                   type={item.type}
                   onClick={async () => {
-                    await item.onClick?.({ refresh: table.current.refresh });
+                    await item.onClick?.({ refresh: tableRef.current.refresh });
                   }}
                 >
                   {item.label}
@@ -141,7 +156,7 @@ export default ({
           </div>
         </div>
       )}
-      <Table table={table} columns={lastColums} {...rest} />
+      <Table tableRef={tableRef} columns={lastColums} {...rest} />
     </div>
   );
 };

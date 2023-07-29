@@ -213,7 +213,7 @@ export default () => {
             <Content>
               <div className="main">Content</div>
             </Content>
-            <Footer>Site-UI ©2020 Created by DYL</Footer>
+            <Footer>yl-design ©2023 Created by Yunliang-Ding</Footer>
           </Layout>
         </Layout>
       </div>
@@ -221,14 +221,3 @@ export default () => {
   );
 };
 ```
-
-# API
-
-| **属性名** | **类型**    | **描述**   | **默认** |
-| ---------- | ----------- | ---------- | -------- |
-| disabled   | boolean     | 是否禁用   | 20       |
-| onClick    | Function(e) | 点击的回调 | 20       |
-| icon       | string      | 图标       | 20       |
-| loading    | boolean     | 是否加载   | 20       |
-| type       | string      | 主题       | 20       |
-| style      | object      | 样式       | 20       |

@@ -38,12 +38,3 @@ export default () => {
   );
 };
 ```
-
-# API
-
-| **属性名** | **类型** | **描述**   | **默认** |
-| ---------- | -------- | ---------- | -------- |
-| loading    | boolean  | 展示的内容 | false    |
-| icon       | string   | icon       | 无       |
-| style      | object   | 样式       | 无       |
-| message    | string   | 提示文案   | 无       |

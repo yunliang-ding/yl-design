@@ -231,33 +231,3 @@ export default () => {
   );
 };
 ```
-
-# API
-
-# SubMenu
-
-| **属性名** | **类型**  | **描述** | **默认** |
-| ---------- | --------- | -------- | -------- |
-| icon       | icon      | 图标     | 无       |
-| title      | ReactNode | 文案     | 无       |
-| disabled   | boolean   | 是否禁用 | false    |
-
-# Item
-
-| **属性名** | **类型**  | **描述** | **默认** |
-| ---------- | --------- | -------- | -------- |
-| icon       | icon      | 图标     | 无       |
-| title      | ReactNode | 文案     | 无       |
-| disabled   | boolean   | 是否禁用 | false    |
-
-# Menu
-
-| **属性名** | **类型**                     | **描述**     | **默认** |
-| ---------- | ---------------------------- | ------------ | -------- |
-| menus      | array                        | 菜单数据     | 无       |
-| menuClick  | Function(openKey, selectKey) | 菜单点击事件 | 无       |
-| openKey    | string[]                     | 样式         | 无       |
-| selectKey  | string[]                     | icon         | 无       |
-| style      | object                       | 点击回调     | 无       |
-| collapsed  | boolean                      | 是否收起     | false    |
-| theme      | string                       | light/dark   | light    |

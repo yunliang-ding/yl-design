@@ -34,12 +34,3 @@ export default () => {
   );
 };
 ```
-
-# API
-
-| **属性名** | **类型**                     | **描述**   | **默认** |
-| ---------- | ---------------------------- | ---------- | -------- |
-| message    | array                        | 文案       | 无       |
-| closable   | Function(openKey, selectKey) | 是否可关闭 | false    |
-| type       | string                       | 类型       | 无       |
-| style      | object                       | 样式       | 无       |

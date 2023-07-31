@@ -70,39 +70,49 @@ export default () => {
 
 ```jsx
 /**
- * title: 动态更新模型
+ * title: 表单项联动
  */
-import React, { useState } from 'react';
-import { Switch, Form, Button } from 'yl-design';
-import items from './items';
+import React from 'react';
+import { Form } from 'yl-design';
 
 export default () => {
-  const form = Form.useForm();
   return (
-    <>
-      <Form
-        form={form}
-        column={3}
-        items={items}
-        onValuesChange={(v) => {
-          if ('select' in v) {
-            form.mergeItemByName('radioGroup', {
-              visible: v.select !== 1,
-            });
-          }
-        }}
-      />
-      <br />
-      <Button
-        type="primary"
-        onClick={async () => {
-          console.log(await form.validateFields());
-          await new Promise((res) => setTimeout(res, 1000));
-        }}
-      >
-        提交
-      </Button>
-    </>
+    <Form
+      items={[
+        {
+          type: 'Select',
+          name: 'sex',
+          label: '性别',
+          touchItemsRender: [
+            {
+              name: 'age',
+              clear: true,
+            },
+          ],
+          required: true,
+          props: {
+            options: [
+              {
+                label: '男',
+                value: 0,
+              },
+              {
+                label: '女',
+                value: 1,
+              },
+            ],
+          },
+        },
+        {
+          type: 'InputNumber',
+          name: 'age',
+          label: '年龄',
+          visible({ getValues }) {
+            return getValues().sex === 0;
+          },
+        },
+      ]}
+    />
   );
 };
 ```

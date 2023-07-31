@@ -10,8 +10,8 @@ features:
     title: 配置化风格
     desc: 组件采用配置模式
   - icon: https://gw.alipayobjects.com/zos/bmw-prod/881dc458-f20b-407b-947a-95104b5ec82b/k79dm8ih_w144_h144.png
-    title: 表单校验
-    desc: 全面的自动交验，支持自定义组件
+    title: 表单模块
+    desc: 基于配置的联动解决方案、数据源异步配置、自定义表单组件
   - icon: https://gw.alipayobjects.com/zos/bmw-prod/d1ee0c6f-5aed-4a45-a507-339a4bfe076c/k7bjsocq_w144_h144.png
     title: 使用方式
     desc: ui 和 api 使用接近 antd-design

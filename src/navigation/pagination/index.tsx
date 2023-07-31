@@ -1,6 +1,22 @@
 import { useState, useEffect } from 'react';
-import { Input, Select, Icon, InputNumber } from '../../index';
+import { Select, Icon, InputNumber } from '../../index';
 
+interface PaginationProps {
+  /** 当前页码 */
+  current?: number;
+  /** 页码大小 */
+  pageSize?: number;
+  /** 总条数 */
+  total?: number;
+  /** 改变的钩子 */
+  onChange?: Function;
+  /** 设置页码大小选项 */
+  pageSizeOptions?: number[];
+  /** 设置页码大小选项钩子 */
+  onPageSizeChange?: Function;
+  /** 开启快捷跳转 */
+  showJumper?: boolean;
+}
 export default ({
   current = 1,
   pageSize = 10,
@@ -9,9 +25,9 @@ export default ({
   pageSizeOptions,
   onPageSizeChange,
   showJumper,
-}: any) => {
+}: PaginationProps) => {
   const [_current, setCurrent] = useState(current);
-  const [_pageSize, setpageSize] = useState(pageSize);
+  const [_pageSize, setPageSize] = useState(pageSize);
   /**
    * update
    */
@@ -19,7 +35,7 @@ export default ({
     setCurrent(current);
   }, [current]);
   useEffect(() => {
-    setpageSize(pageSize);
+    setPageSize(pageSize);
   }, [pageSize]);
   const pageChange = (current) => {
     setCurrent(current);
@@ -132,7 +148,7 @@ export default ({
               value={_pageSize}
               onChange={(pageSize) => {
                 setCurrent(1);
-                setpageSize(pageSize);
+                setPageSize(pageSize);
                 typeof onPageSizeChange === 'function' &&
                   onPageSizeChange(pageSize);
               }}

@@ -3,7 +3,7 @@ import mapping from './mapping';
 import Error from './error';
 import { isEmpty } from '@/tools';
 
-export default ({ descriptorRef, itemRef, value, onChange, item }) => {
+export default ({ descriptorRef, itemRef, value, onChange, form, item }) => {
   const [_item, setItem] = useState(item);
   const {
     label,
@@ -13,8 +13,9 @@ export default ({ descriptorRef, itemRef, value, onChange, item }) => {
     style = {},
     span = 1,
     props,
-    visible = true,
+    visible,
   } = _item;
+  const [refresh, setRefresh] = useState(Math.random());
   const [_value, setValue] = useState(value);
   const [disabled, setDisabled] = useState(false);
   const [error, setError] = useState(false);
@@ -39,6 +40,9 @@ export default ({ descriptorRef, itemRef, value, onChange, item }) => {
       },
       setValue,
       setDisabled,
+      reload: () => {
+        setRefresh(Math.random());
+      },
       setItem: (item) => {
         // 做一个合并操作, 之后重新渲染
         setItem({
@@ -48,12 +52,14 @@ export default ({ descriptorRef, itemRef, value, onChange, item }) => {
       },
     });
   }, []);
+  if (typeof visible === 'function' && visible(form) === false) {
+    return null;
+  }
   return (
     <div
       className="yld-form-item"
       style={{
         ...style,
-        display: visible ? 'grid' : 'none',
         gridColumnStart: `span ${span}`,
       }}
     >

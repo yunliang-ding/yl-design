@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useLayoutEffect, useRef } from 'react';
 import Schema from 'async-validator';
 import { FormProps, FormRefInstance } from './type.form';
 import Item from './item';
@@ -18,70 +18,68 @@ const Form = ({
   const itemRef: any = useRef({});
   const errorItemRef: any = useRef([]); // 保存上一次检验失败的字段
   // 挂载 api
-  useEffect(() => {
-    Object.assign(form, {
-      // 通知所有的Item全部禁用
-      setDisabled: (v: boolean) => {
-        Object.keys(itemRef.current).forEach((name) => {
-          itemRef.current[name].setDisabled(v);
-        });
-      },
-      mergeItemByName(name, item) {
-        itemRef.current[name].setItem(item);
-      },
-      getValues: () => {
-        return store.current;
-      },
-      setValues: (values: any) => {
-        store.current = {
-          ...store.current,
-          ...values,
-        };
-      },
-      validateField: (name: string, value: any) => {
-        const validator = new Schema({
-          [name]: descriptorRef.current[name],
-        });
-        validator.validate({ [name]: value }, (errors) => {
+  Object.assign(form, {
+    // 通知所有的Item全部禁用
+    setDisabled: (v: boolean) => {
+      Object.keys(itemRef.current).forEach((name) => {
+        itemRef.current[name].setDisabled(v);
+      });
+    },
+    mergeItemByName(name, item) {
+      itemRef.current[name].setItem(item);
+    },
+    getValues: () => {
+      return store.current;
+    },
+    setValues: (values: any) => {
+      store.current = {
+        ...store.current,
+        ...values,
+      };
+    },
+    validateField: (name: string, value: any) => {
+      const validator = new Schema({
+        [name]: descriptorRef.current[name],
+      });
+      validator.validate({ [name]: value }, (errors) => {
+        if (errors) {
+          errors.map((error) => {
+            itemRef.current[error.field].showError(error.message);
+          });
+        } else {
+          itemRef.current[name].clearError();
+        }
+      });
+    },
+    validateFields: async () => {
+      const validator = new Schema(descriptorRef.current);
+      const values = form.getValues();
+      return new Promise((res, rej) => {
+        validator.validate(values, (errors) => {
           if (errors) {
             errors.map((error) => {
               itemRef.current[error.field].showError(error.message);
             });
+            // 找到在errorItemRef里面却不在errors里的需要清除下
+            const needClear = errorItemRef.current.filter(
+              (i) => !errors.some((error) => error.field === i.field),
+            );
+            needClear.map((error) => {
+              itemRef.current[error.field].clearError();
+            });
+            errorItemRef.current = errors; // 更新
+            rej(errors);
           } else {
-            itemRef.current[name].clearError();
+            errorItemRef.current.map((error) => {
+              itemRef.current[error.field].clearError();
+            });
+            errorItemRef.current = []; // 清空
+            res(values);
           }
         });
-      },
-      validateFields: async () => {
-        const validator = new Schema(descriptorRef.current);
-        const values = form.getValues();
-        return new Promise((res, rej) => {
-          validator.validate(values, (errors) => {
-            if (errors) {
-              errors.map((error) => {
-                itemRef.current[error.field].showError(error.message);
-              });
-              // 找到在errorItemRef里面却不在errors里的需要清除下
-              const needClear = errorItemRef.current.filter(
-                (i) => !errors.some((error) => error.field === i.field),
-              );
-              needClear.map((error) => {
-                itemRef.current[error.field].clearError();
-              });
-              errorItemRef.current = errors; // 更新
-              rej(errors);
-            } else {
-              errorItemRef.current.map((error) => {
-                itemRef.current[error.field].clearError();
-              });
-              errorItemRef.current = []; // 清空
-              res(values);
-            }
-          });
-        });
-      },
-    });
-  }, []);
+      });
+    },
+  });
   return (
     <div className={`yld-form yld-form-grid-${column}`}>
       {items.map((item) => {
@@ -89,6 +87,7 @@ const Form = ({
         return (
           <Item
             item={item}
+            form={form}
             itemRef={itemRef.current[item.name]}
             descriptorRef={descriptorRef}
             value={store.current[item.name]}
@@ -109,6 +108,18 @@ const Form = ({
               );
               // 提示该item拿最新的value去更新, 确保原子性，哪个 item 值改变，就更新 哪个 item
               itemRef.current[item.name].setValue(store.current[item.name]);
+              /** 触发重新渲染 */
+              if (Array.isArray(item.touchItemsRender)) {
+                item.touchItemsRender.forEach(({ name, clear }) => {
+                  itemRef.current[name].reload();
+                  // 是否清空
+                  if (clear) {
+                    form.setValues({
+                      [name]: undefined,
+                    });
+                  }
+                });
+              }
             }}
           />
         );

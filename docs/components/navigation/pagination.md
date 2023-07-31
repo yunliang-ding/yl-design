@@ -30,3 +30,7 @@ export default () => {
   );
 };
 ```
+
+## API
+
+<API src="../../../src/navigation/pagination/index.tsx" hideTitle></API>

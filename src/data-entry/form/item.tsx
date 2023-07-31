@@ -15,11 +15,12 @@ export default ({ descriptorRef, itemRef, value, onChange, form, item }) => {
     props,
     visible,
   } = _item;
-  const [refresh, setRefresh] = useState(Math.random());
+  const [, setRefresh] = useState(Math.random());
   const [_value, setValue] = useState(value);
   const [disabled, setDisabled] = useState(false);
   const [error, setError] = useState(false);
-  const Comp = mapping[type] || <Error type={type} />;
+  const Comp =
+    typeof type === 'function' ? type : mapping[type] || <Error type={type} />;
   // 生成校验规则
   if (required) {
     descriptorRef.current[name] = {

@@ -53,9 +53,9 @@ export default () => {
           };
         })}
       />
-      <br />
       <Button
         type="primary"
+        style={{ marginTop: 24 }}
         onClick={async () => {
           console.log(await form.validateFields());
           await new Promise((res) => setTimeout(res, 1000));
@@ -73,46 +73,153 @@ export default () => {
  * title: 表单项联动
  */
 import React from 'react';
-import { Form } from 'yl-design';
+import { Form, Button } from 'yl-design';
 
 export default () => {
+  const form = Form.useForm();
   return (
-    <Form
-      items={[
-        {
-          type: 'Select',
-          name: 'sex',
-          label: '性别',
-          touchItemsRender: [
-            {
-              name: 'age',
-              clear: true,
-            },
-          ],
-          required: true,
-          props: {
-            options: [
+    <>
+      <Form
+        form={form}
+        items={[
+          {
+            type: 'Select',
+            name: 'sex',
+            label: '性别',
+            touchItemsRender: [
               {
-                label: '男',
-                value: 0,
-              },
-              {
-                label: '女',
-                value: 1,
+                name: 'age',
+                clear: true,
               },
             ],
+            required: true,
+            props: {
+              options: [
+                {
+                  label: '男',
+                  value: 0,
+                },
+                {
+                  label: '女',
+                  value: 1,
+                },
+              ],
+            },
           },
-        },
-        {
-          type: 'InputNumber',
-          name: 'age',
-          label: '年龄',
-          visible({ getValues }) {
-            return getValues().sex === 0;
+          {
+            type: 'InputNumber',
+            name: 'age',
+            label: '年龄',
+            visible({ getValues }) {
+              return getValues().sex === 0;
+            },
           },
-        },
-      ]}
-    />
+        ]}
+      />
+      <Button
+        type="primary"
+        style={{ marginTop: 24 }}
+        onClick={async () => {
+          console.log(await form.validateFields());
+        }}
+      >
+        提交
+      </Button>
+    </>
+  );
+};
+```
+
+```jsx
+/**
+ * title: 动态修改模型
+ */
+import React from 'react';
+import { Form, Button } from 'yl-design';
+
+export default () => {
+  const form = Form.useForm();
+  return (
+    <>
+      <Form
+        form={form}
+        items={[
+          {
+            type: 'Select',
+            name: 'sex',
+            label: '性别',
+            required: true,
+            props: {
+              onChange(value, option) {
+                form.mergeItemByName('sex', {
+                  label: `性别-${option.label}`,
+                });
+              },
+              options: [
+                {
+                  label: '男',
+                  value: 0,
+                },
+                {
+                  label: '女',
+                  value: 1,
+                },
+              ],
+            },
+          },
+        ]}
+      />
+      <Button
+        type="primary"
+        style={{ marginTop: 24 }}
+        onClick={async () => {
+          console.log(await form.validateFields());
+        }}
+      >
+        提交
+      </Button>
+    </>
+  );
+};
+```
+
+```jsx
+/**
+ * title: 自定义表单组件
+ */
+import React from 'react';
+import { Form, Button } from 'yl-design';
+
+export default () => {
+  const form = Form.useForm();
+  return (
+    <>
+      <Form
+        form={form}
+        initialValues={{
+          name: '自定义',
+        }}
+        items={[
+          {
+            type: ({ value, onChange }) => {
+              return <input value={value} onChange={onChange} />;
+            },
+            name: 'name',
+            label: '自定义',
+            required: true,
+          },
+        ]}
+      />
+      <Button
+        type="primary"
+        style={{ marginTop: 24 }}
+        onClick={async () => {
+          console.log(await form.validateFields());
+        }}
+      >
+        提交
+      </Button>
+    </>
   );
 };
 ```

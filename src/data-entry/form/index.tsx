@@ -91,7 +91,7 @@ const Form = ({
             itemRef={itemRef.current[item.name]}
             descriptorRef={descriptorRef}
             value={store.current[item.name]}
-            onChange={(e) => {
+            onChange={(e, option) => {
               const value = e?.eventPhase ? e.target.value : e;
               form.setValues({
                 [item.name]: value,
@@ -106,6 +106,9 @@ const Form = ({
                 },
                 form.getValues(),
               );
+              if (typeof item.props?.onChange === 'function') {
+                item.props.onChange(value, option);
+              }
               // 提示该item拿最新的value去更新, 确保原子性，哪个 item 值改变，就更新 哪个 item
               itemRef.current[item.name].setValue(store.current[item.name]);
               /** 触发重新渲染 */

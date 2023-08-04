@@ -1,6 +1,7 @@
 import { ButtonProps } from '../../general/button';
+import { FormProps } from '../../data-entry/form/type.form';
 import { useRef, ReactNode, CSSProperties, MutableRefObject } from 'react';
-import { Button } from '../../index';
+import { Button, Form, Space } from '../../index';
 import Table from './table';
 
 export interface columnProps {
@@ -28,6 +29,8 @@ export interface TableProps {
   title?: ReactNode;
   /** 列信息 */
   columns: columnProps[];
+  /** 查询信息配置 */
+  search?: FormProps;
   /** 统一数据请求 */
   request: (params) => Promise<{
     success: boolean;
@@ -70,6 +73,9 @@ export default ({
   title = '',
   tableRef = useRef({}),
   columns = [],
+  search = {
+    items: [],
+  },
   tools = [],
   rowOperations,
   useRefresh = true,
@@ -128,6 +134,25 @@ export default ({
   }
   return (
     <div className="yld-table-contianer">
+      {search.items.length > 0 && (
+        <Form
+          {...search}
+          items={[
+            ...search.items,
+            {
+              type() {
+                return (
+                  <Space>
+                    <Button>重置</Button>
+                    <Button type="primary">查询</Button>
+                  </Space>
+                );
+              },
+            } as any,
+          ]}
+          className="yld-table-contianer-search"
+        />
+      )}
       {tools.length > 0 && (
         <div className="yld-table-contianer-tools">
           <h3

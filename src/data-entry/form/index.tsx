@@ -10,6 +10,7 @@ const Form = ({
   onValuesChange = (v, vs) => {},
   items = [],
   column = 1,
+  className,
   ...rest
 }: FormProps) => {
   const form = rest.form || Form.useForm();
@@ -80,8 +81,12 @@ const Form = ({
       });
     },
   });
+  const _className = ['yld-form', `yld-form-grid-${column}`];
+  if (className) {
+    _className.push(className);
+  }
   return (
-    <div className={`yld-form yld-form-grid-${column}`}>
+    <div className={_className.join(' ')}>
       {items.map((item) => {
         itemRef.current[item.name] = {};
         return (

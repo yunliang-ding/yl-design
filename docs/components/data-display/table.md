@@ -29,6 +29,16 @@ export default () => {
           },
         },
       ]}
+      search={{
+        column: 3,
+        items: [
+          {
+            type: 'Input',
+            name: 'userName',
+            label: '用户姓名',
+          },
+        ],
+      }}
       rowOperations={({ record, refresh }) => {
         return [
           {

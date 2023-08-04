@@ -6,7 +6,7 @@ export interface ItemTypeProps {
   value: any;
   onChange: Function;
 }
-export interface ItemProps {
+export interface FormItemProps {
   /** 表单项类型 */
   type: string | ((props: ItemTypeProps) => ReactNode);
   /** 名称 */
@@ -30,6 +30,6 @@ export interface ItemProps {
   props?: any;
 }
 
-const Hello: React.FC<ItemProps> = () => null;
+const Hello: React.FC<FormItemProps> = () => null;
 
 export default Hello;

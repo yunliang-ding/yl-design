@@ -1,0 +1,54 @@
+.yld-notification {
+  left: calc(100vw - 260px);
+  top: 50px;
+  height: 120px;
+  width: 200px;
+  position: fixed;
+  z-index: 930226;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  color: var(--text-color);
+  background: #fff;
+  border-radius: var(--border-radius-base);
+  box-shadow: 0 0 5px 0px #dcdcdc;
+  transition: 0.4s;
+  &-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    color: #fff;
+    font-size: var(--font-size-base);
+    white-space: nowrap;
+    &-header {
+      display: flex;
+      height: 40px;
+      width: 100%;
+      align-items: center;
+      justify-content: space-between;
+      &-icon {
+        width: 30px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      &-close {
+        position: absolute;
+        right: 0;
+        cursor: pointer;
+        transition: 0.3s;
+        opacity: 0.8;
+        &:hover {
+          opacity: 1;
+          transition: 0.3s;
+        }
+      }
+    }
+    &-message {
+      width: calc(100% - 40px);
+      font-size: var(--font-size-base);
+    }
+  }
+}

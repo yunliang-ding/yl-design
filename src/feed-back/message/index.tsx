@@ -15,19 +15,28 @@ const colorMapping = {
   3: '#f4ea2a',
   4: '#39a9f4',
 };
-export default class Message {
-  duration: any;
-  dark: any;
-  position: string;
-  constructor(props) {
-    this.duration = props.duration || 3;
-    this.position = props.position || 'center';
-  }
-  open = (type, content) => {
+interface MessageProps {
+  /** 提示的秒数 */
+  duration?: number;
+  /** 提示的位置 */
+  position?: 'center' | 'bottomRight';
+  /** 主题 */
+  theme?: 'light' | 'dark';
+}
+
+export default ({
+  duration = 3,
+  position = 'center',
+  theme = 'light',
+}: MessageProps) => {
+  const open = (type, content) => {
     let messageContainer = document.createElement('div');
     let length = $$('.yld-message').length;
     messageContainer.className = 'yld-message';
-    if (this.position === 'br') {
+    if (theme === 'dark') {
+      messageContainer.className = 'yld-message yld-message-dark';
+    }
+    if (position === 'bottomRight') {
       messageContainer.style.left = 'auto';
       messageContainer.style.top = 'auto';
       messageContainer.style.bottom = 50 + length * 60 + 'px';
@@ -39,25 +48,13 @@ export default class Message {
     $('body').appendChild(messageContainer);
     setTimeout(() => {
       messageContainer.remove();
-    }, this.duration * 1000);
-    ReactDOM.render(this.renderMessage(type, content), messageContainer);
+    }, duration * 1000);
+    ReactDOM.render(renderMessage(type, content), messageContainer);
   };
-  close = (node) => {
+  const close = (node) => {
     node.target.parentNode.parentNode.parentNode.remove();
   };
-  success = (content) => {
-    this.open(1, content);
-  };
-  error = (content) => {
-    this.open(2, content);
-  };
-  warning = (content) => {
-    this.open(3, content);
-  };
-  normal = (content) => {
-    this.open(4, content);
-  };
-  renderMessage = (type, content) => {
+  const renderMessage = (type, content) => {
     return (
       <div className="yld-message-content">
         <div className="yld-message-content-icon">
@@ -68,11 +65,25 @@ export default class Message {
           <Icon
             type="guanbi"
             onClick={(e) => {
-              this.close(e);
+              close(e);
             }}
           />
         </div>
       </div>
     );
   };
-}
+  return {
+    success: (content) => {
+      open(1, content);
+    },
+    error: (content) => {
+      open(2, content);
+    },
+    warning: (content) => {
+      open(3, content);
+    },
+    normal: (content) => {
+      open(4, content);
+    },
+  };
+};

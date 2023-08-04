@@ -5,20 +5,34 @@ import { uuid, $ } from '../modal';
 
 export interface DrawerProps {
   containId?: string;
-  title?: ReactNode;
-  closable?: boolean;
+  /** 方向 */
   placement?: 'left' | 'right';
-  style?: CSSProperties;
+  /** 距离顶部距离 */
   top?: number;
-  onClose?: Function;
-  onOk?: Function;
-  footer?: boolean;
+  /** 标题 */
+  title?: ReactNode;
+  /** 是否有遮罩 */
   mask?: boolean;
-  render: () => ReactNode;
-  footerRender: (api: { onClose: any }) => ReactNode;
-  okText?: string;
-  cancelText?: string;
+  /** 点击遮罩是否带关闭 */
+  closable?: boolean;
+  /** 关闭的钩子 */
+  onClose?: Function;
+  /** 确认的钩子 */
+  onOk?: Function;
+  /** 底部按钮配置 */
   actions?: any[];
+  /** 是否展示底部 */
+  footer?: boolean;
+  /** 自定义渲染底部 */
+  footerRender?: (api: { onClose: any }) => ReactNode;
+  /** 容器样式 */
+  style?: CSSProperties;
+  /** 确认文案 */
+  okText?: string;
+  /** 取消文案 */
+  cancelText?: string;
+  /** 主体渲染 */
+  render: () => ReactNode;
 }
 
 const Drawer = ({

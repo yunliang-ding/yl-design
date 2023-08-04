@@ -38,6 +38,9 @@ export interface TableProps {
   tableRef?: MutableRefObject<{
     refresh?: Function;
     search?: Function;
+    dataSource?: any;
+    pagination?: any;
+    params?: any;
   }>;
   /** 工具配置 */
   tools?: ToolProps[];
@@ -75,20 +78,23 @@ export default ({
   ...rest
 }: TableProps) => {
   if (useFilter) {
-    tools.unshift({
+    tools.push({
       icon: 'shezhi',
+      className: 'btn-tool',
       async onClick({ refresh }) {},
     });
   }
   if (useAdjust) {
-    tools.unshift({
+    tools.push({
       icon: 'da-xiao',
+      className: 'btn-tool',
       async onClick({ refresh }) {},
     });
   }
   if (useRefresh) {
-    tools.unshift({
+    tools.push({
       icon: 'refresh',
+      className: 'btn-tool',
       async onClick({ refresh }) {
         await refresh();
       },

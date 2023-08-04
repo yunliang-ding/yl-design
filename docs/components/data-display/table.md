@@ -10,14 +10,25 @@ import { columns } from './schema';
 import axios from 'axios';
 
 export default () => {
+  const tableRef = React.useRef({});
   return (
     <Table
       rowKey="id"
+      tableRef={tableRef}
       title="用户信息表"
       columns={columns}
       style={{ height: 260 }}
       bordered
       checkable
+      tools={[
+        {
+          label: '导出',
+          type: 'primary',
+          onClick({ refresh }) {
+            console.log(tableRef);
+          },
+        },
+      ]}
       rowOperations={({ record, refresh }) => {
         return [
           {

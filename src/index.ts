@@ -43,8 +43,13 @@ export { default as Alert } from './feed-back/alert';
 export { default as Progress } from './feed-back/progress';
 export { default as Message } from './feed-back/message';
 import Message from './feed-back/message';
-export const message = new Message({
+export const message = Message({
   duration: 3,
+});
+export { default as Notification } from './feed-back/notification';
+import Notification from './feed-back/notification';
+export const notification = Notification({
+  duration: 10000,
 });
 /** other */
 export { default as CopyToClipboard } from './other/copy-to-clipboard';

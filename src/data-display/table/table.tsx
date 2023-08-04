@@ -60,7 +60,14 @@ export default ({
       innerTableRef.current.pagination.pageNum = 1; // 回到第一页
       await query(params);
     };
-  }, []);
+    tableRef.current.dataSource = innerTableRef.current.dataSource;
+    tableRef.current.pagination = innerTableRef.current.pagination;
+    tableRef.current.params = innerTableRef.current.params;
+  }, [
+    innerTableRef.current.dataSource,
+    innerTableRef.current.pagination,
+    innerTableRef.current.params,
+  ]);
   // 请求数据
   useEffect(() => {
     query();

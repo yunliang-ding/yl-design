@@ -1,3 +1,7 @@
+---
+order: 2
+---
+
 # Message 提示信息
 
 ```jsx
@@ -49,8 +53,10 @@ export default () => {
 import React from 'react';
 import { Message, Button, Space } from 'yl-design';
 export default () => {
-  const message = new Message({
+  const message = Message({
     duration: 1,
+    position: 'bottomRight',
+    theme: 'dark',
   });
   return (
     <Space>
@@ -86,3 +92,7 @@ export default () => {
   );
 };
 ```
+
+## API
+
+<API src="../../../src/feed-back/message/index.tsx" hideTitle></API>

@@ -19,6 +19,8 @@ export interface ButtonProps {
     title?: String;
     content: ReactNode;
   };
+  /** 类名 */
+  className?: string;
   children?: ReactNode;
 }
 
@@ -29,26 +31,30 @@ export default ({
   icon,
   type,
   style,
+  className,
   children,
 }: ButtonProps) => {
-  const className = ['yld-btn'];
+  const _className = ['yld-btn'];
   const [loading, setLoading] = useState(false);
+  if (className) {
+    _className.push(className);
+  }
   if (type) {
-    className.push('yld-btn-' + type);
+    _className.push('yld-btn-' + type);
   }
   if (ghost) {
-    className.push('yld-btn-ghost');
+    _className.push('yld-btn-ghost');
   }
   if (disabled) {
-    className.push('yld-btn-disabled');
+    _className.push('yld-btn-disabled');
   }
   if (loading) {
-    className.push('yld-btn-loading');
+    _className.push('yld-btn-loading');
   }
   return (
     <button
       style={style}
-      className={className.join(' ')}
+      className={_className.join(' ')}
       onClick={async (e: any) => {
         setLoading(true);
         if (disabled) return;

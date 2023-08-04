@@ -125,3 +125,7 @@ export default () => {
   );
 };
 ```
+
+## API
+
+<API src="../../../src/feed-back/modal/index.tsx" hideTitle></API>

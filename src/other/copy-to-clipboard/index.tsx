@@ -1,6 +1,6 @@
 import Message from '@/feed-back/message';
 
-const message = new Message({
+const message = Message({
   duration: 3,
 });
 

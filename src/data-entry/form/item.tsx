@@ -71,7 +71,7 @@ export default ({ descriptorRef, itemRef, value, onChange, form, item }) => {
         gridColumnStart: `span ${span}`,
       }}
     >
-      <label>{label}</label>
+      {label && <label>{label}</label>}
       <div className="yld-form-item-wapper">
         <Comp
           disabled={disabled}

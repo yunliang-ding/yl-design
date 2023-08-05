@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Icon } from '../../../index';
 import { InputProps } from '..';
 import Prefix from './prefix';
@@ -23,17 +23,13 @@ export default ({
   readOnly,
 }: InputProps) => {
   let style: any = {};
-  const [_value, setvalue] = useState(value);
   prefix && (style.paddingLeft = 30);
   suffix && (style.paddingRight = 30);
   addonBefore &&
     ((style.borderTopLeftRadius = 0), (style.borderBottomLeftRadius = 0));
   addonAfter &&
     ((style.borderTopRightRadius = 0), (style.borderBottomRightRadius = 0));
-  const [password, setpassword] = useState(type === 'password');
-  useEffect(() => {
-    setvalue(value);
-  }, [value]);
+  const [password, setPassword] = useState(type === 'password');
   return (
     <>
       {prefix && <Prefix>{prefix}</Prefix>}
@@ -42,12 +38,11 @@ export default ({
         style={style}
         className={disabled ? 'yld-input-disabled' : 'yld-input'}
         placeholder={placeholder}
-        value={_value}
+        value={value}
         maxLength={maxLength}
         readOnly={readOnly}
         onChange={(e) => {
-          setvalue(e.target.value);
-          typeof onChange === 'function' && onChange(e);
+          onChange(e.target.value);
         }}
         onBlur={(e) => {
           typeof onBlur === 'function' && onBlur(e);
@@ -67,19 +62,19 @@ export default ({
             <Icon
               type={password ? 'password-invisible' : 'password-visible'}
               onClick={() => {
-                setpassword(!password);
+                setPassword(!password);
               }}
             />
           </Suffix>
         </>
       ) : (
         <>
-          {!disabled && allowClear && _value !== '' && (
+          {!disabled && allowClear && value !== '' && (
             <Suffix style={{ marginRight: suffix ? 24 : 8 }}>
               <Icon
                 type="cuo"
                 onClick={() => {
-                  setvalue('');
+                  onChange('');
                   typeof onAllowClear === 'function' && onAllowClear();
                 }}
               />

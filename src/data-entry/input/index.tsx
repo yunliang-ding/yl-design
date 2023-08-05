@@ -1,4 +1,4 @@
-import { CSSProperties, ReactNode } from 'react';
+import { CSSProperties, ReactNode, useEffect, useState } from 'react';
 import AddonAfter from './components/addon-after';
 import AddonBefore from './components/addon-before';
 import Input from './components/input';
@@ -43,7 +43,17 @@ export interface InputProps {
   suffix?: ReactNode;
 }
 
-export default ({ className, ...props }: InputProps) => {
+export default ({
+  className,
+  value,
+  onChange = () => {},
+  ...props
+}: InputProps) => {
+  const [innerValue, setInnerValue] = useState(value);
+  // 同步外部更新
+  useEffect(() => {
+    setInnerValue(value || '');
+  }, [value]);
   const _className = [
     props.type === 'textarea' ? 'yld-textarea-wrapper' : 'yld-input-wrapper',
   ];
@@ -54,9 +64,23 @@ export default ({ className, ...props }: InputProps) => {
     <span style={props.style} className={_className.join(' ')}>
       <AddonBefore addon={props.addonBefore} />
       {props.type === 'textarea' ? (
-        <TextArea {...props} />
+        <TextArea
+          {...props}
+          value={innerValue}
+          onChange={(e) => {
+            setInnerValue(e);
+            onChange(e);
+          }}
+        />
       ) : (
-        <Input {...props} />
+        <Input
+          {...props}
+          value={innerValue}
+          onChange={(e) => {
+            setInnerValue(e);
+            onChange(e);
+          }}
+        />
       )}
       <AddonAfter addon={props.addonAfter} />
     </span>

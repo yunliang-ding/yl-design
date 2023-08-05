@@ -7,6 +7,8 @@ export interface FormInstance {
   getValues?: Function;
   /** 设置表单值 */
   setValues?: Function;
+  /** 清空表单值 */
+  clearValues?: Function;
   /** 表单校验 */
   validateFields?: Function;
   validateField?: Function;

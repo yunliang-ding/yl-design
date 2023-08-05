@@ -106,6 +106,8 @@ export default ({
       },
     });
   }
+  // 查询表单实例
+  const form = Form.useForm();
   // 解析 cloums
   const lastColums = [...columns];
   if (typeof rowOperations === 'function') {
@@ -136,6 +138,8 @@ export default ({
     <div className="yld-table-contianer">
       {search.items.length > 0 && (
         <Form
+          horizontal
+          form={form}
           {...search}
           items={[
             ...search.items,
@@ -143,8 +147,22 @@ export default ({
               type() {
                 return (
                   <Space>
-                    <Button>重置</Button>
-                    <Button type="primary">查询</Button>
+                    <Button
+                      onClick={async () => {
+                        form.clearValues({});
+                        await tableRef.current.search(form.getValues());
+                      }}
+                    >
+                      重置
+                    </Button>
+                    <Button
+                      type="primary"
+                      onClick={async () => {
+                        await tableRef.current.search(form.getValues());
+                      }}
+                    >
+                      查询
+                    </Button>
                   </Space>
                 );
               },

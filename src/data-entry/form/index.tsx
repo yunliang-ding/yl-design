@@ -39,6 +39,14 @@ const Form = ({
         ...values,
       };
     },
+    clearValues: () => {
+      store.current = {};
+      Object.keys(itemRef.current).forEach((name) => {
+        if (name) {
+          itemRef.current[name].setValue(undefined);
+        }
+      });
+    },
     validateField: (name: string, value: any) => {
       const validator = new Schema({
         [name]: descriptorRef.current[name],
@@ -148,6 +156,7 @@ Form.useForm = () => {
     mergeItemByName: () => {},
     validateField: () => {},
     validateFields: () => {},
+    clearValues: () => {},
   });
   return ref.current;
 };

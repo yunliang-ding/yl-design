@@ -56,23 +56,23 @@ export default ({ descriptorRef, itemRef, value, onChange, form, item }) => {
   if (typeof visible === 'function' && visible(form) === false) {
     return null;
   }
+  const className = ['yld-form-item'];
+  if (required) {
+    className.push('yld-form-item-required');
+  }
+  if (error) {
+    className.push('yld-form-item-error');
+  }
   return (
     <div
-      className="yld-form-item"
+      className={className.join(' ')}
       style={{
         ...style,
         gridColumnStart: `span ${span}`,
       }}
     >
-      <label>
-        {required && <span style={{ color: 'red', marginRight: 4 }}>*</span>}
-        {label}
-      </label>
-      <div
-        className={
-          error ? 'yld-form-item-wapper-error' : 'yld-form-item-wapper'
-        }
-      >
+      <label>{label}</label>
+      <div className="yld-form-item-wapper">
         <Comp
           disabled={disabled}
           placeholder={`${placeholderMapping[type]}${label}`}
@@ -81,9 +81,7 @@ export default ({ descriptorRef, itemRef, value, onChange, form, item }) => {
           value={_value}
           onChange={onChange}
         />
-        {error && (
-          <div className="yld-form-item-wapper-error-message">{error}</div>
-        )}
+        {error && <div className="yld-form-item-error-message">{error}</div>}
       </div>
     </div>
   );

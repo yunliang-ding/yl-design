@@ -1,9 +1,10 @@
+import { BigNumber } from '@/tools';
 import { useState, useEffect, CSSProperties } from 'react';
 import { Icon } from '../../index';
 
 export interface InputNumberProps {
   /** 值 */
-  value?: string;
+  value?: number;
   /** 类名 */
   className?: string;
   /** 是否禁用 */
@@ -45,31 +46,30 @@ export default ({
   min,
   max,
 }: InputNumberProps) => {
-  const [_value, setValue] = useState(value);
+  const [innerValue, setInnerValue] = useState(value);
   useEffect(() => {
-    setValue(value);
+    setInnerValue(value);
   }, [value]);
+  /** 更新 */
+  const setValue = (value) => {
+    setInnerValue(value);
+    onChange?.(value);
+  };
   const add = () => {
-    let value = Number(_value) + Number(step);
+    let value = BigNumber.add(innerValue, step);
     if (max !== undefined) {
-      value <= max && updateValue(value);
+      value <= max && setValue(value);
     } else {
-      updateValue(value);
+      setValue(value);
     }
   };
   const minus = () => {
-    let value = Number(_value) - Number(step);
+    let value = BigNumber.minus(innerValue, step);
     if (min !== undefined) {
-      value >= min && updateValue(value);
+      value >= min && setValue(value);
     } else {
-      updateValue(value);
+      setValue(value);
     }
-  };
-  const updateValue = (value) => {
-    const number =
-      step < 1 ? Number(value).toFixed(1) : Number(value).toFixed(0);
-    setValue(number);
-    typeof onChange === 'function' && onChange(number);
   };
   const _className = ['yld-input-number-wrapper'];
   if (className) {
@@ -81,15 +81,17 @@ export default ({
         type="number"
         className={disabled ? 'yld-input-number-disabled' : 'yld-input-number'}
         placeholder={placeholder}
-        value={_value}
+        value={innerValue}
         maxLength={maxLength}
-        onChange={(e) => {
-          setValue(e.target.value);
+        onChange={(e: any) => {
+          if (e.target.value === '') {
+            setValue(undefined);
+          } else {
+            setValue(Number(e.target.value));
+          }
         }}
-        onBlur={() => {
-          let value: any = Number(_value);
-          updateValue(value);
-          typeof onBlur === 'function' && onBlur(value);
+        onBlur={(e) => {
+          typeof onBlur === 'function' && onBlur(e);
         }}
         onFocus={(e) => {
           typeof onFocus === 'function' && onFocus(e);

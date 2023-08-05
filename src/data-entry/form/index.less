@@ -6,7 +6,18 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
-    &-wapper-error {
+    &-required {
+      & > label::before {
+        top: 3px;
+        position: relative;
+        content: '*';
+        color: red;
+        font-size: 14px;
+        font-weight: 400;
+        margin-right: 4px;
+      }
+    }
+    &-error {
       &-message {
         font-size: 12px;
         padding: 4px 0;
@@ -41,4 +52,26 @@
 
 .yld-form-grid-4 {
   grid-template-columns: repeat(4, 1fr);
+}
+
+.yld-form-horizontal {
+  .yld-form-item {
+    flex-direction: row;
+    align-items: center;
+    > label {
+      width: 30%;
+      &::after {
+        content: ':';
+        font-size: 14px;
+        font-weight: 400;
+        margin-left: 4px;
+      }
+    }
+    &-wapper {
+      width: 70%;
+      &-error {
+        width: 70%;
+      }
+    }
+  }
 }

@@ -27,6 +27,7 @@ export default () => {
       <br />
       <Form
         form={form}
+        horizontal
         column={3} // 设置3等分布局
         initialValues={{
           input: '2323',

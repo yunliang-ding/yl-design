@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef } from 'react';
+import { useRef } from 'react';
 import Schema from 'async-validator';
 import { FormProps, FormRefInstance } from './type.form';
 import Item from './item';
@@ -11,6 +11,7 @@ const Form = ({
   items = [],
   column = 1,
   className,
+  horizontal = false,
   ...rest
 }: FormProps) => {
   const form = rest.form || Form.useForm();
@@ -85,6 +86,9 @@ const Form = ({
   if (className) {
     _className.push(className);
   }
+  if (horizontal) {
+    _className.push('yld-form-horizontal');
+  }
   return (
     <div className={_className.join(' ')}>
       {items.map((item) => {
@@ -115,7 +119,7 @@ const Form = ({
                 item.props.onChange(value, option);
               }
               // 提示该item拿最新的value去更新, 确保原子性，哪个 item 值改变，就更新 哪个 item
-              itemRef.current[item.name].setValue(store.current[item.name]);
+              itemRef.current[item.name].setValue?.(store.current[item.name]);
               /** 触发重新渲染 */
               if (Array.isArray(item.touchItemsRender)) {
                 item.touchItemsRender.forEach(({ name, clear }) => {

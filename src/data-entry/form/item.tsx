@@ -91,7 +91,7 @@ export default ({
       <div className="yld-form-item-wrap" style={{ flex: flex.wrap }}>
         <Comp
           disabled={_disabled}
-          placeholder={`${placeholderMapping[type]}${label}`}
+          placeholder={placeholderMapping[type]?.(label)}
           {...props}
           /** 注入属性 value 和 onChange */
           value={_value}
@@ -104,11 +104,12 @@ export default ({
 };
 
 const placeholderMapping = {
-  Input: '请输入',
-  InputNumber: '请输入',
-  Select: '请选择',
-  AutoComplete: '请输入',
-  Cascader: '请选择',
-  DatePicker: '请选择',
-  TimePicker: '请选择',
+  Input: (label: string) => `请输入${label}`,
+  InputNumber: (label: string) => `请输入${label}`,
+  AutoComplete: (label: string) => `请输入${label}`,
+  Select: (label: string) => `请选择${label}`,
+  Cascader: (label: string) => `请选择${label}`,
+  DatePicker: (label: string) => `请选择${label}`,
+  TimePicker: (label: string) => `请选择${label}`,
+  RangeDatePicker: (label: string) => ['请选择开始日期', '请选择结束日期'],
 };

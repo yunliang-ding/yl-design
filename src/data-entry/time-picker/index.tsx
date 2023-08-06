@@ -116,6 +116,7 @@ export default ({
         placeholder={placeholder}
         value={times.join(':')}
         readOnly
+        showCount={false}
         allowClear={allowClear && times.length > 0}
         onAllowClear={() => {
           setValue([]);

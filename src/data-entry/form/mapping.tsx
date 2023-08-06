@@ -10,6 +10,7 @@ import {
   TimePicker,
   CheckGroup,
   RadioGroup,
+  RangeDatePicker,
 } from '../../index';
 
 export default {
@@ -23,5 +24,6 @@ export default {
   AutoComplete: AutoComplete,
   Cascader: Cascader,
   DatePicker: DatePicker,
+  RangeDatePicker: RangeDatePicker,
   TimePicker: TimePicker,
 };

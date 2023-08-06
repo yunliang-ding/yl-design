@@ -19,6 +19,8 @@ export interface DatePickerProps {
   allowClear?: boolean;
   /** 是否禁用 */
   disabled?: boolean;
+  /** 禁用时间段 */
+  disabledDate?: Function;
 }
 
 export default ({
@@ -98,6 +100,7 @@ export default ({
         <div className="yld-date-picker-input">
           <Input
             suffix={<Icon type="weimingmingwenjianjia_rili" />}
+            showCount={false}
             addonBefore={addonBefore}
             disabled={disabled}
             addonAfter={addonAfter}

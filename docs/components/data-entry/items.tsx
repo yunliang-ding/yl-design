@@ -120,6 +120,11 @@ export default [
     label: '选择日期',
   },
   {
+    type: 'RangeDatePicker',
+    name: 'rangeDatePicker',
+    label: '选择日期范围',
+  },
+  {
     type: 'TimePicker',
     name: 'timePicker',
     label: '时间选择',

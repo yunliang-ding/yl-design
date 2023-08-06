@@ -1,8 +1,7 @@
-import { useState, useEffect } from 'react';
 import { InputProps } from '..';
 
 export default ({
-  value = '',
+  value,
   addonBefore,
   addonAfter,
   disabled,
@@ -13,26 +12,21 @@ export default ({
   onFocus,
   onPressEnter,
 }: InputProps) => {
-  const [_value, setvalue] = useState(value);
   let style: any = {};
   addonBefore &&
     ((style.borderTopLeftRadius = 0), (style.borderTopRightRadius = 0));
   addonAfter &&
     ((style.borderBottomLeftRadius = 0), (style.borderBottomRightRadius = 0));
-  useEffect(() => {
-    setvalue(value);
-  }, [value]);
   return (
     <textarea
       readOnly={disabled}
       className={disabled ? 'yld-textarea-disabled' : 'yld-textarea'}
       placeholder={placeholder}
       maxLength={maxLength}
-      value={_value}
+      value={value}
       style={style}
       onChange={(e) => {
-        setvalue(e.target.value);
-        typeof onChange === 'function' && onChange(e);
+        onChange(e.target.value);
       }}
       onBlur={(e) => {
         typeof onBlur === 'function' && onBlur(e);
@@ -46,7 +40,7 @@ export default ({
         }
       }}
     >
-      {_value}
+      {value}
     </textarea>
   );
 };

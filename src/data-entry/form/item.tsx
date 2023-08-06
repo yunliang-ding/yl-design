@@ -3,8 +3,20 @@ import mapping from './mapping';
 import Error from './error';
 import { isEmpty } from '@/tools';
 
-export default ({ descriptorRef, itemRef, value, onChange, form, item }) => {
+export default ({
+  descriptorRef,
+  itemRef,
+  value,
+  onChange,
+  form,
+  item,
+  column,
+  disabled,
+}) => {
   const [_item, setItem] = useState(item);
+  useEffect(() => {
+    setItem(item);
+  }, [item]);
   const {
     label,
     required,
@@ -14,10 +26,14 @@ export default ({ descriptorRef, itemRef, value, onChange, form, item }) => {
     span = 1,
     props,
     visible,
+    flex,
   } = _item;
   const [, setRefresh] = useState(Math.random());
   const [_value, setValue] = useState(value);
-  const [disabled, setDisabled] = useState(false);
+  const [_disabled, setDisabled] = useState(disabled);
+  useEffect(() => {
+    setDisabled(disabled);
+  }, [disabled]);
   const [error, setError] = useState(false);
   const Comp =
     typeof type === 'function' ? type : mapping[type] || <Error type={type} />;
@@ -68,13 +84,13 @@ export default ({ descriptorRef, itemRef, value, onChange, form, item }) => {
       className={className.join(' ')}
       style={{
         ...style,
-        gridColumnStart: `span ${span}`,
+        gridColumnStart: `span ${span === 'fill' ? column : span}`,
       }}
     >
-      {label && <label>{label}</label>}
-      <div className="yld-form-item-wapper">
+      {label && <label style={{ flex: flex.label }}>{label}</label>}
+      <div className="yld-form-item-wrap" style={{ flex: flex.wrap }}>
         <Comp
-          disabled={disabled}
+          disabled={_disabled}
           placeholder={`${placeholderMapping[type]}${label}`}
           {...props}
           /** 注入属性 value 和 onChange */

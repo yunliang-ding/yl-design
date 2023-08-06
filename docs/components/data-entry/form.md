@@ -9,29 +9,97 @@ order: 18
  * title: 基本使用
  */
 import React, { useState } from 'react';
-import { Switch, Form, Button } from 'yl-design';
+import { RadioGroup, Form, Button, Space } from 'yl-design';
 import items from './items';
 
 export default () => {
   const form = Form.useForm();
+  const [disabled, setDisabled] = useState(false);
+  const [horizontal, setHorizontal] = useState(true);
+  const [column, setColumn] = useState(2);
   return (
     <>
-      <Switch
-        checkedChildren="可用"
-        unCheckedChildren="禁用"
-        onChange={(v) => {
-          form.setDisabled(!v);
+      <Form
+        horizontal
+        column={3}
+        initialValues={{
+          column,
+          disabled: 0,
+          horizontal: 1,
         }}
+        onValuesChange={(v, { disabled, horizontal, column }) => {
+          setDisabled(!!disabled);
+          setHorizontal(!!horizontal);
+          setColumn(column);
+        }}
+        items={[
+          {
+            type: 'RadioGroup',
+            label: '是否禁用',
+            name: 'disabled',
+            props: {
+              options: [
+                {
+                  label: '是',
+                  value: 1,
+                },
+                {
+                  label: '否',
+                  value: 0,
+                },
+              ],
+            },
+          },
+          {
+            type: 'RadioGroup',
+            label: '布局方式',
+            name: 'horizontal',
+            props: {
+              options: [
+                {
+                  label: '水平',
+                  value: 1,
+                },
+                {
+                  label: '垂直',
+                  value: 0,
+                },
+              ],
+            },
+          },
+          {
+            type: 'RadioGroup',
+            label: '设置排版',
+            name: 'column',
+            props: {
+              options: [
+                {
+                  label: '1等份',
+                  value: 1,
+                },
+                {
+                  label: '2等份',
+                  value: 2,
+                },
+                {
+                  label: '3等份',
+                  value: 3,
+                },
+              ],
+            },
+          },
+        ]}
       />
       <br />
       <br />
       <Form
         form={form}
-        horizontal
-        column={3} // 设置3等分布局
+        disabled={disabled}
+        horizontal={horizontal}
+        column={column}
         initialValues={{
           input: '2323',
-          password: '2323',
+          autoComplete: '2323@163.com',
           inputNumber: 2323,
           select: 1,
           switch: false,

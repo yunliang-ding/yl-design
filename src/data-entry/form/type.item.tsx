@@ -19,6 +19,8 @@ export interface FormItemProps {
   tooltip?: ReactNode;
   /** 描述信息 */
   extra?: ReactNode;
+  /** 占据的格子数 */
+  span?: 2 | 3 | 'fill';
   /** 值改变触发指定的item渲染 */
   touchItemsRender?: {
     name: string;
@@ -26,6 +28,11 @@ export interface FormItemProps {
   }[];
   /** 是否展示自己 */
   visible?: (form: FormInstance) => boolean;
+  /** 标签和表单的比例 */
+  flex?: {
+    label: number;
+    wrap: number;
+  };
   /** 表单项属性 */
   props?: any;
 }

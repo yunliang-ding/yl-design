@@ -15,12 +15,19 @@ export interface FormProps {
   onValuesChange?: Function;
   /** 表单数据模型 */
   items: FormItemProps[];
+  /** 是否禁用 */
+  disabled?: boolean;
   /** 布局等份 */
-  column?: 1 | 2 | 3 | 4;
+  column?: 1 | 2 | 3;
   /** 类名 */
   className?: string;
   /** 是否水平布局 */
   horizontal?: boolean;
+  /** 标签和表单的比例 */
+  flex?: {
+    label: number;
+    wrap: number;
+  };
 }
 
 const Hello: React.FC<FormProps> = () => null;

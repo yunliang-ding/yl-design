@@ -128,7 +128,12 @@ export default [
     type: 'Input',
     name: 'textarea',
     label: '大文本输入框',
-    span: 3, // 占3个格子空间
+    span: 'fill', // 沾满格子
+    // 设置单个的比例
+    flex: {
+      label: 2,
+      wrap: 19,
+    },
     props: {
       type: 'textarea',
     },

@@ -1,7 +1,7 @@
 ---
 hero:
   title: yl-design
-  desc: 基于 React 基础 UI 组件库
+  desc: 基于`配置化`的React 基础 UI 组件库
   actions:
     - text: 组件
       link: /components

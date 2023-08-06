@@ -83,11 +83,6 @@ export default () => {
       <br />
       <Input placeholder="查找" suffix={<Icon type="searchicon" />} />
       <br />
-      <Input
-        placeholder="发送到"
-        prefix={<Icon size={18} type="duihao" style={{ color: '#4569d4' }} />}
-        suffix={'.com'}
-      />
     </>
   );
 };

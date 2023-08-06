@@ -41,6 +41,8 @@ export interface InputProps {
   prefix?: ReactNode;
   /** 小后缀 */
   suffix?: ReactNode;
+  /** 是否展示计数 */
+  showCount?: boolean;
 }
 
 export default ({

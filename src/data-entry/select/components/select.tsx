@@ -60,9 +60,9 @@ export default ({
     }
     return actualTop;
   };
-  /** 获取位置 */
+  /** 实时更新下拉容器的位置 */
   useEffect(() => {
-    setTimeout(() => {
+    const timer = setTimeout(() => {
       if (selectionRef && selectionRef.current) {
         const { left, height, width } =
           selectionRef.current.getBoundingClientRect();
@@ -77,7 +77,10 @@ export default ({
         });
       }
     }, 10);
-  }, []);
+    return () => {
+      window.clearTimeout(timer);
+    };
+  });
   return (
     <>
       <div className={_className.join(' ')} style={style}>

@@ -49,14 +49,6 @@ export default ({
   useEffect(() => {
     setOptions(options);
   }, [options]);
-  /** 获取位置 */
-  useEffect(() => {
-    adjustHeight();
-  }, []);
-  useEffect(() => {
-    adjustHeight();
-  }, [_value]);
-  /** 自适应位置 */
   const adjustHeight = () => {
     if (selectValueWapper && selectValueWapper.current) {
       const { height } = selectValueWapper.current.getBoundingClientRect();
@@ -74,6 +66,16 @@ export default ({
       });
     }
   };
+  /** 实时更新下拉容器的位置 */
+  useEffect(() => {
+    const timer = setTimeout(adjustHeight, 10);
+    return () => {
+      window.clearTimeout(timer);
+    };
+  });
+  useEffect(() => {
+    adjustHeight();
+  }, [_value]);
   return (
     <>
       <div className={_className.join(' ')} style={style}>

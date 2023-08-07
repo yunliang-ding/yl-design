@@ -9,7 +9,7 @@ order: 8
  * title: 基本使用
  */
 import React, { useState } from 'react';
-import { DatePicker, Button, Switch } from 'yl-design';
+import { RangeDatePicker, DatePicker, Button, Switch } from 'yl-design';
 export default () => {
   const [disabled, setDisabled] = useState(false);
   return (
@@ -17,6 +17,16 @@ export default () => {
       <DatePicker
         style={{ width: 200 }}
         value="2023-07-28"
+        placeholder="选择日期"
+        disabled={disabled}
+        onChange={(e) => {
+          console.log('value is', e);
+        }}
+      />
+      <br />
+      <RangeDatePicker
+        style={{ width: 424 }}
+        value={['2023-07-28', '2023-08-28']}
         placeholder="选择日期"
         disabled={disabled}
         onChange={(e) => {

@@ -112,4 +112,5 @@ const placeholderMapping = {
   DatePicker: (label: string) => `请选择${label}`,
   TimePicker: (label: string) => `请选择${label}`,
   RangeDatePicker: (label: string) => ['请选择开始日期', '请选择结束日期'],
+  RangeTimePicker: (label: string) => ['请选择开始时间', '请选择结束时间'],
 };

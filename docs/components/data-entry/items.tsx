@@ -130,10 +130,15 @@ export default [
     label: '时间选择',
   },
   {
+    type: 'RangeTimePicker',
+    name: 'rangeTimePicker',
+    label: '选择时间范围',
+  },
+  {
     type: 'Input',
     name: 'textarea',
     label: '大文本输入框',
-    span: 'fill', // 沾满格子
+    span: 'fill', // 占满格子
     // 设置单个的比例
     flex: {
       label: 2,

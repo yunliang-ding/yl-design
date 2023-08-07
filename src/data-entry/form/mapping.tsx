@@ -11,6 +11,7 @@ import {
   CheckGroup,
   RadioGroup,
   RangeDatePicker,
+  RangeTimePicker,
 } from '../../index';
 
 export default {
@@ -26,4 +27,5 @@ export default {
   DatePicker: DatePicker,
   RangeDatePicker: RangeDatePicker,
   TimePicker: TimePicker,
+  RangeTimePicker: RangeTimePicker,
 };

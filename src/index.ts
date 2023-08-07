@@ -27,6 +27,7 @@ export { default as AutoComplete } from './data-entry/auto-complete';
 export { default as DatePicker } from './data-entry/date-picker';
 export { default as RangeDatePicker } from './data-entry/date-picker-range';
 export { default as TimePicker } from './data-entry/time-picker';
+export { default as RangeTimePicker } from './data-entry/time-picker-range';
 export { default as Cascader } from './data-entry/cascader';
 export { default as Slider } from './data-entry/slider';
 export { default as Form } from './data-entry/form';

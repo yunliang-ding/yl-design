@@ -1,6 +1,6 @@
-import { useState, useEffect, CSSProperties, ReactNode } from 'react';
+import { useState, useEffect, CSSProperties, ReactNode, useRef } from 'react';
 import { Select, Button, Input, Icon } from '../../index';
-import dateUtil from './util';
+import DateUtil from './util';
 
 export interface DatePickerProps {
   /** 值 */
@@ -33,11 +33,9 @@ export default ({
   allowClear = true,
   disabled = false,
 }: DatePickerProps) => {
-  useEffect(() => {
-    let date = value || new Date().getTime();
-    setValue(value); // update
-    updateDateCalendar(date); // 更新时间
-  }, [value]);
+  const dateUtil = useRef(
+    new DateUtil(new Date(value || new Date().getTime()), 'YYYY-MM-DD'),
+  ).current;
   let yearList = dateUtil.getYearList(); // 获取年列表
   let monthList = dateUtil.getMonthList(); // 获取月列表
   const [_value, setValue] = useState(value);
@@ -46,6 +44,11 @@ export default ({
   const [month, setMonth] = useState(dateUtil.date.getMonth() + 1);
   const [days, setDays] = useState(value);
   const [calendar, setCalendar] = useState(dateUtil.getCalendar());
+  useEffect(() => {
+    let date = value || new Date().getTime();
+    setValue(value); // update
+    updateDateCalendar(date); // 更新时间
+  }, [value, open]);
   const renderHeader = () => {
     return ['日', '一', '二', '三', '四', '五', '六'].map((item) => {
       return (
@@ -85,14 +88,11 @@ export default ({
   const updateDateCalendar = (date) => {
     // 更新时间
     let month: any = dateUtil.date.getMonth() + 1;
-    let day: any = dateUtil.date.getDate();
     month = month > 9 ? month : '0' + month; // safari 不兼容不标准的字符转日期
-    day = day > 9 ? day : '0' + day; // safari 不兼容不标准的字符转日期
     dateUtil.setDate(new Date(date));
     setCalendar(dateUtil.getCalendar());
     setYear(dateUtil.date.getFullYear());
     setMonth(dateUtil.date.getMonth() + 1);
-    setDays(`${dateUtil.date.getFullYear()}-${month}-${day}`);
   };
   return (
     <>

@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 
-class DateUtil {
+export default class DateUtil {
   date: Date;
   format: string;
   constructor(date, format) {
@@ -125,5 +125,3 @@ class DateUtil {
     });
   };
 }
-const dateUtil = new DateUtil(new Date(), 'YYYY-MM-DD');
-export default dateUtil;

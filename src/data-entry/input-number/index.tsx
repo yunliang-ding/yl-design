@@ -29,6 +29,8 @@ export interface InputNumberProps {
   min?: number;
   /** 最大范围 */
   max?: number;
+  /** 是否展示上下调整 */
+  control?: boolean;
 }
 
 export default ({
@@ -42,6 +44,7 @@ export default ({
   onBlur,
   onFocus,
   onPressEnter,
+  control = true,
   step = 1,
   min,
   max,
@@ -102,7 +105,7 @@ export default ({
           }
         }}
       />
-      {!disabled && (
+      {!disabled && control && (
         <div className="yld-input-number-suffix">
           <div className="suffix-top" onClick={add}>
             <Icon type="xiala1" size={12} />

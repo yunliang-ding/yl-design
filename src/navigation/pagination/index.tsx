@@ -168,8 +168,9 @@ export default ({
               style={{ width: 80 }}
               min={1}
               max={totalPage}
-              onBlur={(v) => {
-                let current = parseInt(v);
+              control={false}
+              onBlur={(e) => {
+                let current = parseInt(e.target.value);
                 if (!isNaN(current)) {
                   const pageNum = current > totalPage ? totalPage : current;
                   setCurrent(pageNum);

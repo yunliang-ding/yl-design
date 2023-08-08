@@ -36,6 +36,10 @@ export default () => {
             type: 'Input',
             name: 'userName',
             label: '用户姓名',
+            flex: {
+              label: 2,
+              wrap: 9,
+            },
           },
         ],
       }}

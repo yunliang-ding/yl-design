@@ -51,7 +51,7 @@ export const message = Message({
 export { default as Notification } from './feed-back/notification';
 import Notification from './feed-back/notification';
 export const notification = Notification({
-  duration: 10000,
+  duration: 3,
 });
 /** other */
 export { default as CopyToClipboard } from './other/copy-to-clipboard';

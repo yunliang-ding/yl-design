@@ -18,7 +18,13 @@ features:
 footer: Open-source MIT Licensed | Copyright © 2023<br />Powered by [dumi](https://d.umijs.org)
 ---
 
-# 配置主题
+# 使用样式
+
+```less
+@import 'yl-design/dist/index.css';
+```
+
+# 可以配置自定义主题
 
 ```css
 :root {

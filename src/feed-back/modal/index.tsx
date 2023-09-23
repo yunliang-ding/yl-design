@@ -33,7 +33,7 @@ export interface ModalProps {
   /** 取消文案 */
   cancelText?: string;
   /** 主体渲染 */
-  render: () => ReactNode;
+  render: (api: { onClose: any }) => ReactNode;
 }
 
 const Modal = ({
@@ -74,7 +74,9 @@ const Modal = ({
               footer === false ? 'calc(100% - 50px)' : 'calc(100% - 100px)',
           }}
         >
-          {render()}
+          {render({
+            onClose,
+          })}
         </div>
         {footer !== false && (
           <div className="yld-modal-footer">
@@ -106,6 +108,12 @@ export default (props: ModalProps) => {
         ...props,
         ...options,
       };
+      const close = () => {
+        $(`#${containId} .yld-modal`).style.top = '-9999px';
+        setTimeout(() => {
+          $(`#${containId}`)?.remove();
+        }, 500);
+      };
       const containId = modalProps.containId || `modalId_${uuid(6)}`;
       const tag = document.createElement('div');
       tag.setAttribute('id', containId);
@@ -115,12 +123,12 @@ export default (props: ModalProps) => {
         <Modal
           {...modalProps}
           onClose={() => {
-            $(`#${containId}`)?.remove();
+            close();
             modalProps.onClose?.();
           }}
           onOk={async () => {
             await modalProps.onOk?.(); // 等待关闭 resolve
-            $(`#${containId}`)?.remove();
+            close();
           }}
         />,
         tag,

@@ -9,6 +9,7 @@ import { Drawer, Button } from 'yl-design';
 export default () => {
   return (
     <Button
+      type="primary"
       onClick={() => {
         Drawer({
           title: '默认抽屉',
@@ -18,13 +19,18 @@ export default () => {
           },
           onOk() {
             console.log('onOk');
+            return new Promise((res) => setTimeout(res, 1000));
           },
-          render() {
+          render({ onClose }) {
+            console.log('render');
             return (
               <>
                 <p>Some contents...</p>
                 <p>Some contents...</p>
                 <p>Some contents...</p>
+                <br />
+                <br />
+                <a onClick={onClose}>点击关闭</a>
               </>
             );
           },

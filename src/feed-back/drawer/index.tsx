@@ -32,7 +32,7 @@ export interface DrawerProps {
   /** 取消文案 */
   cancelText?: string;
   /** 主体渲染 */
-  render: () => ReactNode;
+  render: (api: { onClose: any }) => ReactNode;
 }
 
 const Drawer = ({
@@ -85,7 +85,7 @@ const Drawer = ({
               footer === false ? 'calc(100% - 50px)' : 'calc(100% - 100px)',
           }}
         >
-          {render()}
+          {render({ onClose })}
         </div>
         {footer !== false && (
           <div className="yld-drawer-footer">
@@ -118,24 +118,31 @@ export default (props: DrawerProps) => {
   return {
     open: (options: DrawerProps) => {
       const drawerProps = {
+        placement: 'right',
         ...props,
         ...options,
+      } as DrawerProps;
+      const close = () => {
+        $(`#${containId} .yld-drawer`).style[drawerProps.placement] = '-9999px';
+        setTimeout(() => {
+          $(`#${containId}`)?.remove();
+        }, 500);
       };
-      const containId = drawerProps.containId || `modalId_${uuid(6)}`;
+      const containId = drawerProps.containId || `drawerId_${uuid(6)}`;
       const tag = document.createElement('div');
       tag.setAttribute('id', containId);
-      tag.setAttribute('class', 'yld-modal-wrapper');
+      tag.setAttribute('class', 'yld-drawer-wrapper');
       $('body').appendChild(tag);
       ReactDOM.render(
         <Drawer
           {...drawerProps}
           onClose={() => {
-            $(`#${containId}`)?.remove();
+            close();
             drawerProps.onClose?.();
           }}
           onOk={async () => {
             await drawerProps.onOk?.(); // 等待关闭 resolve
-            $(`#${containId}`)?.remove();
+            close();
           }}
         />,
         tag,

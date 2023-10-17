@@ -1,5 +1,13 @@
-import { useRef, useEffect } from 'react';
+import { ReactNode, useRef, useEffect, CSSProperties } from 'react';
 import { Icon } from '../../index';
+
+export interface SpinProps {
+  loading?: Boolean;
+  icon?: String;
+  style?: CSSProperties;
+  message?: ReactNode;
+  children?: ReactNode;
+}
 
 export default ({
   loading,
@@ -7,7 +15,7 @@ export default ({
   style,
   message,
   children,
-}: any) => {
+}: SpinProps) => {
   const spinMaskRef: any = useRef();
   const spinBodyRef: any = useRef();
   useEffect(() => {

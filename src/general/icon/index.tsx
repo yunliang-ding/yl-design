@@ -1,3 +1,14 @@
+import { CSSProperties } from 'react';
+
+export interface IconProps {
+  type?: String;
+  primary?: Boolean;
+  size?: number;
+  style?: CSSProperties;
+  onClick?: Function;
+  color?: string;
+}
+
 export default ({
   type,
   primary = false,
@@ -5,7 +16,7 @@ export default ({
   style = {},
   onClick,
   color,
-}: any) => {
+}: IconProps) => {
   return (
     <i
       className={`yld-icon yld-icon-${type}`}

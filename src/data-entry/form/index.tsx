@@ -42,7 +42,6 @@ const Form = ({
   const errorItemRef: any = useRef([]); // 保存上一次检验失败的字段
   // 通知 item 更新
   const itemUpdateOnStoreChange = () => {
-    console.log(itemRef.current);
     Object.keys(itemRef.current).forEach((name) => {
       itemRef.current[name].setValue(store.current[name]);
     });

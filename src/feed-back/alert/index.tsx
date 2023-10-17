@@ -1,5 +1,12 @@
-import { useState } from 'react';
+import { CSSProperties, ReactNode, useState } from 'react';
 import { Icon } from '../../index';
+
+export interface AlertProps {
+  message: ReactNode;
+  closable?: Boolean;
+  type?: keyof typeof iconMapping;
+  style?: CSSProperties;
+}
 
 const iconMapping = {
   success: 'message_SendSuccessfully',
@@ -7,7 +14,13 @@ const iconMapping = {
   warning: 'info_warning',
   error: 'cuo',
 };
-export default ({ message, closable = false, type, style }) => {
+
+export default ({
+  message,
+  closable = false,
+  type = 'info',
+  style,
+}: AlertProps) => {
   const [open, setopen] = useState(true);
   return (
     <>

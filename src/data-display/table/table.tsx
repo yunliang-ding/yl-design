@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
-import { TableProps } from '.';
 import { Icon, Pagination, Checkbox, Empty, Spin } from '../../index';
+import { TableProps } from './type';
 
 export default ({
   columns = [],

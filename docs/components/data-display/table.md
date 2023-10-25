@@ -37,8 +37,8 @@ export default () => {
             name: 'userName',
             label: '用户姓名',
             flex: {
-              label: 2,
-              wrap: 9,
+              label: 3,
+              wrap: 7,
             },
           },
         ],
@@ -81,7 +81,7 @@ export default () => {
       }}
       request={async (params) => {
         const res = await axios.get(
-          'http://api.yunliang.cloud/react-core-form/table',
+          'http://api-online.yunliang.cloud/react-core-form/table',
           {
             params,
           },
